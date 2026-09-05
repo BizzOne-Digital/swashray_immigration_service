@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-sponsorship" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b2545"/>
+      <stop offset="100%" stop-color="#13315c"/>
+    </linearGradient>
+    <radialGradient id="glow-sponsorship" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#13315c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b2545" stop-opacity="0.35"/>
+    </radialGradient>
+    <pattern id="dots-sponsorship" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#ffffff" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-sponsorship)"/>
+  <rect width="1600" height="900" fill="url(#dots-sponsorship)"/>
+  <rect width="1600" height="900" fill="url(#glow-sponsorship)"/>
+
+  <!-- diagonal accent band -->
+  <polygon points="0,900 544,900 224.00000000000003,0 0,0" fill="#ffffff" fill-opacity="0.035"/>
+  <polygon points="1600,0 1600,900 1152,900" fill="#c8a24a" fill-opacity="0.06"/>
+
+  <!-- thin frame line -->
+  <rect x="28" y="28" width="1544" height="844" fill="none" stroke="#c8a24a" stroke-opacity="0.22" stroke-width="1.5"/>
+
+  <!-- oversized watermark icon, bottom right -->
+  <g transform="translate(1215.6, 515.6)" stroke="#ffffff" stroke-opacity="0.055" fill="none">
+    <svg width="620" height="620" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+  </g>
+
+  <!-- accent ring behind main icon -->
+  <circle cx="800" cy="430" r="170" fill="none" stroke="#c8a24a" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="800" cy="430" r="170" fill="#c8a24a" fill-opacity="0.08"/>
+
+  <!-- main icon -->
+  <g transform="translate(690, 320)" stroke="#c8a24a" fill="none">
+    <svg width="220" height="220" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+  </g>
+
+  
+  <g>
+    <circle cx="264" cy="198" r="54" fill="#ffffff" fill-opacity="0.08"/>
+    <g transform="translate(222, 156)" stroke="#ffffff" stroke-opacity="0.75" fill="none">
+      <svg width="84" height="84" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+    </g>
+  </g>
+</svg>

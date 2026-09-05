@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
 type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -21,6 +19,13 @@ global.__mongooseCache = cached;
  */
 export async function connectDB(): Promise<typeof mongoose> {
   if (cached.conn) return cached.conn;
+
+  // Read from process.env at call time (not module load time) so this works
+  // correctly both in Next.js (env already loaded before any module runs)
+  // and in standalone scripts that load .env.local via dotenv before calling
+  // connectDB() — reading it into a top-level const would capture `undefined`
+  // in the latter case whenever imports get hoisted above the dotenv call.
+  const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
     throw new Error(

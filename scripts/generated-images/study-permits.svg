@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-study-permits" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b2545"/>
+      <stop offset="100%" stop-color="#13315c"/>
+    </linearGradient>
+    <radialGradient id="glow-study-permits" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#13315c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b2545" stop-opacity="0.35"/>
+    </radialGradient>
+    <pattern id="dots-study-permits" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#ffffff" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-study-permits)"/>
+  <rect width="1600" height="900" fill="url(#dots-study-permits)"/>
+  <rect width="1600" height="900" fill="url(#glow-study-permits)"/>
+
+  <!-- diagonal accent band -->
+  <polygon points="0,900 544,900 224.00000000000003,0 0,0" fill="#ffffff" fill-opacity="0.035"/>
+  <polygon points="1600,0 1600,900 1152,900" fill="#c8a24a" fill-opacity="0.06"/>
+
+  <!-- thin frame line -->
+  <rect x="28" y="28" width="1544" height="844" fill="none" stroke="#c8a24a" stroke-opacity="0.22" stroke-width="1.5"/>
+
+  <!-- oversized watermark icon, bottom right -->
+  <g transform="translate(1215.6, 515.6)" stroke="#ffffff" stroke-opacity="0.055" fill="none">
+    <svg width="620" height="620" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+  </g>
+
+  <!-- accent ring behind main icon -->
+  <circle cx="800" cy="430" r="170" fill="none" stroke="#c8a24a" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="800" cy="430" r="170" fill="#c8a24a" fill-opacity="0.08"/>
+
+  <!-- main icon -->
+  <g transform="translate(690, 320)" stroke="#c8a24a" fill="none">
+    <svg width="220" height="220" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+  </g>
+
+  
+  <g>
+    <circle cx="264" cy="198" r="54" fill="#ffffff" fill-opacity="0.08"/>
+    <g transform="translate(222, 156)" stroke="#ffffff" stroke-opacity="0.75" fill="none">
+      <svg width="84" height="84" viewBox="0 0 24 24"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+    </g>
+  </g>
+</svg>

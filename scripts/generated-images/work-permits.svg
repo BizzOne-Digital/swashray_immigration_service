@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-work-permits" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b2545"/>
+      <stop offset="100%" stop-color="#13315c"/>
+    </linearGradient>
+    <radialGradient id="glow-work-permits" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#13315c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b2545" stop-opacity="0.35"/>
+    </radialGradient>
+    <pattern id="dots-work-permits" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#ffffff" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-work-permits)"/>
+  <rect width="1600" height="900" fill="url(#dots-work-permits)"/>
+  <rect width="1600" height="900" fill="url(#glow-work-permits)"/>
+
+  <!-- diagonal accent band -->
+  <polygon points="0,900 544,900 224.00000000000003,0 0,0" fill="#ffffff" fill-opacity="0.035"/>
+  <polygon points="1600,0 1600,900 1152,900" fill="#c8a24a" fill-opacity="0.06"/>
+
+  <!-- thin frame line -->
+  <rect x="28" y="28" width="1544" height="844" fill="none" stroke="#c8a24a" stroke-opacity="0.22" stroke-width="1.5"/>
+
+  <!-- oversized watermark icon, bottom right -->
+  <g transform="translate(1215.6, 515.6)" stroke="#ffffff" stroke-opacity="0.055" fill="none">
+    <svg width="620" height="620" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+  </g>
+
+  <!-- accent ring behind main icon -->
+  <circle cx="800" cy="430" r="170" fill="none" stroke="#c8a24a" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="800" cy="430" r="170" fill="#c8a24a" fill-opacity="0.08"/>
+
+  <!-- main icon -->
+  <g transform="translate(690, 320)" stroke="#c8a24a" fill="none">
+    <svg width="220" height="220" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+  </g>
+
+  
+  <g>
+    <circle cx="264" cy="198" r="54" fill="#ffffff" fill-opacity="0.08"/>
+    <g transform="translate(222, 156)" stroke="#ffffff" stroke-opacity="0.75" fill="none">
+      <svg width="84" height="84" viewBox="0 0 24 24"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>
+    </g>
+  </g>
+</svg>

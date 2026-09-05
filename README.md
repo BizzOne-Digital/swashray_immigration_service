@@ -72,6 +72,10 @@ To keep this deliverable honest, a few things are placeholders on purpose —
 - **6 service categories** (Visitor Visa, Sponsorship, Work Permits, Study
   Permits, Passport Services, Citizenship) were pre-created from **Admin →
   Services** so the site isn't empty on day one. Edit or remove them freely.
+  Each one also ships with a custom-designed navy/gold illustration (no stock
+  photos — nothing to license) so the cards don't look empty; swap any of
+  them for a real photo any time from **Admin → Services → (edit) → Featured
+  Image**.
 - **2 demo news articles** are marked with a visible "Demo" badge — replace
   or delete them from **Admin → News & Updates** before launch.
 - **About page copy, Privacy Policy, and Terms of Use** are general
