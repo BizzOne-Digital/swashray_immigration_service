@@ -17,13 +17,26 @@ export function Logo({
 }) {
   const url = mediaUrl(logoMediaId as string | null | undefined);
   return (
-    <Link href={href} className="flex items-center gap-2.5 shrink-0">
+    <Link href={href} className="flex items-center shrink-0">
       {url ? (
-        <Image src={url} alt={businessName} width={40} height={40} className="h-10 w-auto object-contain" />
+        // A custom logo has been uploaded (Admin → Site Settings → Branding) —
+        // it's shown on its own, full brand mark, rather than alongside the
+        // generic wordmark below (which is only a placeholder for when no
+        // logo has been uploaded yet).
+        <Image
+          src={url}
+          alt={businessName}
+          width={180}
+          height={48}
+          priority
+          className="h-10 md:h-11 w-auto object-contain"
+        />
       ) : (
-        <LogoMark className="h-9 w-9" light={light} />
+        <span className="flex items-center gap-2.5">
+          <LogoMark className="h-9 w-9" light={light} />
+          <LogoWordmark light={light} />
+        </span>
       )}
-      <LogoWordmark light={light} />
     </Link>
   );
 }

@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 import { getSiteSettings } from "@/lib/cms";
 import { openDownloadStream } from "@/lib/media";
+import { connectDB } from "@/lib/db";
+import Media from "@/lib/models/Media";
 import mongoose from "mongoose";
 
 export const size = { width: 32, height: 32 };
@@ -12,7 +14,13 @@ export default async function Icon() {
     const settings = await getSiteSettings();
     const faviconId = settings.faviconMediaId || settings.logoMediaId;
     if (faviconId) {
-      const stream = await openDownloadStream(new mongoose.Types.ObjectId(String(faviconId)));
+      // faviconId/logoMediaId reference a Media document (see the Service/
+      // Footer/Header usage of the same fields) — its `gridFsId` field is
+      // the actual GridFS file id, which is what openDownloadStream needs.
+      await connectDB();
+      const media = await Media.findById(String(faviconId));
+      if (!media) throw new Error("Favicon media document not found");
+      const stream = await openDownloadStream(new mongoose.Types.ObjectId(String(media.gridFsId)));
       const chunks: Buffer[] = [];
       await new Promise<void>((resolve, reject) => {
         stream.on("data", (c) => chunks.push(c as Buffer));
