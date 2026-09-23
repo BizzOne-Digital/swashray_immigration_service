@@ -5,7 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = { title: "Privacy Policy", alternates: { canonical: "/privacy" } };
 
 export default async function PrivacyPage() {
   const settings = await getSiteSettings();

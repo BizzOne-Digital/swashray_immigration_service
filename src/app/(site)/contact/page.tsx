@@ -6,16 +6,19 @@ import { getSiteSettings } from "@/lib/cms";
 import { serialize } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
-import { InquiryForm } from "@/components/site/InquiryForm";
+import { ContactPanels } from "@/components/site/ContactPanels";
+import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  return {
+  return buildMetadata({
     title: `Contact Us | ${settings.businessName}`,
-    description: `Get in touch with ${settings.businessName}.`,
-  };
+    description: `Get in touch with ${settings.businessName}, or book a consultation online.`,
+    path: "/contact",
+    siteName: settings.businessName,
+  });
 }
 
 export default async function ContactPage() {
@@ -29,13 +32,13 @@ export default async function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact Us"
-        heading="Send Us an Inquiry"
-        intro="Tell us about your immigration goals and we'll follow up with next steps."
+        heading="Get in Touch"
+        intro="Send us an inquiry or book a consultation online — whichever works best for you."
       />
       <section className="py-16">
         <Container className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 order-2 lg:order-1">
-            <InquiryForm services={serialize(services)} />
+            <ContactPanels services={serialize(services)} />
           </div>
           <aside className="space-y-4 order-1 lg:order-2">
             <div className="rounded-[var(--radius-card)] border border-black/[0.06] p-6">

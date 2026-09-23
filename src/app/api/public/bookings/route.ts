@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
     phone: parsed.data.phone,
     serviceId: parsed.data.serviceId || null,
     serviceName: parsed.data.serviceName,
+    country: parsed.data.country,
     preferredDate: parsed.data.preferredDate,
     preferredTime: parsed.data.preferredTime,
     preferredContactMethod: parsed.data.preferredContactMethod,

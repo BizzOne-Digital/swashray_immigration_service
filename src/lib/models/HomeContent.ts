@@ -22,6 +22,14 @@ export interface IHomeContent {
   secondaryCtaUrl: string;
   servicesHeading: string;
   servicesIntro: string;
+  calculatorHeading: string;
+  calculatorIntro: string;
+  calculatorCtaText: string;
+  bookingHeading: string;
+  bookingIntro: string;
+  bookingHighlights: string[];
+  bookingCtaText: string;
+  trustHeading: string;
   whyChooseHeading: string;
   whyChooseIntro: string;
   benefits: IBenefit[];
@@ -42,7 +50,7 @@ export interface IHomeContent {
 
 const HomeContentSchema = new Schema<IHomeContent>(
   {
-    heroHeadline: { type: String, default: "Swashray Immigration" },
+    heroHeadline: { type: String, default: "Canadian Immigration Consultancy | Swashray Immigration Services" },
     heroSubheading: {
       type: String,
       default:
@@ -58,6 +66,29 @@ const HomeContentSchema = new Schema<IHomeContent>(
       type: String,
       default: "General guidance across the most common immigration pathways.",
     },
+    calculatorHeading: { type: String, default: "Estimate Your Immigration Score" },
+    calculatorIntro: {
+      type: String,
+      default:
+        "Get an informational estimate of your Express Entry Comprehensive Ranking System (CRS) score using the official IRCC point tables, then book a consultation to discuss your options in detail.",
+    },
+    calculatorCtaText: { type: String, default: "Calculate My Score" },
+    bookingHeading: { type: String, default: "Book Your Consultation" },
+    bookingIntro: {
+      type: String,
+      default:
+        "Speak directly with our RCIC-IRB licensed consultant about your immigration goals. We'll review your situation, explain your options clearly, and outline the next steps.",
+    },
+    bookingHighlights: {
+      type: [String],
+      default: [
+        "One-on-one consultation with a Regulated Canadian Immigration Consultant",
+        "Clear, honest guidance tailored to your circumstances",
+        "Choose a date and time that works for you",
+      ],
+    },
+    bookingCtaText: { type: String, default: "Book a Consultation" },
+    trustHeading: { type: String, default: "Regulated & Licensed" },
     whyChooseHeading: { type: String, default: "Why Clients Choose Swashray" },
     whyChooseIntro: {
       type: String,
@@ -102,7 +133,7 @@ const HomeContentSchema = new Schema<IHomeContent>(
     ctaSecondaryText: { type: String, default: "Send an Inquiry" },
     ctaSecondaryUrl: { type: String, default: "/contact" },
     seo: {
-      title: { type: String, default: "Swashray Immigration Services Inc. | Immigration Guidance" },
+      title: { type: String, default: "Canadian Immigration Consultancy | Swashray Immigration Services" },
       description: {
         type: String,
         default:

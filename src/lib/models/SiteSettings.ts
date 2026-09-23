@@ -17,6 +17,7 @@ export interface ISiteSettings {
   };
   logoMediaId?: mongoose.Types.ObjectId | null;
   faviconMediaId?: mongoose.Types.ObjectId | null;
+  trustBadgeText: string;
   footerDescription: string;
   copyrightText: string;
   disclaimerText: string;
@@ -50,6 +51,10 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
     },
     logoMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
     faviconMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
+    trustBadgeText: {
+      type: String,
+      default: "Regulated Canadian Immigration Consultant, licensed and authorized by the CICC (RCIC-IRB).",
+    },
     footerDescription: {
       type: String,
       default:
@@ -65,7 +70,7 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
         "The information on this website is provided for general guidance only and does not constitute legal or immigration advice. Immigration policies, fees, processing times, and eligibility requirements change frequently. Please verify current requirements with official government sources or a qualified immigration professional before making decisions.",
     },
     seoDefaults: {
-      title: { type: String, default: "Swashray Immigration Services Inc." },
+      title: { type: String, default: "Canadian Immigration Consultancy | Swashray Immigration Services" },
       description: {
         type: String,
         default:

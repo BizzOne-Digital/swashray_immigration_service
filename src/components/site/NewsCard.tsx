@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { mediaUrl, formatDate } from "@/lib/utils";
 import type { INewsArticle } from "@/lib/models/NewsArticle";
+import { BrandIllustration } from "@/components/site/BrandIllustration";
 
 export function NewsCard({ article, index = 0 }: { article: INewsArticle; index?: number }) {
   const imageUrl = mediaUrl(article.featuredImageMediaId as string | null | undefined);
@@ -14,7 +15,7 @@ export function NewsCard({ article, index = 0 }: { article: INewsArticle; index?
       style={{ animationDelay: `${Math.min(index, 6) * 60}ms` }}
     >
       <div className="relative h-44 w-full overflow-hidden bg-[var(--color-primary)]/5">
-        {imageUrl && (
+        {imageUrl ? (
           <Image
             src={imageUrl}
             alt={article.title}
@@ -22,11 +23,8 @@ export function NewsCard({ article, index = 0 }: { article: INewsArticle; index?
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
-        )}
-        {article.isDemo && (
-          <span className="absolute top-3 left-3 rounded-full bg-black/60 text-white text-[10px] font-semibold uppercase tracking-wide px-2.5 py-1">
-            Demo Content
-          </span>
+        ) : (
+          <BrandIllustration icon="Newspaper" tone="muted" />
         )}
       </div>
       <div className="p-6 flex flex-col flex-1">

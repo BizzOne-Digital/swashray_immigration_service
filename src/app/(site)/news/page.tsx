@@ -9,15 +9,18 @@ import { NewsCard } from "@/components/site/NewsCard";
 import { EmptyState } from "@/components/site/EmptyState";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  return {
+  return buildMetadata({
     title: `News & Updates | ${settings.businessName}`,
     description: "Immigration news, visa updates, and announcements.",
-  };
+    path: "/news",
+    siteName: settings.businessName,
+  });
 }
 
 export default async function NewsPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {

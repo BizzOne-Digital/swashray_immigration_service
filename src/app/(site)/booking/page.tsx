@@ -6,15 +6,18 @@ import { serialize } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { BookingForm } from "@/components/site/BookingForm";
+import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  return {
+  return buildMetadata({
     title: `Book a Consultation | ${settings.businessName}`,
     description: `Book a consultation with ${settings.businessName}.`,
-  };
+    path: "/booking",
+    siteName: settings.businessName,
+  });
 }
 
 export default async function BookingPage() {

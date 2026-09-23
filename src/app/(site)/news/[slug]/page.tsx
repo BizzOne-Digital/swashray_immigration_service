@@ -7,6 +7,9 @@ import { serialize, mediaUrl, formatDate } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
+import { getSiteSettings } from "@/lib/cms";
+import { buildMetadata, getSiteUrl, jsonLd } from "@/lib/seo";
+import { BrandIllustration } from "@/components/site/BrandIllustration";
 
 export const dynamic = "force-dynamic";
 
@@ -20,10 +23,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const article = await getArticle(slug);
   if (!article) return {};
-  return {
-    title: article.seo?.title || article.title,
+  const settings = await getSiteSettings();
+  return buildMetadata({
+    title: article.seo?.title || `${article.title} | ${settings.businessName}`,
     description: article.seo?.description || article.excerpt,
-  };
+    path: `/news/${slug}`,
+    image: mediaUrl(article.featuredImageMediaId as string | null | undefined),
+    siteName: settings.businessName,
+    type: "article",
+    publishedTime: article.publishedAt,
+  });
 }
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,9 +41,22 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
   if (!article) notFound();
 
   const imageUrl = mediaUrl(article.featuredImageMediaId as string | null | undefined);
+  const siteUrl = getSiteUrl();
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined,
+    dateModified: article.updatedAt ? new Date(article.updatedAt).toISOString() : undefined,
+    author: { "@type": "Organization", name: article.author },
+    image: imageUrl ? [`${siteUrl}${imageUrl}`] : undefined,
+    mainEntityOfPage: `${siteUrl}/news/${slug}`,
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(articleSchema) }} />
       <PageHero eyebrow={article.category} heading={article.title} />
       <section className="py-16">
         <Container className="max-w-3xl">
@@ -42,18 +64,15 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             <span>{article.author}</span>
             <span aria-hidden>•</span>
             <span>{formatDate(article.publishedAt)}</span>
-            {article.isDemo && (
-              <span className="rounded-full bg-black/70 text-white text-[10px] font-semibold uppercase tracking-wide px-2.5 py-1">
-                Demo Content
-              </span>
-            )}
           </div>
 
-          {imageUrl && (
-            <div className="relative aspect-video rounded-[var(--radius-card)] overflow-hidden mb-10">
+          <div className="relative aspect-video rounded-[var(--radius-card)] overflow-hidden mb-10 bg-[var(--color-primary)]/5">
+            {imageUrl ? (
               <Image src={imageUrl} alt={article.title} fill className="object-cover" priority />
-            </div>
-          )}
+            ) : (
+              <BrandIllustration icon="Newspaper" tone="muted" />
+            )}
+          </div>
 
           <div className="prose-swashray text-[var(--color-ink)] leading-relaxed whitespace-pre-line">
             {article.content}

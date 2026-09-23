@@ -82,6 +82,15 @@ function SettingsSection() {
           <ImagePicker label="Logo" value={values.logoMediaId} onChange={(id) => set("logoMediaId", id)} aspect="aspect-[3/1]" />
           <ImagePicker label="Favicon" value={values.faviconMediaId} onChange={(id) => set("faviconMediaId", id)} aspect="aspect-square" />
         </div>
+        <div>
+          <label className={labelClass}>Trust Badge Text (shown next to the logo image on the homepage and About page)</label>
+          <textarea
+            rows={2}
+            className={inputClass}
+            value={values.trustBadgeText}
+            onChange={(e) => set("trustBadgeText", e.target.value)}
+          />
+        </div>
       </div>
 
       <div className={`${cardClass} p-6 space-y-5`}>

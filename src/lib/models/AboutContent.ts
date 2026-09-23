@@ -26,7 +26,7 @@ const AboutContentSchema = new Schema<IAboutContent>(
     introText: {
       type: String,
       default:
-        "Swashray Immigration Services Inc. was created to give individuals and families clear, organized, and professional guidance through immigration-related processes. We are currently building out our full company story — check back soon for more details about our background and team.",
+        "Every immigration case reflects a unique story, a family's aspirations, and an individual's future. At Swashray Immigration Services, we believe every client deserves personalized attention and guidance tailored to their circumstances.\n\nWe are committed to upholding CICC's professional standards through honest advice, loyalty to our clients, and strict confidentiality. We provide transparent guidance, even when the information may not be what a client hopes to hear.\n\nNo two immigration cases are alike. We take the time to understand each client's goals, circumstances, and concerns before recommending an appropriate immigration pathway.\n\nOur practice is built on integrity, professionalism, and accountability. We strive to ensure that every client feels heard, informed, and supported throughout their immigration journey.",
     },
     introImageMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
     missionHeading: { type: String, default: "Our Mission" },

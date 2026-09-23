@@ -4,6 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
+import { LanguageSelector } from "@/components/site/LanguageSelector";
+import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
+import type { ISiteSettings } from "@/lib/models/SiteSettings";
 
 export interface NavLink {
   label: string;
@@ -11,8 +14,29 @@ export interface NavLink {
   openInNewTab: boolean;
 }
 
-export function MobileNav({ links, ctaText, ctaUrl }: { links: NavLink[]; ctaText: string; ctaUrl: string }) {
+const SOCIAL_ICONS = {
+  facebook: FacebookGlyph,
+  instagram: InstagramGlyph,
+  linkedin: LinkedInGlyph,
+  x: XGlyph,
+  youtube: YouTubeGlyph,
+} as const;
+
+export function MobileNav({
+  links,
+  ctaText,
+  ctaUrl,
+  social,
+}: {
+  links: NavLink[];
+  ctaText: string;
+  ctaUrl: string;
+  social?: ISiteSettings["social"];
+}) {
   const [open, setOpen] = useState(false);
+  const socialEntries = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).filter(
+    (key) => social?.[key]
+  );
 
   return (
     <div className="md:hidden">
@@ -43,6 +67,29 @@ export function MobileNav({ links, ctaText, ctaUrl }: { links: NavLink[]; ctaTex
             <ButtonLink href={ctaUrl} className="mt-3 justify-center" onClick={() => setOpen(false)}>
               {ctaText}
             </ButtonLink>
+
+            <div className="mt-4 pt-4 border-t border-black/5 flex items-center justify-between">
+              <LanguageSelector />
+              {socialEntries.length > 0 && (
+                <div className="flex items-center gap-3">
+                  {socialEntries.map((key) => {
+                    const Icon = SOCIAL_ICONS[key];
+                    return (
+                      <a
+                        key={key}
+                        href={social?.[key]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={key}
+                        className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </nav>
         </div>
       )}

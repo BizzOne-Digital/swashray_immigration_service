@@ -133,8 +133,13 @@ export function ServiceForm({ initial }: { initial?: ServiceFormValues }) {
           <textarea rows={3} className={inputClass} value={values.whoItsFor} onChange={(e) => set("whoItsFor", e.target.value)} />
         </div>
         <div>
-          <label className={labelClass}>General Process</label>
-          <textarea rows={3} className={inputClass} value={values.process} onChange={(e) => set("process", e.target.value)} />
+          <label className={labelClass}>Our Process</label>
+          <p className="text-xs text-slate-500 mb-1.5">
+            Enter one step per line (e.g. &ldquo;We review your documents&rdquo; on its own line, then the next
+            step on the next line) — the site displays each line as a numbered step. A single line of text
+            still displays fine as a plain paragraph.
+          </p>
+          <textarea rows={5} className={inputClass} value={values.process} onChange={(e) => set("process", e.target.value)} />
         </div>
       </div>
 

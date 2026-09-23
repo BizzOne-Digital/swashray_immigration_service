@@ -19,6 +19,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  Newspaper,
   type LucideIcon,
 } from "lucide-react";
 
@@ -43,6 +44,7 @@ export const ICONS: Record<string, LucideIcon> = {
   Mail,
   Phone,
   MapPin,
+  Newspaper,
 };
 
 export const ICON_NAMES = Object.keys(ICONS);

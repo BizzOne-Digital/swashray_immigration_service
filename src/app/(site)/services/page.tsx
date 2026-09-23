@@ -7,15 +7,18 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { EmptyState } from "@/components/site/EmptyState";
+import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  return {
+  return buildMetadata({
     title: `Services | ${settings.businessName}`,
     description: "Immigration-related services offered by " + settings.businessName,
-  };
+    path: "/services",
+    siteName: settings.businessName,
+  });
 }
 
 export default async function ServicesPage() {

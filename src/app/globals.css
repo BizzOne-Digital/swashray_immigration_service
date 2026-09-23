@@ -5,8 +5,8 @@
    src/components/site/ThemeVars.tsx), so the admin can change colors and
    typography without a rebuild. */
 @theme {
-  --color-primary: #0b2545;
-  --color-secondary: #13315c;
+  --color-primary: #0d3d3d;
+  --color-secondary: #145c5c;
   --color-accent: #c8a24a;
   --color-background: #fbfaf7;
   --color-surface: #ffffff;
@@ -56,6 +56,49 @@ body {
 
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out both;
+}
+
+/* Scroll-reveal: elements start faded/offset and settle into place the
+   first time they scroll into view (see ScrollReveal.tsx). Content is
+   visible by default — the hidden state is only ever applied by JS after
+   it confirms it can also reveal it again, so a slow or failed script load
+   never leaves real content permanently invisible. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* No-JS safety net lives in a <noscript><style> block in app/layout.tsx —
+   without JavaScript, ScrollReveal can never add .scroll-reveal-visible, so
+   that block forces full visibility instead of hiding content forever. */
+
+/* Slow continuous "Ken Burns" drift for hero/feature photos — a subtle,
+   never-ending zoom so the page reads as alive even before the visitor
+   scrolls, rather than a static screenshot. Pure CSS, no JS dependency,
+   and disabled entirely under prefers-reduced-motion below. */
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns {
+    animation: none;
+  }
 }
 
 ::selection {

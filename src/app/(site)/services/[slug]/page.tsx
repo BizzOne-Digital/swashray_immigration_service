@@ -10,6 +10,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { PageHero } from "@/components/site/PageHero";
 import { Icon } from "@/components/ui/IconMap";
 import { DisclaimerNote } from "@/components/site/DisclaimerNote";
+import { buildMetadata, getSiteUrl, jsonLd } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -23,10 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = await getService(slug);
   if (!service) return {};
-  return {
-    title: service.seo?.title || `${service.title} | Swashray Immigration Services Inc.`,
+  const settings = await getSiteSettings();
+  return buildMetadata({
+    title: service.seo?.title || `${service.title} | ${settings.businessName}`,
     description: service.seo?.description || service.shortDescription,
-  };
+    path: `/services/${slug}`,
+    image: mediaUrl(service.featuredImageMediaId as string | null | undefined),
+    siteName: settings.businessName,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,9 +41,36 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const settings = await getSiteSettings();
   const imageUrl = mediaUrl(service.featuredImageMediaId as string | null | undefined);
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${siteUrl}/services` },
+      { "@type": "ListItem", position: 3, name: service.title, item: `${siteUrl}/services/${slug}` },
+    ],
+  };
+  const faqSchema =
+    service.faq?.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: service.faq.map((item: { question: string; answer: string }) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema) }} />
+      )}
       <PageHero eyebrow="Service" heading={service.title} intro={service.shortDescription} />
 
       <section className="py-16">
@@ -66,8 +98,33 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
             {service.process && (
               <div>
-                <h2 className="font-heading text-2xl font-semibold text-[var(--color-primary)] mb-4">General Process</h2>
-                <p className="text-[var(--color-muted)] leading-relaxed whitespace-pre-line">{service.process}</p>
+                <h2 className="font-heading text-2xl font-semibold text-[var(--color-primary)] mb-6">Our Process</h2>
+                {(() => {
+                  const steps = service.process
+                    .split("\n")
+                    .map((s: string) => s.trim())
+                    .filter(Boolean);
+                  // Content authored as a single paragraph (legacy/admin free-text)
+                  // still renders sensibly as one plain block; content authored
+                  // as one step per line renders as a numbered process list.
+                  if (steps.length <= 1) {
+                    return (
+                      <p className="text-[var(--color-muted)] leading-relaxed whitespace-pre-line">{service.process}</p>
+                    );
+                  }
+                  return (
+                    <ol className="space-y-5">
+                      {steps.map((step: string, i: number) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-white text-sm font-semibold font-heading">
+                            {i + 1}
+                          </span>
+                          <p className="text-[var(--color-muted)] leading-relaxed pt-1.5">{step}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  );
+                })()}
               </div>
             )}
 

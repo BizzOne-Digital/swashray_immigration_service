@@ -44,7 +44,7 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0b2545",
+          background: "#0d3d3d",
           borderRadius: 6,
         }}
       >

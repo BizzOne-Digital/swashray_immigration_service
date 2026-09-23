@@ -6,17 +6,26 @@ import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHero } from "@/components/site/PageHero";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { Icon } from "@/components/ui/IconMap";
+import { TrustBadge } from "@/components/site/TrustBadge";
+import { getSiteSettings } from "@/lib/cms";
+import { buildMetadata } from "@/lib/seo";
+import { BrandIllustration } from "@/components/site/BrandIllustration";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const about = await getAboutContent();
-  return { title: about.seo.title, description: about.seo.description };
+  const [about, settings] = await Promise.all([getAboutContent(), getSiteSettings()]);
+  return buildMetadata({
+    title: about.seo.title,
+    description: about.seo.description,
+    path: "/about",
+    image: mediaUrl(about.introImageMediaId as string | null | undefined),
+    siteName: settings.businessName,
+  });
 }
 
 export default async function AboutPage() {
-  const about = await getAboutContent();
+  const [about, settings] = await Promise.all([getAboutContent(), getSiteSettings()]);
   const introImage = mediaUrl(about.introImageMediaId as string | null | undefined);
   const approachImage = mediaUrl(about.approachImageMediaId as string | null | undefined);
 
@@ -26,16 +35,19 @@ export default async function AboutPage() {
 
       <section className="py-20">
         <Container className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in-up">
+          <div className="min-w-0 animate-fade-in-up space-y-8">
             <p className="text-[var(--color-muted)] leading-relaxed text-lg whitespace-pre-line">{about.introText}</p>
+            <TrustBadge
+              logoMediaId={settings.logoMediaId as string | null}
+              text={settings.trustBadgeText}
+              businessName={settings.businessName}
+            />
           </div>
           <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden bg-[var(--color-primary)]/5">
             {introImage ? (
-              <Image src={introImage} alt="About Swashray Immigration" fill className="object-cover" />
+              <Image src={introImage} alt="About Swashray Immigration" fill className="object-cover animate-kenburns" />
             ) : (
-              <div className="h-full w-full flex items-center justify-center">
-                <Icon name="Compass" className="h-16 w-16 text-[var(--color-primary)]/25" />
-              </div>
+              <BrandIllustration icon="Compass" tone="muted" />
             )}
           </div>
         </Container>
@@ -58,14 +70,12 @@ export default async function AboutPage() {
         <Container className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden bg-[var(--color-primary)]/5 order-2 lg:order-1">
             {approachImage ? (
-              <Image src={approachImage} alt="Our approach" fill className="object-cover" />
+              <Image src={approachImage} alt="Our approach" fill className="object-cover animate-kenburns" />
             ) : (
-              <div className="h-full w-full flex items-center justify-center">
-                <Icon name="Handshake" className="h-16 w-16 text-[var(--color-primary)]/25" />
-              </div>
+              <BrandIllustration icon="Handshake" tone="muted" />
             )}
           </div>
-          <div className="order-1 lg:order-2">
+          <div className="min-w-0 order-1 lg:order-2">
             <SectionHeading heading={about.approachHeading} />
             <p className="mt-4 text-[var(--color-muted)] leading-relaxed whitespace-pre-line">{about.approachText}</p>
           </div>

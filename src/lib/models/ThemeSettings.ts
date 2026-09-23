@@ -20,8 +20,8 @@ export interface IThemeSettings {
 const ThemeSettingsSchema = new Schema<IThemeSettings>(
   {
     colors: {
-      primary: { type: String, default: "#0b2545" },
-      secondary: { type: String, default: "#13315c" },
+      primary: { type: String, default: "#0d3d3d" },
+      secondary: { type: String, default: "#145c5c" },
       accent: { type: String, default: "#c8a24a" },
       background: { type: String, default: "#fbfaf7" },
       surface: { type: String, default: "#ffffff" },

@@ -74,6 +74,67 @@ export function HomeContentForm() {
       </div>
 
       <div className={`${cardClass} p-6 space-y-5`}>
+        <h2 className={sectionTitleClass}>Calculator Teaser Section</h2>
+        <div>
+          <label className={labelClass}>Heading</label>
+          <input className={inputClass} value={values.calculatorHeading} onChange={(e) => set("calculatorHeading", e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>Intro Text</label>
+          <textarea rows={2} className={inputClass} value={values.calculatorIntro} onChange={(e) => set("calculatorIntro", e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>Button Text</label>
+          <input className={inputClass} value={values.calculatorCtaText} onChange={(e) => set("calculatorCtaText", e.target.value)} />
+        </div>
+      </div>
+
+      <div className={`${cardClass} p-6 space-y-5`}>
+        <div className="flex items-center justify-between">
+          <h2 className={sectionTitleClass}>Booking Section</h2>
+          <button type="button" className={btnGhost} onClick={() => set("bookingHighlights", [...values.bookingHighlights, ""])}>
+            <Plus className="h-4 w-4" /> Add Highlight
+          </button>
+        </div>
+        <div>
+          <label className={labelClass}>Heading</label>
+          <input className={inputClass} value={values.bookingHeading} onChange={(e) => set("bookingHeading", e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>Intro Text</label>
+          <textarea rows={2} className={inputClass} value={values.bookingIntro} onChange={(e) => set("bookingIntro", e.target.value)} />
+        </div>
+        {values.bookingHighlights.map((h: string, i: number) => (
+          <div key={i} className="flex items-center gap-2">
+            <input
+              className={inputClass}
+              value={h}
+              onChange={(e) => {
+                const next = [...values.bookingHighlights];
+                next[i] = e.target.value;
+                set("bookingHighlights", next);
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => set("bookingHighlights", values.bookingHighlights.filter((_: string, idx: number) => idx !== i))}
+              className="text-slate-400 hover:text-red-600 shrink-0"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </div>
+        ))}
+        <div>
+          <label className={labelClass}>Button Text</label>
+          <input className={inputClass} value={values.bookingCtaText} onChange={(e) => set("bookingCtaText", e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>Trust Panel Heading</label>
+          <input className={inputClass} value={values.trustHeading} onChange={(e) => set("trustHeading", e.target.value)} />
+        </div>
+      </div>
+
+      <div className={`${cardClass} p-6 space-y-5`}>
         <h2 className={sectionTitleClass}>Services Section</h2>
         <div>
           <label className={labelClass}>Heading</label>

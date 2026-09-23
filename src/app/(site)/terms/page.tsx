@@ -5,7 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = { title: "Terms of Use" };
+export const metadata: Metadata = { title: "Terms of Use", alternates: { canonical: "/terms" } };
 
 export default async function TermsPage() {
   const settings = await getSiteSettings();

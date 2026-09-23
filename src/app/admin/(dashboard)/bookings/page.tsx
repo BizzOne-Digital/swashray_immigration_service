@@ -13,6 +13,7 @@ interface BookingRow {
   email: string;
   phone: string;
   serviceName: string;
+  country: string;
   preferredDate: string;
   preferredTime: string;
   preferredContactMethod: string;
@@ -124,6 +125,7 @@ export default function AdminBookingsPage() {
                       <p><span className="text-slate-400">Email:</span> <a className="text-slate-800" href={`mailto:${b.email}`}>{b.email}</a></p>
                       <p><span className="text-slate-400">Phone:</span> <a className="text-slate-800" href={`tel:${b.phone}`}>{b.phone}</a></p>
                       <p><span className="text-slate-400">Preferred Contact:</span> {b.preferredContactMethod}</p>
+                      {b.country && <p><span className="text-slate-400">Country:</span> {b.country}</p>}
                       <p><span className="text-slate-400">Requested:</span> {new Date(b.createdAt).toLocaleString()}</p>
                     </div>
                     {b.message && (

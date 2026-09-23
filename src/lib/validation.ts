@@ -24,10 +24,12 @@ export const bookingSchema = z.object({
   phone: z.string().trim().min(5, "Please enter a valid phone number.").max(40),
   serviceId: z.string().trim().optional().default(""),
   serviceName: z.string().trim().max(160).optional().default(""),
+  country: z.string().trim().max(120).optional().default(""),
   preferredDate: z.string().trim().min(1, "Please choose a preferred date."),
   preferredTime: z.string().trim().min(1, "Please choose a preferred time."),
   preferredContactMethod: z.enum(["Email", "Phone", "Either"]).default("Email"),
   message: z.string().trim().max(4000).optional().default(""),
+  agreedToConsultationTerms: z.coerce.boolean().optional().default(false),
   companyWebsite: z.string().max(300).optional().default(""),
 });
 

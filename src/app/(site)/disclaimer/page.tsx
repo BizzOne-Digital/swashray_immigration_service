@@ -5,7 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = { title: "Disclaimer" };
+export const metadata: Metadata = { title: "Disclaimer", alternates: { canonical: "/disclaimer" } };
 
 export default async function DisclaimerPage() {
   const settings = await getSiteSettings();

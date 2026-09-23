@@ -11,6 +11,7 @@ export interface IBooking {
   phone: string;
   serviceId?: mongoose.Types.ObjectId | null;
   serviceName: string;
+  country: string;
   preferredDate: string;
   preferredTime: string;
   preferredContactMethod: string;
@@ -28,6 +29,7 @@ const BookingSchema = new Schema<IBooking>(
     phone: { type: String, required: true },
     serviceId: { type: Schema.Types.ObjectId, ref: "Service", default: null },
     serviceName: { type: String, default: "" },
+    country: { type: String, default: "" },
     preferredDate: { type: String, required: true },
     preferredTime: { type: String, required: true },
     preferredContactMethod: { type: String, default: "Email" },

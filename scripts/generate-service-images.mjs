@@ -15,8 +15,8 @@ const OUT_DIR = path.resolve("scripts/generated-images");
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const COLORS = {
-  primary: "#0b2545",
-  secondary: "#13315c",
+  primary: "#0d3d3d",
+  secondary: "#145c5c",
   accent: "#c8a24a",
   surface: "#ffffff",
 };
