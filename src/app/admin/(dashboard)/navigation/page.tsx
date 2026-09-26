@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Loader2, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
+import { Loader2, Plus, Trash2, ArrowUp, ArrowDown, Info } from "lucide-react";
 import { inputClass, btnPrimary, btnGhost, cardClass } from "@/lib/adminUi";
 
 interface NavItem {
@@ -70,40 +70,56 @@ export default function AdminNavigationPage() {
         <p className="text-sm text-slate-500 mt-1">Control the labels, links, order, and visibility of the main menu.</p>
       </div>
 
+      <div className="flex items-start gap-2.5 rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800">
+        <Info className="h-4 w-4 mt-0.5 shrink-0" />
+        <p>
+          The menu item linking to <strong>/services</strong> automatically becomes the <strong>Programs</strong> dropdown,
+          listing every published service (managed on the Services page). You can rename its label, but keep the link as{" "}
+          <strong>/services</strong> so the dropdown keeps working.
+        </p>
+      </div>
+
       <div className={`${cardClass} p-6 space-y-4`}>
         {items.map((item, i) => (
-          <div key={i} className="grid grid-cols-12 gap-3 items-center border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-            <input
-              className={`${inputClass} col-span-4`}
-              placeholder="Label"
-              value={item.label}
-              onChange={(e) => update(i, { label: e.target.value })}
-            />
-            <input
-              className={`${inputClass} col-span-4`}
-              placeholder="/url"
-              value={item.url}
-              onChange={(e) => update(i, { url: e.target.value })}
-            />
-            <label className="col-span-2 flex items-center gap-1.5 text-xs text-slate-600">
-              <input type="checkbox" checked={item.visible} onChange={(e) => update(i, { visible: e.target.checked })} />
-              Visible
-            </label>
-            <div className="col-span-2 flex items-center justify-end gap-1">
-              <button type="button" className={`${btnGhost} !px-2 !py-1`} onClick={() => move(i, -1)}>
-                <ArrowUp className="h-4 w-4" />
-              </button>
-              <button type="button" className={`${btnGhost} !px-2 !py-1`} onClick={() => move(i, 1)}>
-                <ArrowDown className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                className={`${btnGhost} !px-2 !py-1 hover:!bg-red-50 hover:!text-red-600`}
-                onClick={() => setItems((prev) => prev.filter((_, idx) => idx !== i))}
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
+          <div key={i} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+            <div className="grid grid-cols-12 gap-3 items-center">
+              <input
+                className={`${inputClass} col-span-4`}
+                placeholder="Label"
+                value={item.label}
+                onChange={(e) => update(i, { label: e.target.value })}
+              />
+              <input
+                className={`${inputClass} col-span-4`}
+                placeholder="/url"
+                value={item.url}
+                onChange={(e) => update(i, { url: e.target.value })}
+              />
+              <label className="col-span-2 flex items-center gap-1.5 text-xs text-slate-600">
+                <input type="checkbox" checked={item.visible} onChange={(e) => update(i, { visible: e.target.checked })} />
+                Visible
+              </label>
+              <div className="col-span-2 flex items-center justify-end gap-1">
+                <button type="button" className={`${btnGhost} !px-2 !py-1`} onClick={() => move(i, -1)}>
+                  <ArrowUp className="h-4 w-4" />
+                </button>
+                <button type="button" className={`${btnGhost} !px-2 !py-1`} onClick={() => move(i, 1)}>
+                  <ArrowDown className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  className={`${btnGhost} !px-2 !py-1 hover:!bg-red-50 hover:!text-red-600`}
+                  onClick={() => setItems((prev) => prev.filter((_, idx) => idx !== i))}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
             </div>
+            {item.url.trim() === "/services" && (
+              <p className="mt-2 text-xs font-medium text-sky-700">
+                → Powers the Programs dropdown, auto-populated from Services
+              </p>
+            )}
           </div>
         ))}
 

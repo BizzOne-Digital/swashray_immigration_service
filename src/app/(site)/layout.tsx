@@ -1,4 +1,4 @@
-import { getSiteSettings, getThemeSettings, getNavigation } from "@/lib/cms";
+import { getSiteSettings, getThemeSettings, getNavigation, getActiveServices } from "@/lib/cms";
 import { buildThemeStyle } from "@/components/site/ThemeVars";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -8,10 +8,11 @@ import { getSiteUrl, jsonLd } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const [settings, theme, navigation] = await Promise.all([
+  const [settings, theme, navigation, services] = await Promise.all([
     getSiteSettings(),
     getThemeSettings(),
     getNavigation(),
+    getActiveServices(),
   ]);
 
   const siteUrl = getSiteUrl();
@@ -41,6 +42,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         businessName={settings.businessName}
         logoMediaId={settings.logoMediaId as string | null}
         navigation={navigation}
+        services={services}
         social={settings.social}
       />
       <main className="flex-1">{children}</main>

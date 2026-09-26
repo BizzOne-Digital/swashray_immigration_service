@@ -5,6 +5,7 @@ import SiteSettings, { ISiteSettings } from "@/lib/models/SiteSettings";
 import ThemeSettings, { IThemeSettings } from "@/lib/models/ThemeSettings";
 import BookingSettings, { IBookingSettings } from "@/lib/models/BookingSettings";
 import NavigationItem from "@/lib/models/NavigationItem";
+import Service from "@/lib/models/Service";
 import { serialize } from "@/lib/utils";
 
 /** Generic "get the one settings/content doc, creating it with defaults if missing" helper. */
@@ -40,4 +41,17 @@ export async function getNavigation() {
   }
   const items = await NavigationItem.find({ visible: true }).sort({ order: 1 });
   return serialize(items.map((i) => i.toObject()));
+}
+
+/**
+ * Minimal, ordered list of active services for the header/mobile "Programs"
+ * dropdown — just enough fields to render a link with an icon.
+ */
+export async function getActiveServices() {
+  await connectDB();
+  const items = await Service.find({ active: true })
+    .select("title slug icon")
+    .sort({ order: 1 })
+    .lean();
+  return serialize(items);
 }

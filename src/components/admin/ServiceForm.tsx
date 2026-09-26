@@ -107,6 +107,9 @@ export function ServiceForm({ initial }: { initial?: ServiceFormValues }) {
           <div>
             <label className={labelClass}>Sort Order (lower shows first)</label>
             <input type="number" className={inputClass} value={values.order} onChange={(e) => set("order", Number(e.target.value))} />
+            <p className="text-xs text-slate-500 mt-1">
+              Also controls this service&apos;s position in the site&apos;s Programs menu — or drag to reorder from the Services list instead.
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
