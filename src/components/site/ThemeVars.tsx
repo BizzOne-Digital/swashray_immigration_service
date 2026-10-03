@@ -14,6 +14,8 @@ export function buildThemeStyle(theme: IThemeSettings): CSSProperties {
     "--color-primary": theme.colors.primary,
     "--color-secondary": theme.colors.secondary,
     "--color-accent": theme.colors.accent,
+    "--color-highlight": theme.colors.highlight,
+    "--color-dark": theme.colors.dark,
     "--color-background": theme.colors.background,
     "--color-surface": theme.colors.surface,
     "--color-ink": theme.colors.text,

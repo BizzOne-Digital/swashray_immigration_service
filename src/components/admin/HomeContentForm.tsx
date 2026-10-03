@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { inputClass, labelClass, btnPrimary, btnGhost, sectionTitleClass, cardClass } from "@/lib/adminUi";
 import { ImagePicker } from "@/components/admin/ImagePicker";
+import { VideoPicker } from "@/components/admin/VideoPicker";
 import { ICON_NAMES, Icon } from "@/components/ui/IconMap";
 
 export function HomeContentForm() {
@@ -43,7 +44,10 @@ export function HomeContentForm() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div className={`${cardClass} p-6 space-y-5`}>
-        <h2 className={sectionTitleClass}>Hero Section</h2>
+        <h2 className={sectionTitleClass}>Hero Section (SEO fallback)</h2>
+        <p className="text-xs text-slate-500 -mt-2">
+          Used for the page title/meta description and as a fallback — the homepage itself now displays the Hero Slider below. Keep the headline exact, it is the site&apos;s required page title.
+        </p>
         <div>
           <label className={labelClass}>Headline</label>
           <input className={inputClass} value={values.heroHeadline} onChange={(e) => set("heroHeadline", e.target.value)} />
@@ -52,7 +56,7 @@ export function HomeContentForm() {
           <label className={labelClass}>Subheading</label>
           <textarea rows={3} className={inputClass} value={values.heroSubheading} onChange={(e) => set("heroSubheading", e.target.value)} />
         </div>
-        <ImagePicker label="Hero Image" value={values.heroImageMediaId} onChange={(id) => set("heroImageMediaId", id)} />
+        <ImagePicker label="Hero Image (meta/share preview)" value={values.heroImageMediaId} onChange={(id) => set("heroImageMediaId", id)} />
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
             <label className={labelClass}>Primary Button Text</label>
@@ -71,6 +75,130 @@ export function HomeContentForm() {
             <input className={inputClass} value={values.secondaryCtaUrl} onChange={(e) => set("secondaryCtaUrl", e.target.value)} />
           </div>
         </div>
+      </div>
+
+      <div className={`${cardClass} p-6 space-y-5`}>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className={sectionTitleClass}>Homepage Hero Slider</h2>
+            <p className="text-xs text-slate-500 mt-1">
+              The cinematic slider at the top of the homepage. Add up to 8 slides; each needs its own image, heading and button. The &quot;Explore Our Services&quot; link above is shown on every slide as the secondary action.
+            </p>
+          </div>
+          <button
+            type="button"
+            className={btnGhost}
+            onClick={() =>
+              set("heroSlides", [
+                ...values.heroSlides,
+                { label: "", heading: "", subheading: "", imageMediaId: null, videoMediaId: null, ctaText: "Learn More", ctaUrl: "/services" },
+              ])
+            }
+            disabled={values.heroSlides.length >= 8}
+          >
+            <Plus className="h-4 w-4" /> Add Slide
+          </button>
+        </div>
+        {values.heroSlides.length === 0 && (
+          <p className="text-sm text-slate-400">No slides yet — add one above to turn on the hero slider.</p>
+        )}
+        {values.heroSlides.map((slide: any, i: number) => (
+          <div key={i} className="rounded-lg border border-slate-200 p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-medium text-slate-500">Slide {i + 1}</p>
+              <button
+                type="button"
+                onClick={() => set("heroSlides", values.heroSlides.filter((_: any, idx: number) => idx !== i))}
+                className="text-slate-400 hover:text-red-600"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+            <ImagePicker
+              label="Background Image / Poster"
+              value={slide.imageMediaId}
+              onChange={(id) => {
+                const next = [...values.heroSlides];
+                next[i] = { ...next[i], imageMediaId: id };
+                set("heroSlides", next);
+              }}
+              aspect="aspect-[16/9]"
+            />
+            <VideoPicker
+              label="Background Video"
+              value={slide.videoMediaId}
+              onChange={(id) => {
+                const next = [...values.heroSlides];
+                next[i] = { ...next[i], videoMediaId: id };
+                set("heroSlides", next);
+              }}
+            />
+            <div>
+              <label className={labelClass}>Label (small eyebrow text)</label>
+              <input
+                className={inputClass}
+                placeholder="e.g. Family Sponsorship"
+                value={slide.label}
+                onChange={(e) => {
+                  const next = [...values.heroSlides];
+                  next[i] = { ...next[i], label: e.target.value };
+                  set("heroSlides", next);
+                }}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Heading</label>
+              <input
+                className={inputClass}
+                value={slide.heading}
+                onChange={(e) => {
+                  const next = [...values.heroSlides];
+                  next[i] = { ...next[i], heading: e.target.value };
+                  set("heroSlides", next);
+                }}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Subheading (typewriter text)</label>
+              <textarea
+                rows={2}
+                className={inputClass}
+                value={slide.subheading}
+                onChange={(e) => {
+                  const next = [...values.heroSlides];
+                  next[i] = { ...next[i], subheading: e.target.value };
+                  set("heroSlides", next);
+                }}
+              />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label className={labelClass}>Button Text</label>
+                <input
+                  className={inputClass}
+                  value={slide.ctaText}
+                  onChange={(e) => {
+                    const next = [...values.heroSlides];
+                    next[i] = { ...next[i], ctaText: e.target.value };
+                    set("heroSlides", next);
+                  }}
+                />
+              </div>
+              <div>
+                <label className={labelClass}>Button Link</label>
+                <input
+                  className={inputClass}
+                  value={slide.ctaUrl}
+                  onChange={(e) => {
+                    const next = [...values.heroSlides];
+                    next[i] = { ...next[i], ctaUrl: e.target.value };
+                    set("heroSlides", next);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className={`${cardClass} p-6 space-y-5`}>

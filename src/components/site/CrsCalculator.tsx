@@ -19,7 +19,7 @@ import { Button, ButtonLink } from "@/components/ui/Button";
 import { Info, RotateCcw } from "lucide-react";
 
 const selectClass =
-  "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-3.5 py-2.5 text-sm text-[var(--color-ink)] focus:border-[var(--color-primary)] focus:outline-none transition-colors";
+  "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-3.5 py-2.5 text-sm text-[var(--color-ink)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/15 transition-all";
 const labelClass = "block text-sm font-medium text-[var(--color-ink)] mb-1.5";
 const fieldsetClass = "space-y-4";
 

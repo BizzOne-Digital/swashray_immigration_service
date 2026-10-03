@@ -11,7 +11,7 @@ export function NewsCard({ article, index = 0 }: { article: INewsArticle; index?
   return (
     <Link
       href={`/news/${article.slug}`}
-      className="group flex flex-col rounded-[var(--radius-card)] border border-black/[0.06] bg-[var(--color-surface)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in-up"
+      className="group flex flex-col rounded-[var(--radius-card)] border border-black/[0.06] bg-[var(--color-surface)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--color-accent)]/40 animate-fade-in-up"
       style={{ animationDelay: `${Math.min(index, 6) * 60}ms` }}
     >
       <div className="relative h-44 w-full overflow-hidden bg-[var(--color-primary)]/5">

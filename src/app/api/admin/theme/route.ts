@@ -10,6 +10,8 @@ const themeSchema = z.object({
     primary: z.string(),
     secondary: z.string(),
     accent: z.string(),
+    highlight: z.string(),
+    dark: z.string(),
     background: z.string(),
     surface: z.string(),
     text: z.string(),

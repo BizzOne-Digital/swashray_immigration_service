@@ -10,7 +10,13 @@ export const ALLOWED_IMAGE_TYPES = new Set([
   "image/gif",
 ]);
 
-export const MAX_UPLOAD_BYTES = 8 * 1024 * 1024; // 8MB
+export const ALLOWED_VIDEO_TYPES = new Set([
+  "video/mp4",
+  "video/webm",
+]);
+
+export const MAX_UPLOAD_BYTES = 8 * 1024 * 1024; // 8MB — images
+export const MAX_VIDEO_UPLOAD_BYTES = 20 * 1024 * 1024; // 20MB — short, muted background-loop clips only
 
 export class MediaUploadError extends Error {}
 
@@ -22,11 +28,15 @@ async function getBucket() {
 }
 
 export async function uploadMedia(file: File, altText = "") {
-  if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-    throw new MediaUploadError("Unsupported file type. Please upload a JPG, PNG, WebP, or GIF image.");
+  const isVideo = ALLOWED_VIDEO_TYPES.has(file.type);
+  const isImage = ALLOWED_IMAGE_TYPES.has(file.type);
+
+  if (!isVideo && !isImage) {
+    throw new MediaUploadError("Unsupported file type. Please upload a JPG, PNG, WebP, GIF image, or an MP4/WebM video.");
   }
-  if (file.size > MAX_UPLOAD_BYTES) {
-    throw new MediaUploadError("File is too large. Maximum size is 8MB.");
+  const maxBytes = isVideo ? MAX_VIDEO_UPLOAD_BYTES : MAX_UPLOAD_BYTES;
+  if (file.size > maxBytes) {
+    throw new MediaUploadError(`File is too large. Maximum size is ${Math.round(maxBytes / (1024 * 1024))}MB.`);
   }
 
   const bucket = await getBucket();
@@ -68,7 +78,7 @@ export async function deleteMedia(mediaId: string) {
   await Media.findByIdAndDelete(mediaId);
 }
 
-export async function openDownloadStream(gridFsId: mongoose.Types.ObjectId) {
+export async function openDownloadStream(gridFsId: mongoose.Types.ObjectId, options?: { start?: number; end?: number }) {
   const bucket = await getBucket();
-  return bucket.openDownloadStream(gridFsId);
+  return bucket.openDownloadStream(gridFsId, options);
 }

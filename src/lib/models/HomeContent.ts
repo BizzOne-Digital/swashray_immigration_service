@@ -11,11 +11,23 @@ export interface IJourneyStep {
   text: string;
 }
 
+export interface IHeroSlide {
+  _id?: mongoose.Types.ObjectId;
+  label: string;
+  heading: string;
+  subheading: string;
+  imageMediaId?: mongoose.Types.ObjectId | null;
+  videoMediaId?: mongoose.Types.ObjectId | null;
+  ctaText: string;
+  ctaUrl: string;
+}
+
 export interface IHomeContent {
   _id: mongoose.Types.ObjectId;
   heroHeadline: string;
   heroSubheading: string;
   heroImageMediaId?: mongoose.Types.ObjectId | null;
+  heroSlides: IHeroSlide[];
   primaryCtaText: string;
   primaryCtaUrl: string;
   secondaryCtaText: string;
@@ -57,6 +69,28 @@ const HomeContentSchema = new Schema<IHomeContent>(
         "Professional guidance for your immigration journey. We help individuals and families understand their options for visitor visas, sponsorships, work permits, study permits, passport services, and citizenship.",
     },
     heroImageMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
+    /**
+     * Homepage hero slider. Empty by default — populated once via
+     * scripts/seed-hero-slides.cjs (idempotent: only fills it if empty),
+     * then fully editable from Admin -> Content -> Homepage Hero Slider.
+     * The single heroHeadline/heroSubheading/heroImageMediaId fields above
+     * are kept only as SEO/meta fallbacks (see generateMetadata in the
+     * homepage), not for the visual hero itself anymore.
+     */
+    heroSlides: {
+      type: [
+        {
+          label: { type: String, default: "" },
+          heading: { type: String, default: "" },
+          subheading: { type: String, default: "" },
+          imageMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
+          videoMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
+          ctaText: { type: String, default: "Learn More" },
+          ctaUrl: { type: String, default: "/services" },
+        },
+      ],
+      default: [],
+    },
     primaryCtaText: { type: String, default: "Book a Consultation" },
     primaryCtaUrl: { type: String, default: "/booking" },
     secondaryCtaText: { type: String, default: "Explore Our Services" },

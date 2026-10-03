@@ -2,6 +2,7 @@ import { getSiteSettings, getThemeSettings, getNavigation, getActiveServices } f
 import { buildThemeStyle } from "@/components/site/ThemeVars";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { MotionProvider } from "@/components/site/MotionProvider";
 import { mediaUrl } from "@/lib/utils";
 import { getSiteUrl, jsonLd } from "@/lib/seo";
 
@@ -38,15 +39,17 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <div style={buildThemeStyle(theme)} className="contents">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(organizationSchema) }} />
-      <Header
-        businessName={settings.businessName}
-        logoMediaId={settings.logoMediaId as string | null}
-        navigation={navigation}
-        services={services}
-        social={settings.social}
-      />
-      <main className="flex-1">{children}</main>
-      <Footer settings={settings} navigation={navigation} />
+      <MotionProvider>
+        <Header
+          businessName={settings.businessName}
+          logoMediaId={settings.logoMediaId as string | null}
+          navigation={navigation}
+          services={services}
+          social={settings.social}
+        />
+        <main className="flex-1">{children}</main>
+        <Footer settings={settings} navigation={navigation} />
+      </MotionProvider>
     </div>
   );
 }

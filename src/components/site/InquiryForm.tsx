@@ -12,7 +12,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 type FormValues = z.input<typeof inquirySchema>;
 
 const inputClass =
-  "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-4 py-2.5 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-muted)]/60 focus:border-[var(--color-primary)] focus:outline-none transition-colors";
+  "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-4 py-2.5 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-muted)]/60 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/15 transition-all";
 const labelClass = "block text-sm font-medium text-[var(--color-ink)] mb-1.5";
 const errorClass = "text-xs text-red-600 mt-1";
 

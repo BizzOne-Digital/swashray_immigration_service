@@ -26,7 +26,9 @@ export function Footer({
   );
 
   return (
-    <footer className="mt-auto bg-[var(--color-primary)] text-white">
+    <footer className="mt-auto relative bg-[var(--color-dark)] text-white">
+      {/* hairline gold signature line across the very top of the footer */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent" aria-hidden="true" />
       <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 lg:col-span-2">
           <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} light />
@@ -54,7 +56,10 @@ export function Footer({
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50 mb-4">Navigation</h3>
+          <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white/50 mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-highlight)]" aria-hidden="true" />
+            Navigation
+          </h3>
           <ul className="space-y-2.5 text-sm">
             {navigation.map((item) => (
               <li key={item.url}>
@@ -67,7 +72,10 @@ export function Footer({
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50 mb-4">Contact</h3>
+          <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white/50 mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-highlight)]" aria-hidden="true" />
+            Contact
+          </h3>
           <ul className="space-y-3 text-sm text-white/80">
             <li className="flex items-center gap-2.5">
               <Phone className="h-4 w-4 shrink-0" />

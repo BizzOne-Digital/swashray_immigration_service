@@ -79,9 +79,10 @@ export function Header({
                   key={item.url}
                   href={item.url}
                   target={item.openInNewTab ? "_blank" : undefined}
-                  className="px-4 py-2 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors"
+                  className="group relative px-4 py-2 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors"
                 >
                   {item.label}
+                  <span className="absolute left-4 right-4 bottom-1 h-[2px] origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-250 ease-out group-hover:scale-x-100" aria-hidden="true" />
                 </Link>
               );
             }
@@ -89,15 +90,16 @@ export function Header({
               <div key={item.url} className="relative group">
                 <Link
                   href={item.url}
-                  className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors"
+                  className="relative flex items-center gap-1 px-4 py-2 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors"
                 >
                   {item.label}
                   <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                  <span className="absolute left-4 right-7 bottom-1 h-[2px] origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-250 ease-out group-hover:scale-x-100" aria-hidden="true" />
                 </Link>
                 <div
                   className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
                 >
-                  <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] bg-[var(--color-surface)] shadow-xl p-4">
+                  <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] shadow-xl p-4">
                     <div className="grid grid-cols-2 gap-1">
                       {services!.map((s) => (
                         <Link

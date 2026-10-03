@@ -5,13 +5,15 @@
    src/components/site/ThemeVars.tsx), so the admin can change colors and
    typography without a rebuild. */
 @theme {
-  --color-primary: #0d3d3d;
-  --color-secondary: #145c5c;
-  --color-accent: #c8a24a;
-  --color-background: #fbfaf7;
+  --color-primary: #123b63;
+  --color-secondary: #0b1f3a;
+  --color-accent: #d4af37;
+  --color-highlight: #b5121b;
+  --color-dark: #111111;
+  --color-background: #f7f8fa;
   --color-surface: #ffffff;
-  --color-ink: #1c2230;
-  --color-muted: #5b6572;
+  --color-ink: #111111;
+  --color-muted: #5b6472;
 
   --radius-card: 0.85rem;
   --radius-btn: 0.5rem;
@@ -99,6 +101,38 @@ body {
   .animate-kenburns {
     animation: none;
   }
+}
+
+/* Brand signature: a short gold rule + a small red tick, used beneath
+   eyebrows/headings throughout the site so the red+gold accent pairing
+   reads as an intentional, repeated motif rather than random color use. */
+.heading-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+
+.heading-rule::before {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.heading-rule::after {
+  content: "";
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--color-highlight);
+}
+
+.heading-rule--center {
+  justify-content: center;
 }
 
 ::selection {

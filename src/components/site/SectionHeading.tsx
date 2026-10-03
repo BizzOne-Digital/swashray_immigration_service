@@ -23,6 +23,7 @@ export function SectionHeading({
       <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-[var(--color-primary)] tracking-tight">
         {heading}
       </h2>
+      <span className={cn("heading-rule", align === "center" && "heading-rule--center")} aria-hidden="true" />
       {intro && <p className="mt-4 text-[var(--color-muted)] leading-relaxed">{intro}</p>}
     </div>
   );

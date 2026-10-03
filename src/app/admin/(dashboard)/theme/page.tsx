@@ -5,10 +5,12 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { inputClass, labelClass, btnPrimary, sectionTitleClass, cardClass } from "@/lib/adminUi";
 
-const COLOR_FIELDS: { key: string; label: string }[] = [
-  { key: "primary", label: "Primary" },
-  { key: "secondary", label: "Secondary" },
-  { key: "accent", label: "Accent" },
+const COLOR_FIELDS: { key: string; label: string; hint?: string }[] = [
+  { key: "primary", label: "Primary (deep blue)", hint: "Main brand color — nav, links, primary buttons" },
+  { key: "secondary", label: "Secondary (navy)", hint: "Darker blue — gradients, hover states" },
+  { key: "accent", label: "Accent (gold)", hint: "Premium accent — use sparingly: dividers, icons, badges" },
+  { key: "highlight", label: "Highlight (red)", hint: "Strategic accent — CTA emphasis, small indicators, hover" },
+  { key: "dark", label: "Dark (near-black)", hint: "Footer and premium section backgrounds" },
   { key: "background", label: "Background" },
   { key: "surface", label: "Surface (cards)" },
   { key: "text", label: "Body Text" },
@@ -70,6 +72,7 @@ export default function AdminThemePage() {
                 />
                 <input className={inputClass} value={values.colors[f.key]} onChange={(e) => setColor(f.key, e.target.value)} />
               </div>
+              {f.hint && <p className="mt-1 text-xs text-slate-400">{f.hint}</p>}
             </div>
           ))}
         </div>

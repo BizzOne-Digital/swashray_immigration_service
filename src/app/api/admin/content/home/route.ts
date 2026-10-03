@@ -9,6 +9,21 @@ const homeSchema = z.object({
   heroHeadline: z.string().min(1).max(200),
   heroSubheading: z.string().max(1000).optional().default(""),
   heroImageMediaId: z.string().nullable().optional(),
+  heroSlides: z
+    .array(
+      z.object({
+        label: z.string().max(60).optional().default(""),
+        heading: z.string().max(200).optional().default(""),
+        subheading: z.string().max(400).optional().default(""),
+        imageMediaId: z.string().nullable().optional(),
+        videoMediaId: z.string().nullable().optional(),
+        ctaText: z.string().max(60).optional().default(""),
+        ctaUrl: z.string().max(300).optional().default(""),
+      })
+    )
+    .max(8)
+    .optional()
+    .default([]),
   primaryCtaText: z.string().max(60).optional().default(""),
   primaryCtaUrl: z.string().max(300).optional().default(""),
   secondaryCtaText: z.string().max(60).optional().default(""),

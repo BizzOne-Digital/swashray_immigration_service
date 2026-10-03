@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 import { connectDB } from "@/lib/db";
 import Service from "@/lib/models/Service";
@@ -17,8 +16,7 @@ import { CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
-import { HeroParallax } from "@/components/site/HeroParallax";
-import { BrandIllustration } from "@/components/site/BrandIllustration";
+import { HeroSlider, type HeroSlide } from "@/components/site/HeroSlider";
 import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { ScoreGaugeIllustration } from "@/components/site/ScoreGaugeIllustration";
 
@@ -44,70 +42,26 @@ export default async function HomePage() {
     NewsArticle.find({ status: "published" }).sort({ featured: -1, publishedAt: -1 }).limit(3).lean(),
   ]);
 
-  const heroImage = mediaUrl(home.heroImageMediaId as string | null | undefined);
   const servicesList = serialize(services);
   const newsList = serialize(news);
 
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[var(--color-primary)] text-white">
-        <HeroParallax className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:22px_22px]" />
-
-        <Container className="relative py-20 sm:py-28 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="min-w-0 animate-fade-in-up">
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[var(--color-accent)] mb-5">
-              Immigration Guidance You Can Trust
-            </p>
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.08]">
-              {home.heroHeadline.includes(" | ") ? (
-                home.heroHeadline.split(" | ").map((part: string, i: number, arr: string[]) => (
-                  <span key={i}>
-                    {part}
-                    {i < arr.length - 1 && (
-                      <>
-                        {" "}
-                        <span className="text-[var(--color-accent)]">|</span>{" "}
-                      </>
-                    )}
-                  </span>
-                ))
-              ) : (
-                home.heroHeadline
-              )}
-            </h1>
-            <p className="mt-6 text-white/75 text-lg leading-relaxed max-w-xl">{home.heroSubheading}</p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <ButtonLink href={home.primaryCtaUrl} variant="secondary" size="lg">
-                {home.primaryCtaText}
-              </ButtonLink>
-              <ButtonLink
-                href={home.secondaryCtaUrl}
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10"
-              >
-                {home.secondaryCtaText}
-              </ButtonLink>
-            </div>
-          </div>
-          <div className="relative min-w-0 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
-            <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden ring-1 ring-white/10 bg-white/5">
-              {heroImage ? (
-                <Image
-                  src={heroImage}
-                  alt={home.heroHeadline}
-                  fill
-                  className="object-cover animate-kenburns"
-                  priority
-                />
-              ) : (
-                <BrandIllustration icon="Globe2" tone="light" />
-              )}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <HeroSlider
+        slides={(home.heroSlides && home.heroSlides.length > 0 ? home.heroSlides : [
+          {
+            label: "Immigration Guidance You Can Trust",
+            heading: home.heroHeadline,
+            subheading: home.heroSubheading,
+            imageMediaId: home.heroImageMediaId as string | null | undefined,
+            ctaText: home.primaryCtaText,
+            ctaUrl: home.primaryCtaUrl,
+          },
+        ]) as unknown as HeroSlide[]}
+        secondaryCtaText={home.secondaryCtaText}
+        secondaryCtaUrl={home.secondaryCtaUrl}
+      />
 
       {/* TRUST BADGE STRIP */}
       <section className="py-10 border-b border-black/[0.05]">
@@ -285,12 +239,18 @@ export default async function HomePage() {
       {/* CTA */}
       <section className="py-20 sm:py-28">
         <Container>
-          <ScrollReveal className="rounded-[var(--radius-card)] bg-[var(--color-primary)] text-white px-8 py-14 sm:px-16 sm:py-16 text-center">
-            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight max-w-2xl mx-auto">
+          <ScrollReveal className="relative overflow-hidden rounded-[var(--radius-card)] bg-[linear-gradient(135deg,var(--color-dark)_0%,var(--color-secondary)_60%,var(--color-primary)_100%)] text-white px-8 py-14 sm:px-16 sm:py-16 text-center">
+            <div
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{ background: "radial-gradient(50% 80% at 90% 10%, rgba(212,175,55,0.14) 0%, transparent 60%)" }}
+              aria-hidden="true"
+            />
+            <h2 className="relative font-heading text-3xl sm:text-4xl font-semibold tracking-tight max-w-2xl mx-auto">
               {home.ctaHeading}
             </h2>
-            <p className="mt-4 text-white/75 max-w-xl mx-auto leading-relaxed">{home.ctaText}</p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <span className="relative heading-rule heading-rule--center" aria-hidden="true" />
+            <p className="relative mt-4 text-white/75 max-w-xl mx-auto leading-relaxed">{home.ctaText}</p>
+            <div className="relative mt-8 flex flex-wrap gap-4 justify-center">
               <ButtonLink href={home.ctaPrimaryUrl} variant="secondary" size="lg">
                 {home.ctaPrimaryText}
               </ButtonLink>
