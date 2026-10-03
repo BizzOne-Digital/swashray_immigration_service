@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { connectDB } from "@/lib/db";
-import Service from "@/lib/models/Service";
 import { getSiteSettings } from "@/lib/cms";
-import { serialize } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
-import { ServiceCard } from "@/components/site/ServiceCard";
-import { EmptyState } from "@/components/site/EmptyState";
+import { CategoryCard } from "@/components/site/CategoryCard";
 import { buildMetadata } from "@/lib/seo";
+import { CATEGORIES } from "@/lib/servicesData";
 
 export const dynamic = "force-dynamic";
 
@@ -15,37 +12,28 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
   return buildMetadata({
     title: `Services | ${settings.businessName}`,
-    description: "Immigration-related services offered by " + settings.businessName,
+    description:
+      "Explore our Canadian immigration services by category — temporary residence, permanent residence, family sponsorship, citizenship, IRB representation, and more.",
     path: "/services",
     siteName: settings.businessName,
   });
 }
 
 export default async function ServicesPage() {
-  await connectDB();
-  const services = serialize(await Service.find({ active: true }).sort({ order: 1 }).lean());
-
   return (
     <>
       <PageHero
         eyebrow="Our Services"
-        heading="Immigration Services"
-        intro="General guidance across the most common immigration pathways. Every situation is different — a consultation lets us discuss what applies to yours."
+        heading="Explore Our Immigration Services"
+        intro="We organize our services around the most common immigration goals. Choose a category to see the specific pathways and programs within it, then explore the one that fits your situation."
       />
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <Container>
-          {services.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((s: any, i: number) => (
-                <ServiceCard key={s._id} service={s} index={i} />
-              ))}
-            </div>
-          ) : (
-            <EmptyState
-              title="Services coming soon"
-              message="The admin can add service categories from the dashboard — they'll appear here automatically."
-            />
-          )}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CATEGORIES.map((category, i) => (
+              <CategoryCard key={category.slug} category={category} index={i} />
+            ))}
+          </div>
         </Container>
       </section>
     </>

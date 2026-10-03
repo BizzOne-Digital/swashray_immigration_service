@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import type { INavigationItem } from "@/lib/models/NavigationItem";
 import type { ISiteSettings } from "@/lib/models/SiteSettings";
 import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
+import { CATEGORIES } from "@/lib/servicesData";
 
 const SOCIAL_ICONS = {
   facebook: FacebookGlyph,
@@ -72,7 +73,7 @@ export function Header({
 
         <nav className="hidden md:flex items-center gap-1">
           {navigation.map((item) => {
-            const isPrograms = item.url === "/services" && services && services.length > 0;
+            const isPrograms = item.url === "/services";
             if (!isPrograms) {
               return (
                 <Link
@@ -101,17 +102,20 @@ export function Header({
                 >
                   <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] shadow-xl p-4">
                     <div className="grid grid-cols-2 gap-1">
-                      {services!.map((s) => (
+                      {CATEGORIES.map((c) => (
                         <Link
-                          key={s.slug}
-                          href={`/services/${s.slug}`}
+                          key={c.slug}
+                          href={`/services/${c.slug}`}
                           className="flex items-start gap-3 rounded-md p-2.5 hover:bg-[var(--color-primary)]/5 transition-colors"
                         >
                           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15">
-                            <Icon name={s.icon} className="h-4 w-4 text-[var(--color-primary)]" />
+                            <Icon name={c.icon} className="h-4 w-4 text-[var(--color-primary)]" />
                           </span>
-                          <span className="text-sm font-medium text-[var(--color-ink)] leading-snug pt-1">
-                            {s.title}
+                          <span className="min-w-0">
+                            <span className="block text-sm font-medium text-[var(--color-ink)] leading-snug">{c.title}</span>
+                            <span className="block text-xs text-[var(--color-muted)] leading-snug mt-0.5 line-clamp-1">
+                              {c.shortDescription}
+                            </span>
                           </span>
                         </Link>
                       ))}

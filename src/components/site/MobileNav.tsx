@@ -9,6 +9,7 @@ import { LanguageSelector } from "@/components/site/LanguageSelector";
 import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
 import type { ISiteSettings } from "@/lib/models/SiteSettings";
 import type { NavService } from "@/components/site/Header";
+import { CATEGORIES } from "@/lib/servicesData";
 import { cn } from "@/lib/cn";
 
 export interface NavLink {
@@ -60,7 +61,7 @@ export function MobileNav({
         <div className="absolute left-0 right-0 top-full bg-[var(--color-surface)] border-t border-black/5 shadow-lg">
           <nav className="flex flex-col p-5 gap-1">
             {links.map((link) => {
-              const isPrograms = link.url === "/services" && services && services.length > 0;
+              const isPrograms = link.url === "/services";
               if (!isPrograms) {
                 return (
                   <Link
@@ -87,15 +88,15 @@ export function MobileNav({
                   </button>
                   {programsOpen && (
                     <div className="ml-2 mb-1 flex flex-col gap-0.5 border-l-2 border-[var(--color-primary)]/10 pl-3">
-                      {services!.map((s) => (
+                      {CATEGORIES.map((c) => (
                         <Link
-                          key={s.slug}
-                          href={`/services/${s.slug}`}
+                          key={c.slug}
+                          href={`/services/${c.slug}`}
                           onClick={() => setOpen(false)}
                           className="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/5"
                         >
-                          <Icon name={s.icon} className="h-4 w-4 text-[var(--color-primary)]/70 shrink-0" />
-                          {s.title}
+                          <Icon name={c.icon} className="h-4 w-4 text-[var(--color-primary)]/70 shrink-0" />
+                          {c.title}
                         </Link>
                       ))}
                       <Link
