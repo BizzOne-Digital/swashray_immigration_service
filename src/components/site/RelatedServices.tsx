@@ -17,7 +17,7 @@ export function RelatedServices({ relatedSlugs }: { relatedSlugs: string[] }) {
           <Link
             key={`${category.slug}/${service.slug}`}
             href={`/services/${category.slug}/${service.slug}`}
-            className="group flex items-start gap-3 rounded-[var(--radius-card)] border border-black/[0.06] bg-[var(--color-surface)] p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:border-[var(--color-accent)]/40"
+            className="group flex items-start gap-3 rounded-[var(--radius-card)] border border-black/[0.06] bg-[var(--color-surface)] p-5 transition-all hover:-translate-y-0.5 hover:shadow-brand-sm hover:border-[var(--color-accent)]/40"
           >
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15">
               <Icon name={service.icon} className="h-4 w-4 text-[var(--color-primary)]" />

@@ -26,18 +26,18 @@ export function BrandIllustration({
   const isLight = tone === "light";
   const ringColor = isLight ? "rgba(255,255,255,0.35)" : "var(--color-primary)";
   const dotColor = isLight ? "rgba(255,255,255,0.5)" : "var(--color-accent)";
-  const arcColor = isLight ? "rgba(255,255,255,0.25)" : "rgba(13,61,61,0.15)";
+  const arcColor = isLight ? "rgba(255,255,255,0.25)" : "rgba(14,14,16,0.22)";
   const blobFill = isLight ? "rgba(200,162,74,0.18)" : "var(--color-accent)";
   const badgeBg = isLight ? "rgba(255,255,255,0.12)" : "var(--color-primary)";
   const badgeRing = isLight ? "rgba(255,255,255,0.3)" : "var(--color-accent)";
-  const leafColor = isLight ? "rgba(255,255,255,0.08)" : "rgba(13,61,61,0.06)";
+  const leafColor = isLight ? "rgba(255,255,255,0.08)" : "rgba(14,14,16,0.1)";
 
   return (
     <div className={`relative h-full w-full overflow-hidden ${className ?? ""}`} aria-hidden="true">
       {/* soft accent blob, top-right */}
       <div
         className="absolute -top-10 -right-10 h-56 w-56 rounded-full blur-2xl"
-        style={{ background: blobFill, opacity: isLight ? 1 : 0.25 }}
+        style={{ background: blobFill, opacity: isLight ? 1 : 0.38 }}
       />
 
       {/* watermark maple leaf, bottom-right, oversized + faint */}
@@ -73,7 +73,7 @@ export function BrandIllustration({
       <div className="relative h-full w-full flex items-center justify-center">
         <span
           className="flex h-24 w-24 items-center justify-center rounded-full"
-          style={{ background: badgeBg, boxShadow: `0 0 0 1px ${badgeRing}, 0 12px 32px -8px ${isLight ? "rgba(0,0,0,0.35)" : "rgba(13,61,61,0.35)"}` }}
+          style={{ background: badgeBg, boxShadow: `0 0 0 1px ${badgeRing}, 0 12px 32px -8px ${isLight ? "rgba(0,0,0,0.35)" : "rgba(14,14,16,0.4)"}` }}
         >
           <Icon name={icon} className="h-10 w-10 text-white" />
         </span>
@@ -83,7 +83,7 @@ export function BrandIllustration({
         />
         <span
           className="absolute h-40 w-40 rounded-full"
-          style={{ boxShadow: `0 0 0 1px ${isLight ? "rgba(255,255,255,0.15)" : "rgba(13,61,61,0.08)"}` }}
+          style={{ boxShadow: `0 0 0 1px ${isLight ? "rgba(255,255,255,0.15)" : "rgba(14,14,16,0.12)"}` }}
         />
       </div>
     </div>

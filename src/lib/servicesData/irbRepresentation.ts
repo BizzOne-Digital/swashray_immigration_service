@@ -8,6 +8,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Refugee Claims",
     icon: "ShieldCheck",
+    image: "/images/services/irb-representation_refugee-claims.jpg",
     shortDescription: "Representation for refugee protection claims before the Refugee Protection Division.",
     suitableFor: "People seeking protection in Canada because they fear persecution or serious harm in their home country.",
     overview: [
@@ -64,6 +65,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Admissibility Hearings",
     icon: "Gavel",
+    image: "/images/services/irb-representation_admissibility-hearings.jpg",
     shortDescription: "Representation at admissibility hearings before the Immigration Division.",
     suitableFor: "People facing an admissibility hearing over alleged grounds of inadmissibility to Canada.",
     overview: [
@@ -113,6 +115,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Detention Reviews",
     icon: "Scale",
+    image: "/images/services/irb-representation_detention-reviews.jpg",
     shortDescription: "Representation at immigration detention review hearings.",
     suitableFor: "People detained under immigration law, or their family, seeking representation at a detention review.",
     overview: [
@@ -162,6 +165,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Sponsorship Appeals",
     icon: "FileWarning",
+    image: "/images/services/irb-representation_sponsorship-appeals.jpg",
     shortDescription: "Appealing a refused family sponsorship application to the Immigration Appeal Division.",
     suitableFor: "Sponsors whose family sponsorship application was refused and who want to appeal the decision.",
     overview: [

@@ -5,8 +5,8 @@
    src/components/site/ThemeVars.tsx), so the admin can change colors and
    typography without a rebuild. */
 @theme {
-  --color-primary: #123b63;
-  --color-secondary: #0b1f3a;
+  --color-primary: #1a1a1d;
+  --color-secondary: #0e0e10;
   --color-accent: #d4af37;
   --color-highlight: #b5121b;
   --color-dark: #111111;
@@ -133,6 +133,22 @@ body {
 
 .heading-rule--center {
   justify-content: center;
+}
+
+/* Brand-tinted elevation — used on cards, panels, and dropdowns instead of
+   a generic gray drop-shadow, so hover/open states read as part of the same
+   navy-based system as the button shadows in Button.tsx rather than a
+   default UI shadow bolted on top of the palette. */
+.shadow-brand-sm {
+  box-shadow: 0 4px 16px -6px rgba(14, 14, 16, 0.2);
+}
+
+.shadow-brand {
+  box-shadow: 0 18px 38px -14px rgba(14, 14, 16, 0.32);
+}
+
+.shadow-brand-lg {
+  box-shadow: 0 28px 60px -18px rgba(14, 14, 16, 0.4);
 }
 
 ::selection {

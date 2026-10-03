@@ -212,7 +212,7 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
           role="listbox"
           aria-labelledby={buttonId}
           className={cn(
-            "notranslate absolute top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-black/[0.06] bg-white py-2 shadow-xl",
+            "notranslate absolute top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-black/[0.06] bg-white py-2 shadow-brand-sm",
             align === "right" ? "right-0" : "left-0"
           )}
         >

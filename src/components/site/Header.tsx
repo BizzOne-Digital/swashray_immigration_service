@@ -100,7 +100,7 @@ export function Header({
                 <div
                   className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
                 >
-                  <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] shadow-xl p-4">
+                  <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] shadow-brand p-4">
                     <div className="grid grid-cols-2 gap-1">
                       {CATEGORIES.map((c) => (
                         <Link

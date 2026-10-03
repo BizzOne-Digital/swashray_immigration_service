@@ -14,7 +14,7 @@ const base =
 // callers; "premium" is an explicit alias of the same treatment for new code.
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-primary)] text-white shadow-[0_1px_2px_rgba(11,31,58,0.15)] hover:bg-[var(--color-secondary)] hover:shadow-[0_8px_20px_-6px_rgba(11,31,58,0.45)]",
+    "bg-[var(--color-primary)] text-white shadow-[0_1px_2px_rgba(14,14,16,0.15)] hover:bg-[var(--color-secondary)] hover:shadow-[0_8px_20px_-6px_rgba(14,14,16,0.45)]",
   secondary:
     "bg-[var(--color-accent)] text-[var(--color-dark)] shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:shadow-[0_10px_22px_-8px_rgba(212,175,55,0.55)]",
   premium:

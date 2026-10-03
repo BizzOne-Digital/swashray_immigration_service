@@ -20,7 +20,7 @@ export function ContactPanels({ services }: { services: ServiceOption[] }) {
           onClick={() => setTab("inquiry")}
           className={cn(
             "px-5 py-2 rounded-full text-sm font-medium transition-colors",
-            tab === "inquiry" ? "bg-[var(--color-surface)] text-[var(--color-primary)] shadow-sm" : "text-[var(--color-muted)]"
+            tab === "inquiry" ? "bg-[var(--color-surface)] text-[var(--color-primary)] shadow-brand-sm" : "text-[var(--color-muted)]"
           )}
         >
           Send an Inquiry
@@ -32,7 +32,7 @@ export function ContactPanels({ services }: { services: ServiceOption[] }) {
           onClick={() => setTab("booking")}
           className={cn(
             "px-5 py-2 rounded-full text-sm font-medium transition-colors",
-            tab === "booking" ? "bg-[var(--color-surface)] text-[var(--color-primary)] shadow-sm" : "text-[var(--color-muted)]"
+            tab === "booking" ? "bg-[var(--color-surface)] text-[var(--color-primary)] shadow-brand-sm" : "text-[var(--color-muted)]"
           )}
         >
           Book a Consultation

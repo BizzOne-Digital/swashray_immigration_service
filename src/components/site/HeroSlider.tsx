@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { mediaUrl } from "@/lib/utils";
@@ -23,12 +22,14 @@ export interface HeroSlide {
 const AUTOPLAY_MS = 7000;
 
 /**
- * Full-bleed cinematic homepage hero: an autoplaying video/image crossfade
- * with a continuously-looping typewriter heading, dark readability
- * overlay, desktop arrow controls, and dot pagination. Pauses on
- * hover/focus and on prefers-reduced-motion (where it shows each slide's
- * poster image statically, no video, no typing animation). Falls back to a
- * brand-colored gradient panel for any slide with neither video nor image.
+ * Full-bleed cinematic homepage hero: an autoplaying video crossfade with a
+ * continuously-looping typewriter heading, dark readability overlay, desktop
+ * arrow controls, and dot pagination. Pauses on hover/focus and on
+ * prefers-reduced-motion (where it shows a static brand-colored gradient
+ * panel instead of video, no typing animation). Video-only by design — no
+ * static photos are ever shown here, so a slide without a video (or while
+ * prefers-reduced-motion is on) falls back to the gradient panel, never an
+ * image.
  */
 export function HeroSlider({
   slides,
@@ -77,7 +78,7 @@ export function HeroSlider({
       if (Number(key) === active) {
         el.currentTime = 0;
         el.play().catch(() => {
-          /* autoplay can be refused before the first user gesture on some browsers — the poster image still shows */
+          /* autoplay can be refused before the first user gesture on some browsers — the gradient panel still shows behind the paused video */
         });
       } else {
         el.pause();
@@ -110,7 +111,6 @@ export function HeroSlider({
       {/* Backgrounds */}
       <div className="absolute inset-0">
         {slides.map((s, i) => {
-          const imageUrl = mediaUrl(s.imageMediaId);
           const videoUrl = mediaUrl(s.videoMediaId);
           const isActive = i === active;
           const showVideo = videoUrl && !reducedMotion && mounted.has(i);
@@ -128,28 +128,21 @@ export function HeroSlider({
                   ref={(el) => {
                     videoRefs.current[i] = el;
                   }}
-                  className={cn("absolute inset-0 h-full w-full object-cover", isActive && "animate-kenburns")}
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-cover bg-[radial-gradient(ellipse_at_top_left,var(--color-secondary)_0%,var(--color-primary)_60%)]",
+                    isActive && "animate-kenburns"
+                  )}
                   muted
                   loop
                   playsInline
                   autoPlay={i === 0}
                   preload={isActive ? "auto" : "none"}
-                  poster={imageUrl ?? undefined}
                   aria-hidden="true"
                   tabIndex={-1}
                   disablePictureInPicture
                 >
                   <source src={videoUrl} type="video/mp4" />
                 </video>
-              ) : imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt=""
-                  fill
-                  priority={i === 0}
-                  sizes="100vw"
-                  className={cn("object-cover", isActive && "animate-kenburns")}
-                />
               ) : (
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--color-secondary)_0%,var(--color-primary)_60%)]" />
               )}

@@ -33,6 +33,8 @@ export interface DetailContent {
   /** Who this page is generally written for — used in listings and the hero. */
   suitableFor: string;
   icon: string;
+  /** Path under /public used as the card/hero background image. */
+  image: string;
   /** 2-4 short paragraphs. */
   overview: string[];
   eligibility: string[];
@@ -64,4 +66,6 @@ export interface CategoryEntry {
   shortDescription: string;
   intro: string[];
   icon: string;
+  /** Path under /public used as the card background image. */
+  image: string;
 }

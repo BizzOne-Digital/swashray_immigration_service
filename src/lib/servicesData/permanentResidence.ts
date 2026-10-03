@@ -8,6 +8,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Express Entry",
     icon: "Globe2",
+    image: "/images/services/permanent-residence_express-entry.jpg",
     shortDescription: "Canada's points-based system managing applications for three federal economic programs.",
     suitableFor: "Skilled workers with the education, work experience, and language ability to settle economically in Canada.",
     overview: [
@@ -71,6 +72,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "cec",
         title: "Canadian Experience Class",
         icon: "BadgeCheck",
+        image: "/images/services/permanent-residence_express-entry_cec.jpg",
         shortDescription: "For candidates with qualifying skilled work experience in Canada.",
         suitableFor: "People who have worked in Canada in a skilled occupation on valid temporary status.",
         keyConsiderations: ["Requires recent, qualifying Canadian work experience", "No formal education requirement on its own", "Often suits former study or work permit holders already in Canada"],
@@ -105,6 +107,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "federal-skilled-worker-program",
         title: "Federal Skilled Worker Program",
         icon: "Globe2",
+        image: "/images/services/permanent-residence_express-entry_federal-skilled-worker-program.jpg",
         shortDescription: "For candidates with foreign skilled work experience assessed on a points grid.",
         suitableFor: "Skilled workers applying from outside Canada, or with foreign work experience, who meet the selection factor criteria.",
         keyConsiderations: ["Assessed on a separate six-factor selection grid", "Requires an Educational Credential Assessment", "Suited to candidates without Canadian work experience"],
@@ -140,6 +143,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "federal-skilled-trades-program",
         title: "Federal Skilled Trades Program",
         icon: "Handshake",
+        image: "/images/services/permanent-residence_express-entry_federal-skilled-trades-program.jpg",
         shortDescription: "For candidates with qualifying experience in an eligible skilled trade.",
         suitableFor: "Workers with experience in an eligible trade occupation, with or without a certificate of qualification.",
         keyConsiderations: ["Built around a specific list of eligible trade occupations", "A valid job offer or certificate of qualification is generally required", "Language requirements differ from the other two programs"],
@@ -177,6 +181,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Provincial Nominee Program (PNP)",
     icon: "Landmark",
+    image: "/images/services/permanent-residence_provincial-nominee-program.jpg",
     shortDescription: "Nomination-based pathways run by individual provinces and territories.",
     suitableFor: "Candidates with a connection to, or interest in, a specific province's labour market or community.",
     overview: [
@@ -232,6 +237,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Atlantic Immigration Program",
     icon: "MapPin",
+    image: "/images/services/permanent-residence_atlantic-immigration-program.jpg",
     shortDescription: "An employer-driven pathway to permanent residence in Canada's Atlantic provinces.",
     suitableFor: "Workers with a qualifying job offer from a designated employer in Nova Scotia, New Brunswick, Prince Edward Island, or Newfoundland and Labrador.",
     overview: [
@@ -286,6 +292,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Rural Community Immigration Pilot",
     icon: "Home",
+    image: "/images/services/permanent-residence_rural-community-immigration-pilot.jpg",
     shortDescription: "A community-driven pathway connecting workers with participating rural communities.",
     suitableFor: "Workers with a qualifying job offer from an employer in one of the pilot's participating rural communities.",
     overview: [
@@ -337,6 +344,7 @@ export const PERMANENT_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Francophone Community Immigration Pilot",
     icon: "Languages",
+    image: "/images/services/permanent-residence_francophone-community-immigration-pilot.jpg",
     shortDescription: "A community-driven pathway supporting French-speaking immigration outside Quebec.",
     suitableFor: "French-speaking workers with a qualifying job offer from an employer in a participating Francophone minority community.",
     overview: [

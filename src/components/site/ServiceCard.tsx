@@ -12,7 +12,7 @@ export function ServiceCard({ service, index = 0 }: { service: IService; index?:
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="group relative block h-[420px] sm:h-[450px] rounded-[var(--radius-card)] overflow-hidden shadow-sm ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-[var(--color-accent)]/50 animate-fade-in-up"
+      className="group relative block h-[420px] sm:h-[450px] rounded-[var(--radius-card)] overflow-hidden shadow-sm ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:shadow-brand-lg hover:ring-[var(--color-accent)]/50 animate-fade-in-up"
       style={{ animationDelay: `${Math.min(index, 6) * 60}ms` }}
     >
       {imageUrl ? (

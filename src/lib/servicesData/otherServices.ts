@@ -8,6 +8,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Business Immigration",
     icon: "Building2",
+    image: "/images/services/other-immigration-services_business-immigration.jpg",
     shortDescription: "Pathways for entrepreneurs, investors, and self-employed applicants.",
     suitableFor: "Entrepreneurs, investors, and self-employed people exploring business-based immigration to Canada.",
     overview: [
@@ -60,6 +61,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Humanitarian & Compassionate Applications",
     icon: "Heart",
+    image: "/images/services/other-immigration-services_humanitarian-compassionate-applications.jpg",
     shortDescription: "Requests for an exception to normal immigration requirements based on compelling personal circumstances.",
     suitableFor: "People facing compelling personal circumstances who don't qualify under a standard immigration category.",
     overview: [
@@ -110,6 +112,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Visitor Record / Status Extension",
     icon: "Clock",
+    image: "/images/services/other-immigration-services_visitor-record-status-extension.jpg",
     shortDescription: "Extending your authorized stay in Canada as a visitor.",
     suitableFor: "Visitors currently in Canada who want to extend their authorized stay before it expires.",
     overview: [
@@ -160,6 +163,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "PR Card Renewal",
     icon: "RefreshCw",
+    image: "/images/services/other-immigration-services_pr-card-renewal.jpg",
     shortDescription: "Renewing an expiring or expired Permanent Resident Card.",
     suitableFor: "Permanent residents whose PR card is expiring or has expired.",
     overview: [
@@ -208,6 +212,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Permanent Resident Travel Document",
     icon: "Stamp",
+    image: "/images/services/other-immigration-services_pr-travel-document.jpg",
     shortDescription: "A travel document allowing a permanent resident outside Canada to return without a valid PR card.",
     suitableFor: "Permanent residents outside Canada who don't have a valid PR card and need to return.",
     overview: [
@@ -257,6 +262,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Restoration of Status",
     icon: "RefreshCw",
+    image: "/images/services/other-immigration-services_restoration-of-status.jpg",
     shortDescription: "Restoring temporary resident status after it has recently expired.",
     suitableFor: "Visitors, students, or workers whose temporary status recently expired and who want to restore it.",
     overview: [
@@ -306,6 +312,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Temporary Resident Permit",
     icon: "FileClock",
+    image: "/images/services/other-immigration-services_temporary-resident-permit.jpg",
     shortDescription: "A permit allowing entry or stay in Canada despite an inadmissibility, where justified.",
     suitableFor: "People who are otherwise inadmissible to Canada but have a justified reason to enter or remain temporarily.",
     overview: [
@@ -355,6 +362,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Procedural Fairness Letter Responses",
     icon: "FileWarning",
+    image: "/images/services/other-immigration-services_procedural-fairness-letter-responses.jpg",
     shortDescription: "Responding to an IRCC letter raising concerns before a decision is made.",
     suitableFor: "Applicants who have received a procedural fairness letter raising a specific concern about their application.",
     overview: [
@@ -403,6 +411,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "GCMS Notes Requests",
     icon: "FileText",
+    image: "/images/services/other-immigration-services_gcms-notes.jpg",
     shortDescription: "Requesting the detailed government case notes behind an immigration decision.",
     suitableFor: "Applicants who want to understand the detailed reasoning behind an IRCC decision on their file.",
     overview: [

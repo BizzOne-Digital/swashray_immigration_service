@@ -82,7 +82,7 @@ export function HomeContentForm() {
           <div>
             <h2 className={sectionTitleClass}>Homepage Hero Slider</h2>
             <p className="text-xs text-slate-500 mt-1">
-              The cinematic slider at the top of the homepage. Add up to 8 slides; each needs its own image, heading and button. The &quot;Explore Our Services&quot; link above is shown on every slide as the secondary action.
+              The cinematic slider at the top of the homepage. Video-only background — each slide needs its own video, heading and button; a slide with no video shows a plain brand-colored panel instead (never a static photo). The &quot;Explore Our Services&quot; link above is shown on every slide as the secondary action.
             </p>
           </div>
           <button
@@ -91,7 +91,7 @@ export function HomeContentForm() {
             onClick={() =>
               set("heroSlides", [
                 ...values.heroSlides,
-                { label: "", heading: "", subheading: "", imageMediaId: null, videoMediaId: null, ctaText: "Learn More", ctaUrl: "/services" },
+                { label: "", heading: "", subheading: "", videoMediaId: null, ctaText: "Learn More", ctaUrl: "/services" },
               ])
             }
             disabled={values.heroSlides.length >= 8}
@@ -114,16 +114,6 @@ export function HomeContentForm() {
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
-            <ImagePicker
-              label="Background Image / Poster"
-              value={slide.imageMediaId}
-              onChange={(id) => {
-                const next = [...values.heroSlides];
-                next[i] = { ...next[i], imageMediaId: id };
-                set("heroSlides", next);
-              }}
-              aspect="aspect-[16/9]"
-            />
             <VideoPicker
               label="Background Video"
               value={slide.videoMediaId}

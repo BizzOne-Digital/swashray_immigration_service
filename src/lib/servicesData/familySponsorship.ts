@@ -8,6 +8,7 @@ export const FAMILY_SPONSORSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Spousal Sponsorship",
     icon: "HeartHandshake",
+    image: "/images/services/family-sponsorship_spousal-sponsorship.jpg",
     shortDescription: "Sponsoring a married spouse for Canadian permanent residence.",
     suitableFor: "Canadian citizens or permanent residents who want to sponsor their legally married spouse.",
     overview: [
@@ -67,6 +68,7 @@ export const FAMILY_SPONSORSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Common-Law Partner Sponsorship",
     icon: "Users",
+    image: "/images/services/family-sponsorship_common-law-partner-sponsorship.jpg",
     shortDescription: "Sponsoring a common-law partner for Canadian permanent residence.",
     suitableFor: "Canadian citizens or permanent residents in a genuine common-law relationship who want to sponsor their partner.",
     overview: [
@@ -120,6 +122,7 @@ export const FAMILY_SPONSORSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Dependent Child Sponsorship",
     icon: "Baby",
+    image: "/images/services/family-sponsorship_dependent-child-sponsorship.jpg",
     shortDescription: "Sponsoring a dependent child for Canadian permanent residence.",
     suitableFor: "Canadian citizens or permanent residents who want to sponsor their dependent child.",
     overview: [
@@ -171,6 +174,7 @@ export const FAMILY_SPONSORSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Parents & Grandparents Sponsorship",
     icon: "Home",
+    image: "/images/services/family-sponsorship_parents-grandparents-sponsorship.jpg",
     shortDescription: "Sponsoring parents or grandparents for Canadian permanent residence.",
     suitableFor: "Canadian citizens or permanent residents who want their parents or grandparents to immigrate permanently.",
     overview: [

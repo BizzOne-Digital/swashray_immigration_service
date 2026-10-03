@@ -58,7 +58,7 @@ export function MobileNav({
       </button>
 
       {open && (
-        <div className="absolute left-0 right-0 top-full bg-[var(--color-surface)] border-t border-black/5 shadow-lg">
+        <div className="absolute left-0 right-0 top-full bg-[var(--color-surface)] border-t border-black/5 shadow-brand">
           <nav className="flex flex-col p-5 gap-1">
             {links.map((link) => {
               const isPrograms = link.url === "/services";

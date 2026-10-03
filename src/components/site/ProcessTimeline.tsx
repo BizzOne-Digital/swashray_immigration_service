@@ -31,7 +31,7 @@ export function ProcessTimeline({ steps }: { steps: { title: string; text: strin
               </span>
 
               <div className={cn("sm:w-[calc(50%-2.5rem)]", alignRight ? "sm:ml-auto" : "sm:mr-auto")}>
-                <div className="rounded-[var(--radius-card)] bg-[var(--color-surface)] border border-black/[0.06] p-6 shadow-sm">
+                <div className="rounded-[var(--radius-card)] bg-[var(--color-surface)] border border-black/[0.06] p-6 shadow-brand-sm">
                   <span className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent)]">
                     Step {String(i + 1).padStart(2, "0")}
                   </span>

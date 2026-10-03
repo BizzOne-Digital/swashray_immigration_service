@@ -79,11 +79,11 @@ export default async function ServiceDetailPage({
             <ServicePathCard
               key={program.slug}
               href={`/services/${category.slug}/${service.slug}/${program.slug}`}
+              image={program.image}
               icon={program.icon}
               title={program.title}
               shortDescription={program.shortDescription}
               suitableFor={program.suitableFor}
-              keyConsiderations={program.keyConsiderations}
               index={i}
             />
           ))}

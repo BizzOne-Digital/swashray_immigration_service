@@ -8,6 +8,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Visitor Visa",
     icon: "Plane",
+    image: "/images/services/temporary-residence_visitor-visa.jpg",
     shortDescription: "A temporary resident visa for visiting Canada for tourism, family, or short business trips.",
     suitableFor: "People who want to visit family, see Canada, or attend a short business trip and need a visa to enter.",
     overview: [
@@ -72,6 +73,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Study Permit",
     icon: "GraduationCap",
+    image: "/images/services/temporary-residence_study-permit.jpg",
     shortDescription: "The authorization required to study at a Designated Learning Institution in Canada.",
     suitableFor: "Prospective international students accepted into a program at a Canadian Designated Learning Institution (DLI).",
     overview: [
@@ -136,6 +138,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Spousal Open Work Permit",
     icon: "HeartHandshake",
+    image: "/images/services/temporary-residence_spousal-open-work-permit.jpg",
     shortDescription: "An open work permit for the spouse or partner of certain permit holders or applicants.",
     suitableFor: "Spouses or common-law partners of eligible work or study permit holders, or of certain permanent residence applicants.",
     overview: [
@@ -192,6 +195,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Super Visa",
     icon: "Users",
+    image: "/images/services/temporary-residence_super-visa.jpg",
     shortDescription: "A long-validity multiple-entry visa for parents and grandparents of Canadians.",
     suitableFor: "Parents and grandparents of Canadian citizens or permanent residents who want to visit for extended periods.",
     overview: [
@@ -251,6 +255,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Post-Graduation Work Permit",
     icon: "BookOpen",
+    image: "/images/services/temporary-residence_post-graduation-work-permit.jpg",
     shortDescription: "An open work permit for eligible graduates of Canadian study programs.",
     suitableFor: "Recent graduates of an eligible program at a Designated Learning Institution.",
     overview: [
@@ -308,6 +313,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Employer-Specific Work Permit",
     icon: "Briefcase",
+    image: "/images/services/temporary-residence_employer-specific-work-permit.jpg",
     shortDescription: "A work permit tied to a specific Canadian employer and job offer.",
     suitableFor: "Workers with a confirmed Canadian job offer who need a permit tied to that specific employer.",
     overview: [
@@ -365,6 +371,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Labour Market Impact Assessment (LMIA)",
     icon: "ClipboardList",
+    image: "/images/services/temporary-residence_lmia.jpg",
     shortDescription: "Support for employers seeking to hire a temporary foreign worker through an LMIA.",
     suitableFor: "Canadian employers who want to hire a foreign worker where no LMIA exemption applies.",
     overview: [
@@ -422,6 +429,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "International Experience Canada (IEC)",
     icon: "Compass",
+    image: "/images/services/temporary-residence_international-experience-canada.jpg",
     shortDescription: "Working holiday and youth mobility programs for citizens of partner countries.",
     suitableFor: "Young adults from IEC partner countries who want to work and travel in Canada.",
     overview: [
@@ -478,6 +486,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "working-holiday",
         title: "Working Holiday",
         icon: "Compass",
+        image: "/images/services/temporary-residence_international-experience-canada_working-holiday.jpg",
         shortDescription: "Open work permit experience to fund independent travel in Canada.",
         suitableFor: "Young travellers who want an open work permit to support travel around Canada.",
         keyConsiderations: ["Open work permit — not tied to one employer", "Based on a random pool draw within your country's quota", "Funds requirement to support your early stay"],
@@ -512,6 +521,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "young-professionals",
         title: "Young Professionals",
         icon: "Briefcase",
+        image: "/images/services/temporary-residence_international-experience-canada_young-professionals.jpg",
         shortDescription: "An employer-specific permit for professional work experience tied to a job offer.",
         suitableFor: "Young professionals with a qualifying job offer contributing to their career development.",
         keyConsiderations: ["Requires a genuine job offer in your field", "Employer-specific work permit, not open", "Job should support your professional development"],
@@ -546,6 +556,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
         slug: "international-co-op",
         title: "International Co-op (Internship)",
         icon: "GraduationCap",
+        image: "/images/services/temporary-residence_international-experience-canada_international-co-op.jpg",
         shortDescription: "A work permit for students completing an internship required by their academic program.",
         suitableFor: "Post-secondary students who need to complete an internship or co-op placement in Canada as part of their studies.",
         keyConsiderations: ["Internship must be required for your academic program", "Employer-specific work permit tied to the placement", "Usually shorter in duration than other IEC categories"],

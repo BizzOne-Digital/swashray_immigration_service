@@ -106,6 +106,7 @@ export default async function CategoryOrLegacyServicePage({ params }: { params: 
                 <ServicePathCard
                   key={service.slug}
                   href={`/services/${category.slug}/${service.slug}`}
+                  image={service.image}
                   icon={service.icon}
                   title={service.title}
                   shortDescription={service.shortDescription}

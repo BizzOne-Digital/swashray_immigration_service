@@ -8,6 +8,7 @@ export const CITIZENSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Canadian Citizenship",
     icon: "Award",
+    image: "/images/services/citizenship_canadian-citizenship.jpg",
     shortDescription: "Applying for Canadian citizenship as a permanent resident.",
     suitableFor: "Permanent residents who meet the physical presence and other requirements to become citizens.",
     overview: [
@@ -64,6 +65,7 @@ export const CITIZENSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Citizenship Certificate & Proof of Citizenship",
     icon: "FileCheck",
+    image: "/images/services/citizenship_citizenship-certificate-proof.jpg",
     shortDescription: "Confirming and documenting Canadian citizenship already held through birth or descent.",
     suitableFor: "People who already hold Canadian citizenship (by birth or descent) and need to confirm or document it.",
     overview: [
