@@ -22,6 +22,16 @@ import { ScoreGaugeIllustration } from "@/components/site/ScoreGaugeIllustration
 
 export const dynamic = "force-dynamic";
 
+// Local video paths for the hero slider — all Canada/immigration themed.
+// Loads instantly from the public directory with no buffering delay.
+// Update from Admin > Content > Hero Slider, or change the defaults here.
+const HERO_VIDEOS = [
+  "/videos/hero-canada-flag.mp4",
+  "/videos/hero-toronto-skyline.mp4",
+  "/videos/hero-airport-travel.mp4",
+  "/videos/hero-couple-airport.mp4",
+];
+
 export async function generateMetadata(): Promise<Metadata> {
   const [home, settings] = await Promise.all([getHomeContent(), getSiteSettings()]);
   return buildMetadata({
@@ -45,20 +55,31 @@ export default async function HomePage() {
   const servicesList = serialize(services);
   const newsList = serialize(news);
 
+  // Map MongoDB hero slides — uses admin-set videoSrc if available,
+  // otherwise falls back to the local default videos above.
+  const heroSlides: HeroSlide[] = (home.heroSlides && home.heroSlides.length > 0 ? home.heroSlides : [
+    {
+      label: "Immigration Guidance You Can Trust",
+      heading: home.heroHeadline,
+      subheading: home.heroSubheading,
+      ctaText: home.primaryCtaText,
+      ctaUrl: home.primaryCtaUrl,
+    },
+  ]).map((s: any, i: number) => ({
+    _id: s._id?.toString() ?? `slide-${i}`,
+    label: s.label,
+    heading: s.heading,
+    subheading: s.subheading,
+    videoSrc: s.videoSrc || HERO_VIDEOS[i % HERO_VIDEOS.length],
+    ctaText: s.ctaText,
+    ctaUrl: s.ctaUrl,
+  }));
+
   return (
     <>
       {/* HERO */}
       <HeroSlider
-        slides={(home.heroSlides && home.heroSlides.length > 0 ? home.heroSlides : [
-          {
-            label: "Immigration Guidance You Can Trust",
-            heading: home.heroHeadline,
-            subheading: home.heroSubheading,
-            imageMediaId: home.heroImageMediaId as string | null | undefined,
-            ctaText: home.primaryCtaText,
-            ctaUrl: home.primaryCtaUrl,
-          },
-        ]) as unknown as HeroSlide[]}
+        slides={heroSlides}
         secondaryCtaText={home.secondaryCtaText}
         secondaryCtaUrl={home.secondaryCtaUrl}
       />

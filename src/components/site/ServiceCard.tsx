@@ -3,10 +3,12 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Icon } from "@/components/ui/IconMap";
 import { mediaUrl } from "@/lib/utils";
+import { getCategory } from "@/lib/servicesData";
 import type { IService } from "@/lib/models/Service";
 
 export function ServiceCard({ service, index = 0 }: { service: IService; index?: number }) {
-  const imageUrl = mediaUrl(service.featuredImageMediaId as string | null | undefined);
+  const category = getCategory(service.slug);
+  const imageUrl = category?.image || mediaUrl(service.featuredImageMediaId as string | null | undefined);
   const number = String(index + 1).padStart(2, "0");
 
   return (

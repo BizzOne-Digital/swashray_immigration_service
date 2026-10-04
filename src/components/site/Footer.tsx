@@ -26,12 +26,12 @@ export function Footer({
   );
 
   return (
-    <footer className="mt-auto relative bg-[var(--color-dark)] text-white">
+    <footer className="mt-auto relative bg-[#0a1628] text-white">
       {/* hairline gold signature line across the very top of the footer */}
       <div className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent" aria-hidden="true" />
       <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 lg:col-span-2">
-          <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} light />
+          <Logo businessName={settings.businessName} />
 
           <p className="text-sm text-white/70 max-w-sm leading-relaxed">{settings.footerDescription}</p>
           {socialEntries.length > 0 && (
@@ -93,7 +93,7 @@ export function Footer({
         </div>
       </Container>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/15">
         <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
           <p>{settings.copyrightText}</p>
           <div className="flex gap-5">

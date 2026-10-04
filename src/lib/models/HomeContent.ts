@@ -18,6 +18,7 @@ export interface IHeroSlide {
   subheading: string;
   imageMediaId?: mongoose.Types.ObjectId | null;
   videoMediaId?: mongoose.Types.ObjectId | null;
+  videoSrc?: string;
   ctaText: string;
   ctaUrl: string;
 }
@@ -85,6 +86,7 @@ const HomeContentSchema = new Schema<IHomeContent>(
           subheading: { type: String, default: "" },
           imageMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
           videoMediaId: { type: Schema.Types.ObjectId, ref: "Media", default: null },
+          videoSrc: { type: String, default: "" },
           ctaText: { type: String, default: "Learn More" },
           ctaUrl: { type: String, default: "/services" },
         },

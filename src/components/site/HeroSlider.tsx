@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { mediaUrl } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { useTypewriter } from "@/components/site/useTypewriter";
@@ -13,8 +12,7 @@ export interface HeroSlide {
   label: string;
   heading: string;
   subheading: string;
-  imageMediaId?: string | null;
-  videoMediaId?: string | null;
+  videoSrc?: string | null;
   ctaText: string;
   ctaUrl: string;
 }
@@ -26,10 +24,11 @@ const AUTOPLAY_MS = 7000;
  * continuously-looping typewriter heading, dark readability overlay, desktop
  * arrow controls, and dot pagination. Pauses on hover/focus and on
  * prefers-reduced-motion (where it shows a static brand-colored gradient
- * panel instead of video, no typing animation). Video-only by design — no
- * static photos are ever shown here, so a slide without a video (or while
- * prefers-reduced-motion is on) falls back to the gradient panel, never an
- * image.
+ * panel instead of video, no typing animation).
+ *
+ * Videos are preloaded eagerly on mount and only faded in once they can play
+ * through without buffering — this prevents the dark/blue gradient flash
+ * that used to show while videos were still loading.
  */
 export function HeroSlider({
   slides,
@@ -43,7 +42,8 @@ export function HeroSlider({
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0]));
+  const [ready, setReady] = useState<Set<number>>(() => new Set());
+  const [errored, setErrored] = useState<Set<number>>(() => new Set());
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -61,30 +61,19 @@ export function HeroSlider({
     setActive(((index % count) + count) % count);
   }, [count]);
 
-  // Lazy-mount each slide's <video> only once it has been shown at least
-  // once (keeps initial page weight down), then leave it mounted so later
-  // replays are instant and the fade transition has something to fade.
-  useEffect(() => {
-    setMounted((prev) => (prev.has(active) ? prev : new Set(prev).add(active)));
-  }, [active]);
-
-  // Play the active slide's video, pause every other mounted one — a video's
-  // `autoPlay` attribute only fires once on mount, so switching slides needs
-  // this to actually start/stop playback.
+  // Play the active slide's video, pause every other mounted one.
   useEffect(() => {
     if (reducedMotion) return;
     Object.entries(videoRefs.current).forEach(([key, el]) => {
       if (!el) return;
       if (Number(key) === active) {
         el.currentTime = 0;
-        el.play().catch(() => {
-          /* autoplay can be refused before the first user gesture on some browsers — the gradient panel still shows behind the paused video */
-        });
+        el.play().catch(() => {});
       } else {
         el.pause();
       }
     });
-  }, [active, reducedMotion, mounted]);
+  }, [active, reducedMotion]);
 
   useEffect(() => {
     if (count <= 1 || paused || reducedMotion) return;
@@ -92,7 +81,25 @@ export function HeroSlider({
     return () => clearInterval(id);
   }, [count, paused, reducedMotion]);
 
-  const slide = slides[Math.min(active, count - 1)] ?? slides[0];
+  const markReady = useCallback((index: number) => {
+    setReady((prev) => {
+      if (prev.has(index)) return prev;
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
+  }, []);
+
+  const markErrored = useCallback((index: number) => {
+    setErrored((prev) => {
+      if (prev.has(index)) return prev;
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
+  }, []);
+
+  const slide = slides[Math.min(active, slides.length - 1)] ?? slides[0];
   const typewriter = useTypewriter(slide?.heading ?? "", { active: count > 0, enabled: !reducedMotion, loop: true, speed: 34 });
 
   if (count === 0 || !slide) return null;
@@ -111,9 +118,10 @@ export function HeroSlider({
       {/* Backgrounds */}
       <div className="absolute inset-0">
         {slides.map((s, i) => {
-          const videoUrl = mediaUrl(s.videoMediaId);
           const isActive = i === active;
-          const showVideo = videoUrl && !reducedMotion && mounted.has(i);
+          const isReady = ready.has(i);
+          const hasErrored = errored.has(i);
+          const showVideo = s.videoSrc && !reducedMotion && !hasErrored;
           return (
             <div
               key={s._id ?? i}
@@ -124,32 +132,44 @@ export function HeroSlider({
               )}
             >
               {showVideo ? (
-                <video
-                  ref={(el) => {
-                    videoRefs.current[i] = el;
-                  }}
-                  className={cn(
-                    "absolute inset-0 h-full w-full object-cover bg-[radial-gradient(ellipse_at_top_left,var(--color-secondary)_0%,var(--color-primary)_60%)]",
-                    isActive && "animate-kenburns"
-                  )}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay={i === 0}
-                  preload={isActive ? "auto" : "none"}
-                  aria-hidden="true"
-                  tabIndex={-1}
-                  disablePictureInPicture
-                >
-                  <source src={videoUrl} type="video/mp4" />
-                </video>
+                <>
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[i] = el;
+                    }}
+                    className={cn(
+                      "absolute inset-0 h-full w-full object-cover",
+                      isActive && isReady && "animate-kenburns"
+                    )}
+                    style={{ opacity: isReady ? 1 : 0, transition: "opacity 600ms ease" }}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay={i === 0}
+                    preload="auto"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    disablePictureInPicture
+                    onCanPlay={() => markReady(i)}
+                    onCanPlayThrough={() => markReady(i)}
+                    onError={() => markErrored(i)}
+                  >
+                    <source src={s.videoSrc ?? ""} type="video/mp4" />
+                  </video>
+                  {/* Dark branded fallback — shown until the video is ready, then hidden behind it.
+                      Uses the same dark palette as the readability overlay so there's no color flash. */}
+                  <div
+                    className="absolute inset-0 bg-[linear-gradient(135deg,var(--color-dark)_0%,var(--color-secondary)_55%,var(--color-primary)_100%)]"
+                    style={{ opacity: isReady ? 0 : 1, transition: "opacity 600ms ease" }}
+                  />
+                </>
               ) : (
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--color-secondary)_0%,var(--color-primary)_60%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,var(--color-dark)_0%,var(--color-secondary)_55%,var(--color-primary)_100%)]" />
               )}
             </div>
           );
         })}
-        {/* Readability overlay: darker on the left where the text sits, fading toward the right, plus a bottom lift for the controls. */}
+        {/* Readability overlay */}
         <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/75 via-black/45 to-black/20" />
         <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/70 via-transparent to-black/10" />
       </div>
@@ -207,7 +227,7 @@ export function HeroSlider({
         </div>
       </Container>
 
-      {/* Arrow controls — larger screens only */}
+      {/* Arrow controls */}
       {count > 1 && (
         <>
           <button

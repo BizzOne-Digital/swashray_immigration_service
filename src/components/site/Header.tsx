@@ -27,13 +27,11 @@ export interface NavService {
 
 export function Header({
   businessName,
-  logoMediaId,
   navigation,
   services,
   social,
 }: {
   businessName: string;
-  logoMediaId?: string | null;
   navigation: INavigationItem[];
   services?: NavService[];
   social?: ISiteSettings["social"];
@@ -68,8 +66,8 @@ export function Header({
         </div>
       )}
 
-      <Container className="relative flex items-center justify-between h-20">
-        <Logo businessName={businessName} logoMediaId={logoMediaId} />
+      <Container className="relative flex items-center justify-between h-28 md:h-32">
+        <Logo businessName={businessName} />
 
         <nav className="hidden md:flex items-center gap-1">
           {navigation.map((item) => {

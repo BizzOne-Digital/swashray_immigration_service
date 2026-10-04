@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { inputClass, labelClass, btnPrimary, btnGhost, sectionTitleClass, cardClass } from "@/lib/adminUi";
 import { ImagePicker } from "@/components/admin/ImagePicker";
-import { VideoPicker } from "@/components/admin/VideoPicker";
 import { ICON_NAMES, Icon } from "@/components/ui/IconMap";
 
 export function HomeContentForm() {
@@ -82,7 +81,7 @@ export function HomeContentForm() {
           <div>
             <h2 className={sectionTitleClass}>Homepage Hero Slider</h2>
             <p className="text-xs text-slate-500 mt-1">
-              The cinematic slider at the top of the homepage. Video-only background — each slide needs its own video, heading and button; a slide with no video shows a plain brand-colored panel instead (never a static photo). The &quot;Explore Our Services&quot; link above is shown on every slide as the secondary action.
+              The cinematic slider at the top of the homepage. Each slide uses a video — paste a direct .mp4 URL (e.g. from Pexels, Coverr, or your CDN) or a local path like /videos/my-video.mp4. Videos preload eagerly so they play instantly with no loading flash. Leave blank to use the built-in default videos (Canadian flag, Toronto skyline, airport). The &quot;Explore Our Services&quot; link is shown on every slide as the secondary action.
             </p>
           </div>
           <button
@@ -91,7 +90,7 @@ export function HomeContentForm() {
             onClick={() =>
               set("heroSlides", [
                 ...values.heroSlides,
-                { label: "", heading: "", subheading: "", videoMediaId: null, ctaText: "Learn More", ctaUrl: "/services" },
+                { label: "", heading: "", subheading: "", videoSrc: "", ctaText: "Learn More", ctaUrl: "/services" },
               ])
             }
             disabled={values.heroSlides.length >= 8}
@@ -114,15 +113,19 @@ export function HomeContentForm() {
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
-            <VideoPicker
-              label="Background Video"
-              value={slide.videoMediaId}
-              onChange={(id) => {
-                const next = [...values.heroSlides];
-                next[i] = { ...next[i], videoMediaId: id };
-                set("heroSlides", next);
-              }}
-            />
+            <div>
+              <label className={labelClass}>Video (URL or local path — leave blank for default)</label>
+              <input
+                className={inputClass}
+                placeholder="/videos/my-video.mp4 or https://..."
+                value={slide.videoSrc ?? slide.videoMediaId ?? ""}
+                onChange={(e) => {
+                  const next = [...values.heroSlides];
+                  next[i] = { ...next[i], videoSrc: e.target.value };
+                  set("heroSlides", next);
+                }}
+              />
+            </div>
             <div>
               <label className={labelClass}>Label (small eyebrow text)</label>
               <input

@@ -17,6 +17,7 @@ const homeSchema = z.object({
         subheading: z.string().max(400).optional().default(""),
         imageMediaId: z.string().nullable().optional(),
         videoMediaId: z.string().nullable().optional(),
+        videoSrc: z.string().max(300).optional().default(""),
         ctaText: z.string().max(60).optional().default(""),
         ctaUrl: z.string().max(300).optional().default(""),
       })
