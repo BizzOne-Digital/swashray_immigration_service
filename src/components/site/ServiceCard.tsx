@@ -6,9 +6,15 @@ import { mediaUrl } from "@/lib/utils";
 import { getCategory } from "@/lib/servicesData";
 import type { IService } from "@/lib/models/Service";
 
+const SERVICE_IMAGES: Record<string, string> = {
+  "visitor-visa": "/images/services/visitor-visa.png",
+  "work-permits": "/images/services/work-permits.png",
+  "study-permits": "/images/services/study-permits.png",
+  "passport-services": "/images/services/passport-services.png",
+};
+
 export function ServiceCard({ service, index = 0 }: { service: IService; index?: number }) {
-  const category = getCategory(service.slug);
-  const imageUrl = category?.image || mediaUrl(service.featuredImageMediaId as string | null | undefined);
+  const imageUrl = SERVICE_IMAGES[service.slug] || getCategory(service.slug)?.image || mediaUrl(service.featuredImageMediaId as string | null | undefined);
   const number = String(index + 1).padStart(2, "0");
 
   return (
