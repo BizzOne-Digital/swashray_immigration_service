@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Icon } from "@/components/ui/IconMap";
-import { resolveRelated } from "@/lib/servicesData";
+import { resolveRelated } from "@/lib/servicesCms";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
-export function RelatedServices({ relatedSlugs }: { relatedSlugs: string[] }) {
-  const related = resolveRelated(relatedSlugs);
+export async function RelatedServices({ relatedSlugs }: { relatedSlugs: string[] }) {
+  const related = await resolveRelated(relatedSlugs);
   if (related.length === 0) return null;
 
   return (

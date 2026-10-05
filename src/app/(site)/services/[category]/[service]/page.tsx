@@ -5,7 +5,7 @@ import { buildMetadata, getSiteUrl, jsonLd } from "@/lib/seo";
 import { ServiceDetailLayout } from "@/components/site/ServiceDetailLayout";
 import { ServicePathCard } from "@/components/site/ServicePathCard";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
-import { getCategory, getService, getAllServiceParams } from "@/lib/servicesData";
+import { getCategory, getService, getAllServiceParams } from "@/lib/servicesCms";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ category: string; service: string }>;
 }): Promise<Metadata> {
   const { category: categorySlug, service: serviceSlug } = await params;
-  const service = getService(categorySlug, serviceSlug);
+  const service = await getService(categorySlug, serviceSlug);
   if (!service) return {};
   const settings = await getSiteSettings();
   return buildMetadata({
@@ -36,8 +36,8 @@ export default async function ServiceDetailPage({
   params: Promise<{ category: string; service: string }>;
 }) {
   const { category: categorySlug, service: serviceSlug } = await params;
-  const category = getCategory(categorySlug);
-  const service = getService(categorySlug, serviceSlug);
+  const category = await getCategory(categorySlug);
+  const service = await getService(categorySlug, serviceSlug);
   if (!category || !service) notFound();
 
   const settings = await getSiteSettings();

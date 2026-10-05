@@ -13,7 +13,7 @@ import { DisclaimerNote } from "@/components/site/DisclaimerNote";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { ServicePathCard } from "@/components/site/ServicePathCard";
 import { buildMetadata, getSiteUrl, jsonLd } from "@/lib/seo";
-import { getCategory, getServicesByCategory, getAllCategoryParams } from "@/lib/servicesData";
+import { getCategory, getServicesByCategory, getAllCategoryParams } from "@/lib/servicesCms";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +30,7 @@ async function getLegacyService(slug: string) {
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category: categorySlug } = await params;
   const settings = await getSiteSettings();
-  const category = getCategory(categorySlug);
+  const category = await getCategory(categorySlug);
 
   if (category) {
     return buildMetadata({
@@ -54,11 +54,11 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 
 export default async function CategoryOrLegacyServicePage({ params }: { params: Promise<{ category: string }> }) {
   const { category: categorySlug } = await params;
-  const category = getCategory(categorySlug);
+  const category = await getCategory(categorySlug);
   const siteUrl = getSiteUrl();
 
   if (category) {
-    const services = getServicesByCategory(category.slug);
+    const services = await getServicesByCategory(category.slug);
 
     const breadcrumbSchema = {
       "@context": "https://schema.org",

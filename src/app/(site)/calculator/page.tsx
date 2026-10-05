@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getSiteSettings } from "@/lib/cms";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CrsCalculator } from "@/components/site/CrsCalculator";
 import { buildMetadata } from "@/lib/seo";
 
@@ -26,7 +27,15 @@ export default function CalculatorPage() {
         heading="Express Entry CRS Score Calculator"
         intro="Get an estimate of your Comprehensive Ranking System (CRS) score, based on the official Immigration, Refugees and Citizenship Canada (IRCC) point tables for Express Entry."
       />
-      <section className="py-16">
+      <section className="pt-14">
+        <Container>
+          <Breadcrumbs
+            items={[{ label: "Home", href: "/" }, { label: "Calculators", href: "/calculators" }, { label: "CRS Calculator" }]}
+          />
+        </Container>
+      </section>
+
+      <section className="py-10">
         <Container>
           <CrsCalculator />
         </Container>

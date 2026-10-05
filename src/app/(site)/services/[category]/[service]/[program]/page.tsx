@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getSiteSettings } from "@/lib/cms";
 import { buildMetadata, getSiteUrl, jsonLd } from "@/lib/seo";
 import { ServiceDetailLayout } from "@/components/site/ServiceDetailLayout";
-import { getCategory, getProgram, getAllProgramParams } from "@/lib/servicesData";
+import { getCategory, getProgram, getAllProgramParams } from "@/lib/servicesCms";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ category: string; service: string; program: string }>;
 }): Promise<Metadata> {
   const { category: categorySlug, service: serviceSlug, program: programSlug } = await params;
-  const match = getProgram(categorySlug, serviceSlug, programSlug);
+  const match = await getProgram(categorySlug, serviceSlug, programSlug);
   if (!match) return {};
   const settings = await getSiteSettings();
   return buildMetadata({
@@ -34,8 +34,8 @@ export default async function ProgramDetailPage({
   params: Promise<{ category: string; service: string; program: string }>;
 }) {
   const { category: categorySlug, service: serviceSlug, program: programSlug } = await params;
-  const category = getCategory(categorySlug);
-  const match = getProgram(categorySlug, serviceSlug, programSlug);
+  const category = await getCategory(categorySlug);
+  const match = await getProgram(categorySlug, serviceSlug, programSlug);
   if (!category || !match) notFound();
   const { service, program } = match;
 

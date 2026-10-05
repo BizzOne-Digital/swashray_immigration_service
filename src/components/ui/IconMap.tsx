@@ -33,6 +33,10 @@ import {
   FileClock,
   FileText,
   FileWarning,
+  Calculator,
+  Mountain,
+  TreePine,
+  ExternalLink,
   type LucideIcon,
 } from "lucide-react";
 
@@ -71,6 +75,10 @@ export const ICONS: Record<string, LucideIcon> = {
   FileClock,
   FileText,
   FileWarning,
+  Calculator,
+  Mountain,
+  TreePine,
+  ExternalLink,
 };
 
 export const ICON_NAMES = Object.keys(ICONS);

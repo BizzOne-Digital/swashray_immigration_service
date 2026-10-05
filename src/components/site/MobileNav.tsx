@@ -8,8 +8,7 @@ import { Icon } from "@/components/ui/IconMap";
 import { LanguageSelector } from "@/components/site/LanguageSelector";
 import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
 import type { ISiteSettings } from "@/lib/models/SiteSettings";
-import type { NavService } from "@/components/site/Header";
-import { CATEGORIES } from "@/lib/servicesData";
+import type { NavService, NavCategory } from "@/components/site/Header";
 import { cn } from "@/lib/cn";
 
 export interface NavLink {
@@ -29,12 +28,14 @@ const SOCIAL_ICONS = {
 export function MobileNav({
   links,
   services,
+  categories,
   ctaText,
   ctaUrl,
   social,
 }: {
   links: NavLink[];
   services?: NavService[];
+  categories: NavCategory[];
   ctaText: string;
   ctaUrl: string;
   social?: ISiteSettings["social"];
@@ -88,7 +89,7 @@ export function MobileNav({
                   </button>
                   {programsOpen && (
                     <div className="ml-2 mb-1 flex flex-col gap-0.5 border-l-2 border-[var(--color-primary)]/10 pl-3">
-                      {CATEGORIES.map((c) => (
+                      {categories.map((c) => (
                         <Link
                           key={c.slug}
                           href={`/services/${c.slug}`}

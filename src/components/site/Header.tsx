@@ -9,7 +9,6 @@ import { Container } from "@/components/ui/Container";
 import type { INavigationItem } from "@/lib/models/NavigationItem";
 import type { ISiteSettings } from "@/lib/models/SiteSettings";
 import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
-import { CATEGORIES } from "@/lib/servicesData";
 
 const SOCIAL_ICONS = {
   facebook: FacebookGlyph,
@@ -25,17 +24,26 @@ export interface NavService {
   icon: string;
 }
 
+export interface NavCategory {
+  title: string;
+  slug: string;
+  icon: string;
+  shortDescription: string;
+}
+
 export function Header({
   businessName,
   logoMediaId,
   navigation,
   services,
+  categories,
   social,
 }: {
   businessName: string;
   logoMediaId?: string | null;
   navigation: INavigationItem[];
   services?: NavService[];
+  categories: NavCategory[];
   social?: ISiteSettings["social"];
 }) {
   const socialEntries = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).filter(
@@ -102,7 +110,7 @@ export function Header({
                 >
                   <div className="w-[560px] rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] shadow-brand p-4">
                     <div className="grid grid-cols-2 gap-1">
-                      {CATEGORIES.map((c) => (
+                      {categories.map((c) => (
                         <Link
                           key={c.slug}
                           href={`/services/${c.slug}`}
@@ -145,6 +153,7 @@ export function Header({
         <MobileNav
           links={navigation.map((n) => ({ label: n.label, url: n.url, openInNewTab: n.openInNewTab }))}
           services={services}
+          categories={categories}
           ctaText="Book a Consultation"
           ctaUrl="/booking"
           social={social}

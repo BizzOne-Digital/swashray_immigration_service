@@ -28,9 +28,10 @@ const DEFAULT_NAV = [
   { label: "Home", url: "/", order: 0, visible: true, openInNewTab: false },
   { label: "About Us", url: "/about", order: 1, visible: true, openInNewTab: false },
   { label: "Services", url: "/services", order: 2, visible: true, openInNewTab: false },
-  { label: "News", url: "/news", order: 3, visible: true, openInNewTab: false },
-  { label: "Booking", url: "/booking", order: 4, visible: true, openInNewTab: false },
-  { label: "Contact", url: "/contact", order: 5, visible: true, openInNewTab: false },
+  { label: "Calculators", url: "/calculators", order: 3, visible: true, openInNewTab: false },
+  { label: "News", url: "/news", order: 4, visible: true, openInNewTab: false },
+  { label: "Booking", url: "/booking", order: 5, visible: true, openInNewTab: false },
+  { label: "Contact", url: "/contact", order: 6, visible: true, openInNewTab: false },
 ];
 
 export async function getNavigation() {

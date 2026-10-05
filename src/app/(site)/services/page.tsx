@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { CategoryCard } from "@/components/site/CategoryCard";
 import { buildMetadata } from "@/lib/seo";
-import { CATEGORIES } from "@/lib/servicesData";
+import { getCategories } from "@/lib/servicesCms";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesPage() {
+  const categories = await getCategories();
   return (
     <>
       <PageHero
@@ -30,7 +31,7 @@ export default async function ServicesPage() {
       <section className="py-16 sm:py-20">
         <Container>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CATEGORIES.map((category, i) => (
+            {categories.map((category, i) => (
               <CategoryCard key={category.slug} category={category} index={i} />
             ))}
           </div>
