@@ -42,6 +42,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <MotionProvider>
         <Header
           businessName={settings.businessName}
+          logoMediaId={settings.logoMediaId as string | null}
           navigation={navigation}
           services={services}
           social={settings.social}

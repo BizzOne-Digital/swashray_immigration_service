@@ -25,16 +25,19 @@ export function LogoMark({ className, light = false }: { className?: string; lig
 export function LogoWordmark({
   className,
   subline = true,
+  tagline = true,
   light = false,
 }: {
   className?: string;
   subline?: boolean;
+  /** The small "Canadian Immigration Consultancy" descriptor under the name. */
+  tagline?: boolean;
   light?: boolean;
 }) {
   return (
     <span className={className}>
       <span
-        className={`font-heading text-lg font-semibold tracking-tight leading-none block ${
+        className={`font-heading text-2xl sm:text-[1.75rem] font-semibold tracking-tight leading-none block text-center ${
           light ? "text-white" : "text-[var(--color-primary)]"
         }`}
       >
@@ -42,11 +45,20 @@ export function LogoWordmark({
       </span>
       {subline && (
         <span
-          className={`text-[10px] font-medium tracking-[0.2em] uppercase leading-none block mt-0.5 ${
+          className={`text-xs sm:text-sm font-medium tracking-[0.2em] uppercase leading-none block mt-1.5 text-center ${
             light ? "text-white/60" : "text-[var(--color-muted)]"
           }`}
         >
           Immigration Services
+        </span>
+      )}
+      {tagline && (
+        <span
+          className={`text-[10px] sm:text-[11px] font-medium tracking-wide leading-none block mt-1 text-center ${
+            light ? "text-white/45" : "text-[var(--color-muted)]/80"
+          }`}
+        >
+          Canadian Immigration Consultancy
         </span>
       )}
     </span>

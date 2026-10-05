@@ -212,7 +212,7 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
           role="listbox"
           aria-labelledby={buttonId}
           className={cn(
-            "notranslate absolute top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-black/[0.06] bg-white py-2 shadow-brand-sm",
+            "notranslate absolute top-full z-50 mt-2 w-36 max-h-72 overflow-y-scroll overscroll-contain rounded-xl border border-black/[0.06] bg-white py-2 shadow-brand-sm scrollbar-brand",
             align === "right" ? "right-0" : "left-0"
           )}
         >
@@ -222,16 +222,25 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
               type="button"
               role="option"
               aria-selected={l.code === current}
+              aria-label={l.name}
+              title={l.name}
               onClick={() => handleChange(l.code)}
               className={cn(
-                "flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors hover:bg-black/[0.04]",
-                l.code === current ? "font-semibold text-[var(--color-primary)]" : "text-slate-700"
+                "flex w-full items-center gap-2.5 px-4 py-2.5 text-left transition-colors hover:bg-black/[0.04]",
+                l.code === current ? "bg-black/[0.03]" : ""
               )}
             >
-              <span aria-hidden="true" className="text-base leading-none">
+              <span aria-hidden="true" className="text-xl leading-none">
                 {l.flag}
               </span>
-              {l.name}
+              <span
+                className={cn(
+                  "text-xs font-semibold tracking-wide",
+                  l.code === current ? "text-[var(--color-primary)]" : "text-slate-500"
+                )}
+              >
+                {l.label}
+              </span>
             </button>
           ))}
         </div>

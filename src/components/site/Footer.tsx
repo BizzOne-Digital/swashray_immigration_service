@@ -31,7 +31,7 @@ export function Footer({
       <div className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent" aria-hidden="true" />
       <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 lg:col-span-2">
-          <Logo businessName={settings.businessName} />
+          <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} light />
 
           <p className="text-sm text-white/70 max-w-sm leading-relaxed">{settings.footerDescription}</p>
           {socialEntries.length > 0 && (

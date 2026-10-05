@@ -79,7 +79,7 @@ function SettingsSection() {
       <div className={`${cardClass} p-6 space-y-5`}>
         <h2 className={sectionTitleClass}>Branding</h2>
         <div className="grid sm:grid-cols-2 gap-6">
-          <ImagePicker label="Logo" value={values.logoMediaId} onChange={(id) => set("logoMediaId", id)} aspect="aspect-[3/1]" />
+          <ImagePicker label="Logo (icon/mark only — the business name is added automatically next to it)" value={values.logoMediaId} onChange={(id) => set("logoMediaId", id)} aspect="aspect-square" />
           <ImagePicker label="Favicon" value={values.faviconMediaId} onChange={(id) => set("faviconMediaId", id)} aspect="aspect-square" />
         </div>
         <div>
