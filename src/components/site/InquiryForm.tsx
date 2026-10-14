@@ -8,6 +8,7 @@ import { inquirySchema } from "@/lib/validation";
 import type { z } from "zod";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { ServiceSelectOptions, type ServiceOption } from "@/components/site/ServiceSelectOptions";
 
 type FormValues = z.input<typeof inquirySchema>;
 
@@ -16,7 +17,7 @@ const inputClass =
 const labelClass = "block text-sm font-medium text-[var(--color-ink)] mb-1.5";
 const errorClass = "text-xs text-red-600 mt-1";
 
-export function InquiryForm({ services }: { services: { title: string }[] }) {
+export function InquiryForm({ services }: { services: ServiceOption[] }) {
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
@@ -83,9 +84,7 @@ export function InquiryForm({ services }: { services: { title: string }[] }) {
           <label className={labelClass} htmlFor="serviceOfInterest">Service of Interest</label>
           <select id="serviceOfInterest" className={inputClass} {...register("serviceOfInterest")}>
             <option value="">Select a service</option>
-            {services.map((s) => (
-              <option key={s.title} value={s.title}>{s.title}</option>
-            ))}
+            <ServiceSelectOptions services={services} valueKey="title" />
             <option value="Other">Other / Not Sure</option>
           </select>
         </div>

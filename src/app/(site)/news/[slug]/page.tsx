@@ -90,7 +90,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
 
           <div className="mt-12 flex gap-4">
             <ButtonLink href="/news" variant="outline">
-              Back to News
+              Back to Blog
             </ButtonLink>
             <ButtonLink href="/contact">Ask a Question</ButtonLink>
           </div>

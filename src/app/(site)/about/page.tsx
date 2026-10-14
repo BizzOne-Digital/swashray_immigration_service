@@ -37,11 +37,7 @@ export default async function AboutPage() {
         <Container className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="min-w-0 animate-fade-in-up space-y-8">
             <p className="text-[var(--color-muted)] leading-relaxed text-lg whitespace-pre-line">{about.introText}</p>
-            <TrustBadge
-              logoMediaId={settings.logoMediaId as string | null}
-              text={settings.trustBadgeText}
-              businessName={settings.businessName}
-            />
+            <TrustBadge text={settings.trustBadgeText} />
           </div>
           <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden bg-[var(--color-primary)]/5">
             {introImage ? (

@@ -40,7 +40,9 @@ export async function POST(req: NextRequest) {
     fullName: parsed.data.fullName,
     email: parsed.data.email,
     phone: parsed.data.phone,
-    serviceId: parsed.data.serviceId || null,
+    // Only a real Service document id is stored as a reference; the service
+    // dropdowns now submit "category/service" keys, which are kept via serviceName.
+    serviceId: /^[a-f\d]{24}$/i.test(parsed.data.serviceId) ? parsed.data.serviceId : null,
     serviceName: parsed.data.serviceName,
     country: parsed.data.country,
     preferredDate: parsed.data.preferredDate,

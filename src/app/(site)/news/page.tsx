@@ -16,8 +16,8 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
   return buildMetadata({
-    title: `News & Updates | ${settings.businessName}`,
-    description: "Immigration news, visa updates, and announcements.",
+    title: `Blog: Immigration News & Updates | ${settings.businessName}`,
+    description: "Our blog — Canadian immigration news, visa updates, and announcements.",
     path: "/news",
     siteName: settings.businessName,
   });
@@ -35,7 +35,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <PageHero
-        eyebrow="News & Updates"
+        eyebrow="Blog"
         heading="Immigration News & Updates"
         intro="General updates from our team. For official policy details, always verify with government sources."
       />

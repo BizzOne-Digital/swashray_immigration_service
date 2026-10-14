@@ -1,13 +1,13 @@
 import { Phone, Mail } from "lucide-react";
 import { connectDB } from "@/lib/db";
-import Service from "@/lib/models/Service";
 import NewsArticle from "@/lib/models/NewsArticle";
 import { getHomeContent, getSiteSettings } from "@/lib/cms";
+import { getCategories } from "@/lib/servicesCms";
 import { serialize, mediaUrl } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { ServiceCard } from "@/components/site/ServiceCard";
+import { CategoryCard } from "@/components/site/CategoryCard";
 import { NewsCard } from "@/components/site/NewsCard";
 import { EmptyState } from "@/components/site/EmptyState";
 import { TrustBadge } from "@/components/site/TrustBadge";
@@ -45,14 +45,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   await connectDB();
-  const [home, settings, services, news] = await Promise.all([
+  const [home, settings, categories, news] = await Promise.all([
     getHomeContent(),
     getSiteSettings(),
-    Service.find({ active: true }).sort({ order: 1 }).limit(6).lean(),
+    getCategories(),
     NewsArticle.find({ status: "published" }).sort({ featured: -1, publishedAt: -1 }).limit(3).lean(),
   ]);
 
-  const servicesList = serialize(services);
   const newsList = serialize(news);
 
   // Map MongoDB hero slides — uses admin-set videoSrc if available,
@@ -88,11 +87,7 @@ export default async function HomePage() {
       <section className="py-10 border-b border-black/[0.05]">
         <Container className="max-w-2xl">
           <ScrollReveal>
-            <TrustBadge
-              logoMediaId={settings.logoMediaId as string | null}
-              text={settings.trustBadgeText}
-              businessName={settings.businessName}
-            />
+            <TrustBadge text={settings.trustBadgeText} />
           </ScrollReveal>
         </Container>
       </section>
@@ -130,20 +125,20 @@ export default async function HomePage() {
             <SectionHeading eyebrow="What We Help With" heading={home.servicesHeading} intro={home.servicesIntro} />
           </ScrollReveal>
           <div className="mt-12">
-            {servicesList.length > 0 ? (
+            {categories.length > 0 ? (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {servicesList.map((s: any, i: number) => (
-                  <ServiceCard key={s._id} service={s} index={i} />
+                {categories.map((category, i) => (
+                  <CategoryCard key={category.slug} category={category} index={i} />
                 ))}
               </div>
             ) : (
               <EmptyState
                 title="Services coming soon"
-                message="The admin can add service categories from the dashboard — they'll appear here automatically."
+                message="Service categories will appear here automatically once they're published."
               />
             )}
           </div>
-          {servicesList.length > 0 && (
+          {categories.length > 0 && (
             <div className="mt-10 text-center">
               <ButtonLink href="/services" variant="outline">
                 View All Services
@@ -182,12 +177,7 @@ export default async function HomePage() {
             <h3 className="font-heading text-xl font-semibold">{home.trustHeading}</h3>
             <p className="mt-3 text-white/75 text-sm leading-relaxed">{settings.trustBadgeText}</p>
             <div className="mt-6">
-              <TrustBadge
-                logoMediaId={settings.logoMediaId as string | null}
-                text={settings.businessName}
-                businessName={settings.businessName}
-                variant="dark"
-              />
+              <TrustBadge text={settings.businessName} variant="dark" />
             </div>
           </ScrollReveal>
         </Container>

@@ -9,9 +9,9 @@ import type { z } from "zod";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { ServiceSelectOptions, type ServiceOption } from "@/components/site/ServiceSelectOptions";
 
 type FormValues = z.input<typeof bookingSchema>;
-type ServiceOption = { _id: string; title: string };
 
 const inputClass =
   "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-4 py-2.5 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-muted)]/60 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/15 transition-all";
@@ -71,7 +71,10 @@ export function BookingForm({ services }: { services: ServiceOption[] }) {
       const res = await fetch("/api/public/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, serviceName: service?.title || "" }),
+        body: JSON.stringify({
+          ...values,
+          serviceName: service?.title || (values.serviceId === "other" ? "Other / Not Sure" : ""),
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
@@ -127,9 +130,8 @@ export function BookingForm({ services }: { services: ServiceOption[] }) {
           <label className={labelClass} htmlFor="serviceId">Service</label>
           <select id="serviceId" className={inputClass} {...register("serviceId")}>
             <option value="">Select a service</option>
-            {services.map((s) => (
-              <option key={s._id} value={s._id}>{s.title}</option>
-            ))}
+            <ServiceSelectOptions services={services} />
+            <option value="other">Other / Not Sure</option>
           </select>
         </div>
       </div>

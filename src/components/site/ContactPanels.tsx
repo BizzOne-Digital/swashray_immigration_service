@@ -4,8 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { InquiryForm } from "@/components/site/InquiryForm";
 import { ConsultationWizard } from "@/components/site/ConsultationWizard";
-
-type ServiceOption = { title: string; _id: string };
+import type { ServiceOption } from "@/components/site/ServiceSelectOptions";
 
 export function ContactPanels({ services }: { services: ServiceOption[] }) {
   const [tab, setTab] = useState<"inquiry" | "booking">("inquiry");
@@ -42,7 +41,7 @@ export function ContactPanels({ services }: { services: ServiceOption[] }) {
       {tab === "inquiry" ? (
         <InquiryForm services={services} />
       ) : (
-        <ConsultationWizard services={services.map((s) => ({ _id: s._id, title: s.title }))} />
+        <ConsultationWizard services={services} />
       )}
     </div>
   );

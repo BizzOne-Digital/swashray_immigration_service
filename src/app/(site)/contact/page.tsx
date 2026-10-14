@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { connectDB } from "@/lib/db";
-import Service from "@/lib/models/Service";
 import { getSiteSettings } from "@/lib/cms";
-import { serialize } from "@/lib/utils";
+import { getServiceOptions } from "@/lib/servicesCms";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { ContactPanels } from "@/components/site/ContactPanels";
+import { TrustBadge } from "@/components/site/TrustBadge";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -22,11 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  await connectDB();
-  const [settings, services] = await Promise.all([
-    getSiteSettings(),
-    Service.find({ active: true }).sort({ order: 1 }).select("title").lean(),
-  ]);
+  const [settings, services] = await Promise.all([getSiteSettings(), getServiceOptions()]);
 
   return (
     <>
@@ -38,32 +33,55 @@ export default async function ContactPage() {
       <section className="py-16">
         <Container className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 order-2 lg:order-1">
-            <ContactPanels services={serialize(services)} />
+            <ContactPanels services={services} />
           </div>
           <aside className="space-y-4 order-1 lg:order-2">
-            <div className="rounded-[var(--radius-card)] border border-black/[0.06] p-6">
-              <h3 className="font-heading font-semibold text-[var(--color-primary)] mb-4">{settings.businessName}</h3>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <Phone className="h-4 w-4 mt-0.5 text-[var(--color-accent)] shrink-0" />
-                  <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="text-[var(--color-ink)] hover:text-[var(--color-primary)]">
-                    {settings.phone}
+            <div className="rounded-[var(--radius-card)] border border-black/[0.06] border-t-2 border-t-[var(--color-accent)] bg-[var(--color-surface)] p-6">
+              <h2 className="font-heading text-xl font-semibold text-[var(--color-primary)]">Contact Us</h2>
+              <p className="mt-1 text-sm text-[var(--color-muted)]">{settings.businessName}</p>
+              <ul className="mt-5 space-y-4 text-sm">
+                <li>
+                  <a
+                    href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`}
+                    className="group flex items-center gap-3 text-[var(--color-ink)] hover:text-[var(--color-primary)]"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15">
+                      <Phone className="h-4 w-4 text-[var(--color-primary)]" />
+                    </span>
+                    <span>
+                      <span className="block text-xs uppercase tracking-wide text-[var(--color-muted)]">Phone</span>
+                      <span className="block font-medium">{settings.phone}</span>
+                    </span>
                   </a>
                 </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="h-4 w-4 mt-0.5 text-[var(--color-accent)] shrink-0" />
-                  <a href={`mailto:${settings.email}`} className="text-[var(--color-ink)] hover:text-[var(--color-primary)] break-all">
-                    {settings.email}
+                <li>
+                  <a
+                    href={`mailto:${settings.email}`}
+                    className="group flex items-center gap-3 text-[var(--color-ink)] hover:text-[var(--color-primary)]"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15">
+                      <Mail className="h-4 w-4 text-[var(--color-primary)]" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs uppercase tracking-wide text-[var(--color-muted)]">Email</span>
+                      <span className="block font-medium break-all">{settings.email}</span>
+                    </span>
                   </a>
                 </li>
                 {settings.address && (
-                  <li className="flex items-start gap-3">
-                    <MapPin className="h-4 w-4 mt-0.5 text-[var(--color-accent)] shrink-0" />
-                    <span className="text-[var(--color-ink)]">{settings.address}</span>
+                  <li className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15">
+                      <MapPin className="h-4 w-4 text-[var(--color-primary)]" />
+                    </span>
+                    <span>
+                      <span className="block text-xs uppercase tracking-wide text-[var(--color-muted)]">Address</span>
+                      <span className="block font-medium text-[var(--color-ink)]">{settings.address}</span>
+                    </span>
                   </li>
                 )}
               </ul>
             </div>
+            <TrustBadge text={settings.trustBadgeText} stacked />
           </aside>
         </Container>
       </section>

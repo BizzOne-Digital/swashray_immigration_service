@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { connectDB } from "@/lib/db";
-import Service from "@/lib/models/Service";
 import { getSiteSettings } from "@/lib/cms";
-import { serialize } from "@/lib/utils";
+import { getServiceOptions } from "@/lib/servicesCms";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { BookingForm } from "@/components/site/BookingForm";
@@ -21,10 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BookingPage() {
-  await connectDB();
-  const services = serialize(
-    await Service.find({ active: true }).sort({ order: 1 }).select("title").lean()
-  );
+  const services = await getServiceOptions();
 
   return (
     <>
@@ -35,7 +30,7 @@ export default async function BookingPage() {
       />
       <section className="py-16">
         <Container className="max-w-2xl">
-          <BookingForm services={services.map((s: any) => ({ _id: s._id, title: s.title }))} />
+          <BookingForm services={services} />
         </Container>
       </section>
     </>

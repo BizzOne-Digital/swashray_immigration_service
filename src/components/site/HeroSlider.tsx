@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { useTypewriter } from "@/components/site/useTypewriter";
+import { RcicIrbLogo } from "@/components/site/RcicIrbLogo";
 
 export interface HeroSlide {
   _id?: string;
@@ -107,7 +108,7 @@ export function HeroSlider({
   return (
     <section
       ref={sectionRef}
-      className="relative isolate overflow-hidden min-h-[560px] h-[82vh] sm:h-[86vh] lg:h-[88vh] max-h-[860px] text-white bg-[var(--color-primary)]"
+      className="relative isolate overflow-hidden min-h-[560px] h-[88vh] sm:h-[86vh] lg:h-[88vh] max-h-[860px] text-white bg-[var(--color-primary)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -176,53 +177,59 @@ export function HeroSlider({
 
       {/* Content */}
       <Container className="relative z-[3] flex h-full items-end sm:items-center pb-20 sm:pb-0">
-        <div key={active} className="max-w-2xl min-w-0 animate-fade-in-up">
-          {slide.label && (
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[var(--color-accent)] mb-5">
-              {slide.label}
-            </p>
-          )}
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.08] min-h-[2.4em] sm:min-h-[2.2em] lg:min-h-[2.16em]">
-            {typewriter.displayed.includes(" | ") ? (
-              typewriter.displayed.split(" | ").map((part, i, arr) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <>
-                      {" "}
-                      <span className="text-[var(--color-accent)]">|</span>{" "}
-                    </>
-                  )}
-                </span>
-              ))
-            ) : (
-              typewriter.displayed
+        <div className="max-w-2xl min-w-0">
+          {/* Licensed-consultant designation — stays put while the slides change. */}
+          <span className="mb-6 hidden sm:inline-flex rounded-md bg-white px-3 py-2 shadow-brand-sm">
+            <RcicIrbLogo className="h-10 sm:h-12" sizes="170px" eager />
+          </span>
+          <div key={active} className="animate-fade-in-up">
+            {slide.label && (
+              <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[var(--color-accent)] mb-5">
+                {slide.label}
+              </p>
             )}
-            <span aria-hidden="true" className="inline-block w-[3px] h-[0.9em] align-middle bg-[var(--color-accent)] ml-1 animate-pulse" />
-            <span className="sr-only">{slide.heading}</span>
-          </h1>
-          {slide.subheading && (
-            <p className="mt-6 text-white/85 text-lg leading-relaxed max-w-xl">
-              {slide.subheading}
-            </p>
-          )}
-          <div className="mt-9 flex flex-wrap items-center gap-5">
-            {slide.ctaText && slide.ctaUrl && (
-              <ButtonLink href={slide.ctaUrl} variant="secondary" size="lg">
-                {slide.ctaText}
-              </ButtonLink>
+            <h1 className="font-heading text-[2rem] sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.08] min-h-[2.4em] sm:min-h-[2.2em] lg:min-h-[2.16em]">
+              {typewriter.displayed.includes(" | ") ? (
+                typewriter.displayed.split(" | ").map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <>
+                        {" "}
+                        <span className="text-[var(--color-accent)]">|</span>{" "}
+                      </>
+                    )}
+                  </span>
+                ))
+              ) : (
+                typewriter.displayed
+              )}
+              <span aria-hidden="true" className="inline-block w-[3px] h-[0.9em] align-middle bg-[var(--color-accent)] ml-1 animate-pulse" />
+              <span className="sr-only">{slide.heading}</span>
+            </h1>
+            {slide.subheading && (
+              <p className="mt-6 text-white/85 text-base sm:text-lg leading-relaxed max-w-xl">
+                {slide.subheading}
+              </p>
             )}
-            {secondaryCtaText && secondaryCtaUrl && (
-              <ButtonLink
-                href={secondaryCtaUrl}
-                variant="ghost"
-                size="lg"
-                className="text-white hover:bg-white/10 gap-2"
-              >
-                {secondaryCtaText}
-                <ArrowRight className="h-4 w-4" />
-              </ButtonLink>
-            )}
+            <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-5">
+              {slide.ctaText && slide.ctaUrl && (
+                <ButtonLink href={slide.ctaUrl} variant="secondary" size="lg">
+                  {slide.ctaText}
+                </ButtonLink>
+              )}
+              {secondaryCtaText && secondaryCtaUrl && (
+                <ButtonLink
+                  href={secondaryCtaUrl}
+                  variant="ghost"
+                  size="lg"
+                  className="text-white hover:bg-white/10 gap-2"
+                >
+                  {secondaryCtaText}
+                  <ArrowRight className="h-4 w-4" />
+                </ButtonLink>
+              )}
+            </div>
           </div>
         </div>
       </Container>

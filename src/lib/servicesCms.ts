@@ -6,13 +6,18 @@
  * (admin-uploaded override) || (original static path) before it reaches a
  * page, so CategoryCard/ServiceDetailLayout/RelatedServices/FaqAccordion
  * never had to change at all.
+ *
+ * If the ServiceCategoryContent collection is empty (e.g. a fresh database,
+ * or before `npm run migrate:services` has been run), everything falls back
+ * to the static src/lib/servicesData content, so the Services pages, the
+ * header menu, and the sitemap are never left blank.
  */
+import { cache } from "react";
 import { connectDB } from "@/lib/db";
 import ServiceCategoryContent from "@/lib/models/ServiceCategoryContent";
 import { mediaUrl, serialize } from "@/lib/utils";
+import { CATEGORIES as STATIC_CATEGORIES, ALL_SERVICES as STATIC_SERVICES } from "@/lib/servicesData";
 import type { CategoryEntry, ServiceEntry, ProgramEntry } from "@/lib/servicesData/types";
-
-type LeanCategory = ReturnType<typeof serialize>;
 
 function resolveCategory(doc: any): CategoryEntry {
   return {
@@ -72,10 +77,33 @@ function resolveProgram(doc: any): ProgramEntry {
   };
 }
 
-async function getAllCategoryDocs() {
+/** The static content, shaped like ServiceCategoryContent documents. */
+function staticCategoryDocs() {
+  return STATIC_CATEGORIES.map((category, categoryIndex) => ({
+    ...category,
+    order: categoryIndex,
+    services: STATIC_SERVICES.filter((s) => s.categorySlug === category.slug).map((s, serviceIndex) => ({
+      ...s,
+      order: serviceIndex,
+      programs: (s.programs || []).map((p, programIndex) => ({ ...p, order: programIndex })),
+    })),
+  }));
+}
+
+/**
+ * Every category document (with its services and programs embedded), in
+ * display order. Memoized per request, so a page that resolves several
+ * categories/services/related links only reads the collection once.
+ */
+const getAllCategoryDocs = cache(async (): Promise<any[]> => {
   await connectDB();
   const docs = await ServiceCategoryContent.find().sort({ order: 1 }).lean();
+  if (docs.length === 0) return staticCategoryDocs();
   return serialize(docs) as any[];
+});
+
+function sortedServiceDocs(categoryDoc: any): any[] {
+  return (categoryDoc.services || []).slice().sort((a: any, b: any) => a.order - b.order);
 }
 
 export async function getCategories(): Promise<CategoryEntry[]> {
@@ -84,21 +112,39 @@ export async function getCategories(): Promise<CategoryEntry[]> {
 }
 
 export async function getCategory(slug: string): Promise<CategoryEntry | undefined> {
-  await connectDB();
-  const doc = await ServiceCategoryContent.findOne({ slug }).lean();
-  if (!doc) return undefined;
-  return resolveCategory(serialize(doc));
+  const docs = await getAllCategoryDocs();
+  const doc = docs.find((d) => d.slug === slug);
+  return doc ? resolveCategory(doc) : undefined;
 }
 
 export async function getServicesByCategory(categorySlug: string): Promise<ServiceEntry[]> {
-  await connectDB();
-  const doc = await ServiceCategoryContent.findOne({ slug: categorySlug }).lean();
+  const docs = await getAllCategoryDocs();
+  const doc = docs.find((d) => d.slug === categorySlug);
   if (!doc) return [];
-  const serialized = serialize(doc) as any;
-  return (serialized.services || [])
-    .slice()
-    .sort((a: any, b: any) => a.order - b.order)
-    .map((s: any) => resolveService(s, categorySlug));
+  return sortedServiceDocs(doc).map((s) => resolveService(s, categorySlug));
+}
+
+/**
+ * Every category with its services, in display order — used to build the
+ * header mega menu, the footer service links, and the sitemap.
+ */
+export async function getServicesTree(): Promise<{ category: CategoryEntry; services: ServiceEntry[] }[]> {
+  const docs = await getAllCategoryDocs();
+  return docs.map((doc) => ({
+    category: resolveCategory(doc),
+    services: sortedServiceDocs(doc).map((s) => resolveService(s, doc.slug)),
+  }));
+}
+
+/**
+ * Every service as a form option ("Service of Interest" dropdowns), grouped
+ * by category title. `_id` is the stable "category/service" path.
+ */
+export async function getServiceOptions(): Promise<{ _id: string; title: string; group: string }[]> {
+  const tree = await getServicesTree();
+  return tree.flatMap(({ category, services }) =>
+    services.map((s) => ({ _id: `${category.slug}/${s.slug}`, title: s.title, group: category.title }))
+  );
 }
 
 export async function getService(categorySlug: string, serviceSlug: string): Promise<ServiceEntry | undefined> {
@@ -137,17 +183,13 @@ export async function getAllCategoryParams() {
 }
 
 export async function getAllServiceParams() {
-  await connectDB();
-  const docs = await ServiceCategoryContent.find().lean();
-  const serialized = serialize(docs) as any[];
-  return serialized.flatMap((doc) => (doc.services || []).map((s: any) => ({ category: doc.slug, service: s.slug })));
+  const docs = await getAllCategoryDocs();
+  return docs.flatMap((doc) => (doc.services || []).map((s: any) => ({ category: doc.slug, service: s.slug })));
 }
 
 export async function getAllProgramParams() {
-  await connectDB();
-  const docs = await ServiceCategoryContent.find().lean();
-  const serialized = serialize(docs) as any[];
-  return serialized.flatMap((doc) =>
+  const docs = await getAllCategoryDocs();
+  return docs.flatMap((doc) =>
     (doc.services || []).flatMap((s: any) =>
       (s.programs || []).map((p: any) => ({ category: doc.slug, service: s.slug, program: p.slug }))
     )

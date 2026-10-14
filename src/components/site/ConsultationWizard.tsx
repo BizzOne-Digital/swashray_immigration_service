@@ -5,8 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { CheckCircle2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-
-type ServiceOption = { _id: string; title: string };
+import { ServiceSelectOptions, type ServiceOption } from "@/components/site/ServiceSelectOptions";
 
 const inputClass =
   "w-full rounded-[var(--radius-btn)] border border-black/10 bg-white px-4 py-2.5 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-muted)]/60 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/15 transition-all";
@@ -139,7 +138,7 @@ export function ConsultationWizard({ services }: { services: ServiceOption[] }) 
           phone: data.phone,
           country: data.country,
           serviceId: data.serviceId,
-          serviceName: service?.title || "",
+          serviceName: service?.title || (data.serviceId === "other" ? "Other / Not Sure" : ""),
           preferredDate: data.preferredDate,
           preferredTime: data.preferredTime,
           preferredContactMethod: data.preferredContactMethod,
@@ -254,9 +253,8 @@ export function ConsultationWizard({ services }: { services: ServiceOption[] }) 
               <label className={labelClass} htmlFor="w-service">Service of Interest</label>
               <select id="w-service" className={inputClass} value={data.serviceId} onChange={(e) => set("serviceId", e.target.value)}>
                 <option value="">Select a service</option>
-                {services.map((s) => (
-                  <option key={s._id} value={s._id}>{s.title}</option>
-                ))}
+                <ServiceSelectOptions services={services} />
+                <option value="other">Other / Not Sure</option>
               </select>
             </div>
             <div>

@@ -34,8 +34,8 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
   {
     businessName: { type: String, default: "Swashray Immigration Services Inc." },
     contactPerson: { type: String, default: "Kajal" },
-    phone: { type: String, default: "(587) 717-2157" },
-    email: { type: String, default: "blshukla@gmail.com" },
+    phone: { type: String, default: "(647) 823-3899" },
+    email: { type: String, default: "swashrayimmigration@gmail.com" },
     address: { type: String, default: "" },
     businessDescription: {
       type: String,

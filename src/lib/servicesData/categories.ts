@@ -9,7 +9,7 @@ export const CATEGORIES: CategoryEntry[] = [
     image: "/images/services/temporary-residence.png",
     intro: [
       "Temporary residence covers the pathways that let someone come to Canada for a defined period — to visit family, study, work, or accompany a partner who is doing one of those things.",
-      "Each pathway has its own purpose and its own conditions, so the right starting point depends on what you're trying to do in Canada and for how long.",
+      "It includes visitor visas and eTAs, study permits, open and employer-specific work permits, LMIAs for employers, and work permits under trade agreements and youth mobility programs. Each has its own purpose and conditions, so the right starting point depends on what you're trying to do in Canada and for how long.",
     ],
   },
   {
@@ -37,11 +37,12 @@ export const CATEGORIES: CategoryEntry[] = [
   {
     slug: "citizenship",
     title: "Citizenship",
-    shortDescription: "Becoming a Canadian citizen, and confirming citizenship you already hold.",
+    shortDescription: "Becoming a Canadian citizen, confirming citizenship, and resolving complex files.",
     icon: "Award",
     image: "/images/services/citizenship.png",
     intro: [
-      "Citizenship services cover both applying for Canadian citizenship as a permanent resident who meets the requirements, and confirming citizenship status that already exists through birth or descent.",
+      "Citizenship services cover applying for Canadian citizenship as a permanent resident who meets the requirements, and confirming citizenship status that already exists through birth or descent.",
+      "We also help with files that become complicated along the way — residency questionnaires, requests for more information, refusals, and revocation notices.",
     ],
   },
   {
@@ -51,18 +52,19 @@ export const CATEGORIES: CategoryEntry[] = [
     icon: "Scale",
     image: "/images/services/irb-representation.png",
     intro: [
-      "The Immigration and Refugee Board (IRB) hears several distinct types of matters, from refugee protection claims to detention reviews and sponsorship appeals.",
-      "Each division follows its own procedure and timelines, so preparation looks different depending on which IRB matter applies to your situation.",
+      "The Immigration and Refugee Board (IRB) hears several distinct types of matters — refugee protection claims and refugee appeals, admissibility hearings and detention reviews, and appeals of sponsorship refusals, residency obligation decisions, and removal orders.",
+      "Each of the IRB's four divisions follows its own procedure and timelines, so preparation looks different depending on which matter applies to your situation. As a licensed RCIC-IRB, we can represent clients before all four divisions.",
     ],
   },
   {
     slug: "other-immigration-services",
     title: "Other Immigration Services",
-    shortDescription: "Business immigration, status maintenance, and other IRCC matters.",
+    shortDescription: "Business immigration, status extensions, refusals, inadmissibility, and other IRCC matters.",
     icon: "ClipboardList",
     image: "/images/services/other-immigration-services.png",
     intro: [
-      "Beyond the main temporary and permanent residence streams, a number of other situations come up regularly — maintaining status, renewing documents, responding to IRCC correspondence, or exploring business-based immigration.",
+      "Beyond the main temporary and permanent residence streams, a number of other situations come up regularly — maintaining or restoring status, renewing PR documents, responding to IRCC correspondence, or exploring business-based immigration.",
+      "This is also where we help with refusal reviews and reconsideration requests, inadmissibility and criminal rehabilitation, risk assessments before removal, private refugee sponsorship and resettlement (including BVOR and community sponsorship), refugee family reunification, and preparing a file for judicial review with a licensed lawyer.",
     ],
   },
 ];
