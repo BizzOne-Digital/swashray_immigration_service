@@ -5,7 +5,6 @@ import { getServiceOptions } from "@/lib/servicesCms";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { ContactPanels } from "@/components/site/ContactPanels";
-import { TrustBadge } from "@/components/site/TrustBadge";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -81,7 +80,6 @@ export default async function ContactPage() {
                 )}
               </ul>
             </div>
-            <TrustBadge text={settings.trustBadgeText} stacked />
           </aside>
         </Container>
       </section>

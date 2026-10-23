@@ -31,6 +31,17 @@ export function Header({
   email?: string;
 }) {
   const links = navigation.map((n) => ({ label: n.label, url: n.url, openInNewTab: n.openInNewTab }));
+  // The Calculators dropdown always sits right after "Our Services". If the
+  // admin menu already has a /calculators item, that item's label and
+  // position are used instead.
+  if (!links.some((link) => link.url === "/calculators")) {
+    const servicesIndex = links.findIndex((link) => link.url === "/services");
+    links.splice(servicesIndex === -1 ? links.length : servicesIndex + 1, 0, {
+      label: "Calculators",
+      url: "/calculators",
+      openInNewTab: false,
+    });
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-accent)]/20 bg-[var(--color-surface)]/95 backdrop-blur-lg">

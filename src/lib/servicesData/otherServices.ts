@@ -459,7 +459,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Pre-Removal Risk Assessment (PRRA)",
     icon: "ShieldCheck",
-    image: "/images/services/irb-representation_refugee-claims.jpg",
+    image: "/images/services/other-immigration-services_pre-removal-risk-assessment.jpg",
     shortDescription: "Help presenting evidence of the risks you would face if removed from Canada.",
     suitableFor: "People facing removal who have been notified by CBSA that they may apply for a PRRA.",
     overview: [
@@ -509,7 +509,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Inadmissibility & Criminal Rehabilitation",
     icon: "ShieldAlert",
-    image: "/images/services/irb-representation_admissibility-hearings.jpg",
+    image: "/images/services/other-immigration-services_inadmissibility-criminal-rehabilitation.jpg",
     shortDescription: "Assessing how a criminal history affects entry to Canada and which remedies may be available.",
     suitableFor: "People whose past offences or convictions may affect travel, temporary status, or immigration to Canada.",
     overview: [
@@ -559,7 +559,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Judicial Review Support",
     icon: "Gavel",
-    image: "/images/services/irb-representation_sponsorship-appeals.jpg",
+    image: "/images/services/other-immigration-services_judicial-review-support.jpg",
     shortDescription: "Help organizing an immigration decision and application records for review by a licensed lawyer.",
     suitableFor: "People considering a Federal Court challenge to an immigration, refugee, or citizenship decision.",
     overview: [
@@ -609,7 +609,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Private Refugee Sponsorship & Resettlement",
     icon: "HandHeart",
-    image: "/images/services/irb-representation_refugee-claims.jpg",
+    image: "/images/services/other-immigration-services_private-refugee-sponsorship.jpg",
     shortDescription: "Application and settlement-plan support for eligible sponsors helping refugees resettle from abroad.",
     suitableFor: "Sponsoring organizations and groups in Canada, and refugees abroad exploring an eligible resettlement pathway.",
     overview: [
@@ -763,7 +763,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Refugee Family Reunification",
     icon: "HeartHandshake",
-    image: "/images/services/family-sponsorship_dependent-child-sponsorship.jpg",
+    image: "/images/services/other-immigration-services_refugee-family-reunification.jpg",
     shortDescription: "Support reuniting eligible spouses, partners, and dependent children through the appropriate refugee or protected-person process.",
     suitableFor: "Recently resettled refugees and protected persons in Canada with eligible dependent family members abroad.",
     overview: [
@@ -814,7 +814,7 @@ export const OTHER_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Application Refusals, Reconsideration & Reapplications",
     icon: "SearchCheck",
-    image: "/images/services/other-immigration-services_procedural-fairness-letter-responses.jpg",
+    image: "/images/services/other-immigration-services_refusals-reconsideration.jpg",
     shortDescription: "Reviewing refusal reasons and assessing whether reconsideration, a stronger new application, or another remedy is appropriate.",
     suitableFor: "Applicants with an IRCC refusal who need a clear assessment of their next steps.",
     overview: [

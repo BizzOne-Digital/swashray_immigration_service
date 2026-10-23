@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHero } from "@/components/site/PageHero";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { TrustBadge } from "@/components/site/TrustBadge";
 import { getSiteSettings } from "@/lib/cms";
 import { buildMetadata } from "@/lib/seo";
 import { BrandIllustration } from "@/components/site/BrandIllustration";
@@ -25,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [about, settings] = await Promise.all([getAboutContent(), getSiteSettings()]);
+  const about = await getAboutContent();
   const introImage = mediaUrl(about.introImageMediaId as string | null | undefined);
   const approachImage = mediaUrl(about.approachImageMediaId as string | null | undefined);
 
@@ -37,7 +36,6 @@ export default async function AboutPage() {
         <Container className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="min-w-0 animate-fade-in-up space-y-8">
             <p className="text-[var(--color-muted)] leading-relaxed text-lg whitespace-pre-line">{about.introText}</p>
-            <TrustBadge text={settings.trustBadgeText} />
           </div>
           <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden bg-[var(--color-primary)]/5">
             {introImage ? (

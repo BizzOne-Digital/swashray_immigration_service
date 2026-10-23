@@ -769,7 +769,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Electronic Travel Authorization (eTA)",
     icon: "PlaneTakeoff",
-    image: "/images/services/temporary-residence_visitor-visa.jpg",
+    image: "/images/services/temporary-residence_electronic-travel-authorization.jpg",
     shortDescription: "An online entry requirement for visa-exempt travellers flying to, or connecting through, a Canadian airport.",
     suitableFor: "Visa-exempt travellers flying to Canada, and some visa-required travellers who qualify to fly with an eTA instead of a visa.",
     overview: [
@@ -829,7 +829,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Intra-Company Transfer Work Permit",
     icon: "ArrowLeftRight",
-    image: "/images/services/temporary-residence_employer-specific-work-permit.jpg",
+    image: "/images/services/temporary-residence_intra-company-transfer.jpg",
     shortDescription: "An LMIA-exempt work permit for key staff moving to a Canadian parent, branch, subsidiary or affiliate of their employer.",
     suitableFor: "Executives, senior managers and specialized knowledge employees of international companies with a related business in Canada.",
     overview: [
@@ -954,7 +954,7 @@ export const TEMPORARY_RESIDENCE_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Bridging Open Work Permit (BOWP)",
     icon: "Link2",
-    image: "/images/services/temporary-residence_spousal-open-work-permit.jpg",
+    image: "/images/services/temporary-residence_bridging-open-work-permit.jpg",
     shortDescription: "An open work permit that lets eligible workers keep working while their permanent residence application is processed.",
     suitableFor: "Workers in Canada whose permit is running out while their application for permanent residence under an eligible program is in process.",
     overview: [

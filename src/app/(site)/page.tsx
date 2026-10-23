@@ -10,7 +10,6 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { CategoryCard } from "@/components/site/CategoryCard";
 import { NewsCard } from "@/components/site/NewsCard";
 import { EmptyState } from "@/components/site/EmptyState";
-import { TrustBadge } from "@/components/site/TrustBadge";
 import { Icon } from "@/components/ui/IconMap";
 import { CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
@@ -82,15 +81,6 @@ export default async function HomePage() {
         secondaryCtaText={home.secondaryCtaText}
         secondaryCtaUrl={home.secondaryCtaUrl}
       />
-
-      {/* TRUST BADGE STRIP */}
-      <section className="py-10 border-b border-black/[0.05]">
-        <Container className="max-w-2xl">
-          <ScrollReveal>
-            <TrustBadge text={settings.trustBadgeText} />
-          </ScrollReveal>
-        </Container>
-      </section>
 
       {/* CALCULATOR TEASER */}
       <section className="py-20 sm:py-24 bg-[var(--color-primary)]/[0.03]">
@@ -176,9 +166,6 @@ export default async function HomePage() {
           <ScrollReveal delay={120} className="rounded-[var(--radius-card)] bg-[var(--color-primary)] text-white p-10 sm:p-12">
             <h3 className="font-heading text-xl font-semibold">{home.trustHeading}</h3>
             <p className="mt-3 text-white/75 text-sm leading-relaxed">{settings.trustBadgeText}</p>
-            <div className="mt-6">
-              <TrustBadge text={settings.businessName} variant="dark" />
-            </div>
           </ScrollReveal>
         </Container>
       </section>

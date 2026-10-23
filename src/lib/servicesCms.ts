@@ -13,6 +13,7 @@
  * header menu, and the sitemap are never left blank.
  */
 import { cache } from "react";
+import { SERVICE_IMAGE_UPDATES } from "@/lib/servicesData/imageUpdates";
 import { connectDB } from "@/lib/db";
 import ServiceCategoryContent from "@/lib/models/ServiceCategoryContent";
 import { mediaUrl, serialize } from "@/lib/utils";
@@ -31,6 +32,8 @@ function resolveCategory(doc: any): CategoryEntry {
 }
 
 function resolveService(doc: any, categorySlug: string): ServiceEntry {
+  const imageUpdate = SERVICE_IMAGE_UPDATES[`${categorySlug}/${doc.slug}`];
+  const image = imageUpdate && doc.image === imageUpdate.previous ? imageUpdate.image : doc.image;
   return {
     slug: doc.slug,
     categorySlug,
@@ -38,7 +41,7 @@ function resolveService(doc: any, categorySlug: string): ServiceEntry {
     shortDescription: doc.shortDescription,
     suitableFor: doc.suitableFor,
     icon: doc.icon,
-    image: mediaUrl(doc.imageMediaId) || doc.image,
+    image: mediaUrl(doc.imageMediaId) || image,
     overview: doc.overview || [],
     eligibility: doc.eligibility || [],
     process: doc.process || [],

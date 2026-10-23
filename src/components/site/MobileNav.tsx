@@ -3,10 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { LanguageSelector } from "@/components/site/LanguageSelector";
-import { isActivePath, RESOURCES_LINK, type HeaderNavLink } from "@/components/site/HeaderNav";
+import {
+  CALCULATOR_MENU,
+  CALCULATORS_URL,
+  isActivePath,
+  isCalculatorPath,
+  type HeaderNavLink,
+} from "@/components/site/HeaderNav";
 import { FacebookGlyph, InstagramGlyph, LinkedInGlyph, XGlyph, YouTubeGlyph } from "@/components/site/SocialIcons";
 import type { ISiteSettings } from "@/lib/models/SiteSettings";
 import type { NavCategory } from "@/components/site/Header";
@@ -23,8 +29,8 @@ const SOCIAL_ICONS = {
 /**
  * Small-screen menu: a full-width panel under the header with every top-level
  * link stacked, the service categories always listed (indented) under
- * "Our Services", then the booking CTA, contact
- * details, language switcher, and social links.
+ * "Our Services", the calculators behind an expandable "Calculators" item,
+ * then the booking CTA, contact details, language switcher, and social links.
  */
 export function MobileNav({
   links,
@@ -52,6 +58,9 @@ export function MobileNav({
   const open = openOn === pathname;
   const setOpen = (value: boolean | ((prev: boolean) => boolean)) =>
     setOpenOn((typeof value === "function" ? value(open) : value) ? pathname : null);
+  // Until toggled, the calculators list starts expanded only on a calculator page.
+  const [calculatorsToggled, setCalculatorsToggled] = useState<boolean | null>(null);
+  const calculatorsOpen = calculatorsToggled ?? isCalculatorPath(pathname);
   const socialEntries = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).filter(
     (key) => social?.[key]
   );
@@ -110,6 +119,44 @@ export function MobileNav({
             <ul className="divide-y divide-black/[0.06]">
               {links.map((link) => {
                 const active = isActivePath(pathname, link.url);
+                if (link.url === CALCULATORS_URL) {
+                  return (
+                    <li key={link.url}>
+                      <button
+                        type="button"
+                        aria-expanded={calculatorsOpen}
+                        aria-controls="mobile-menu-calculators"
+                        onClick={() => setCalculatorsToggled(!calculatorsOpen)}
+                        className={cn(linkClass(isCalculatorPath(pathname)), "flex w-full items-center justify-between text-left")}
+                      >
+                        {link.label}
+                        <ChevronDown
+                          className={cn("h-4 w-4 text-[var(--color-muted)] transition-transform", calculatorsOpen && "rotate-180")}
+                          aria-hidden="true"
+                        />
+                      </button>
+                      {calculatorsOpen && (
+                        <ul
+                          id="mobile-menu-calculators"
+                          className="mb-2 ml-3 flex flex-col gap-0.5 border-l-2 border-[var(--color-accent)]/40 pl-3"
+                        >
+                          {[...CALCULATOR_MENU, { label: "View all calculators", url: CALCULATORS_URL }].map((entry) => (
+                            <li key={entry.url}>
+                              <Link
+                                href={entry.url}
+                                aria-current={pathname === entry.url ? "page" : undefined}
+                                onClick={() => setOpen(false)}
+                                className={subLinkClass(pathname === entry.url)}
+                              >
+                                {entry.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  );
+                }
                 if (link.url !== "/services") {
                   return (
                     <li key={link.url}>
@@ -152,16 +199,6 @@ export function MobileNav({
                           </li>
                         );
                       })}
-                      <li>
-                        <Link
-                          href={RESOURCES_LINK.url}
-                          aria-current={isActivePath(pathname, RESOURCES_LINK.url) ? "page" : undefined}
-                          onClick={() => setOpen(false)}
-                          className={subLinkClass(isActivePath(pathname, RESOURCES_LINK.url))}
-                        >
-                          {RESOURCES_LINK.label}
-                        </Link>
-                      </li>
                     </ul>
                   </li>
                 );

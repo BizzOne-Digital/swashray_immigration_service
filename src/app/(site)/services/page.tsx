@@ -98,7 +98,7 @@ export default async function ServicesPage() {
                 <ServiceLinkCard
                   key={service.slug}
                   href={`/services/${category.slug}/${service.slug}`}
-                  icon={service.icon}
+                  image={service.image || category.image}
                   title={service.title}
                   shortDescription={service.shortDescription}
                   programs={service.programs?.map((p) => p.title)}

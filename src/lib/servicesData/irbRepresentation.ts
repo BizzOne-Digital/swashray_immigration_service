@@ -242,7 +242,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Refugee Appeal Division (RAD) Appeals",
     icon: "Scale",
-    image: "/images/services/irb-representation_refugee-claims.jpg",
+    image: "/images/services/irb-representation_refugee-appeal-division.jpg",
     shortDescription: "Appealing a negative Refugee Protection Division decision to the Refugee Appeal Division.",
     suitableFor: "Refugee claimants whose claim was rejected by the Refugee Protection Division and who have a right to appeal.",
     overview: [
@@ -304,7 +304,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Residency Obligation Appeals",
     icon: "Hourglass",
-    image: "/images/services/irb-representation_sponsorship-appeals.jpg",
+    image: "/images/services/irb-representation_residency-obligation-appeals.jpg",
     shortDescription: "Appealing a finding that you did not meet the permanent resident residency obligation.",
     suitableFor: "Permanent residents found not to meet the residency obligation, whether refused a travel document abroad or reported at the border.",
     overview: [
@@ -366,7 +366,7 @@ export const IRB_REPRESENTATION_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Removal Order Appeals",
     icon: "Gavel",
-    image: "/images/services/irb-representation_admissibility-hearings.jpg",
+    image: "/images/services/irb-representation_removal-order-appeals.jpg",
     shortDescription: "Appealing a removal order to the Immigration Appeal Division where a right of appeal exists.",
     suitableFor: "Permanent residents, protected persons, and permanent resident visa holders who have received a removal order.",
     overview: [

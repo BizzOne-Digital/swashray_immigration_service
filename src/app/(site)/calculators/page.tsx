@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: `Immigration Point Calculators | ${settings.businessName}`,
     description:
-      "Calculate your score for Express Entry, FSW, and seven provincial nominee and pilot programs — every tool runs right here on our site, built from each program's official published criteria.",
+      "Calculate your score for Express Entry, FSW, and eight provincial nominee and pilot programs — every tool runs right here on our site, built from each program's official published criteria.",
     path: "/calculators",
     siteName: settings.businessName,
   });
@@ -28,7 +28,7 @@ export default function CalculatorsHubPage() {
       <PageHero
         eyebrow="Free Immigration Tools"
         heading="Canadian Immigration Point Calculators"
-        intro="Calculate your score for Express Entry, Federal Skilled Worker, and seven provincial nominee and pilot programs — every tool is built in-house and runs right here, no redirects to a government site."
+        intro="Calculate your score for Express Entry, Federal Skilled Worker, and eight provincial nominee and pilot programs — every tool is built in-house and runs right here, no redirects to a government site."
       />
 
       <section className="py-14">

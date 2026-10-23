@@ -74,7 +74,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             )}
           </div>
 
-          <div className="prose-swashray text-[var(--color-ink)] leading-relaxed whitespace-pre-line">
+          <div className="prose-swashray break-words text-[var(--color-ink)] leading-relaxed whitespace-pre-line">
             {article.content}
           </div>
 

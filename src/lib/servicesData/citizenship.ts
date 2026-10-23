@@ -132,7 +132,7 @@ export const CITIZENSHIP_SERVICES: ServiceEntry[] = [
     categorySlug: CATEGORY,
     title: "Citizenship Refusals & Complex Cases",
     icon: "BookUser",
-    image: "/images/services/citizenship_canadian-citizenship.jpg",
+    image: "/images/services/citizenship_citizenship-refusals-complex-cases.jpg",
     shortDescription: "Help with citizenship files facing residency questions, test issues, prohibitions, refusals, or revocation.",
     suitableFor: "Citizenship applicants facing a request for more information, a hearing, or a refusal, and citizens who received a revocation notice.",
     overview: [

@@ -24,8 +24,8 @@ export const getThemeSettings = () => getSingleton<IThemeSettings>(ThemeSettings
 export const getBookingSettings = () => getSingleton<IBookingSettings>(BookingSettings);
 
 // The "/services" item renders as the "Our Services" dropdown (every service
-// category plus Resources & Tools → /calculators); booking is reached through
-// the header's "Book a Consultation" button.
+// category), and the header adds its own "Calculators" dropdown right after
+// it; booking is reached through the header's "Book a Consultation" button.
 const DEFAULT_NAV = [
   { label: "Home", url: "/", order: 0, visible: true, openInNewTab: false },
   { label: "About Us", url: "/about", order: 1, visible: true, openInNewTab: false },

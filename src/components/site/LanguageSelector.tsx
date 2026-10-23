@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 // A curated set of languages likely useful for this audience. Google
@@ -10,20 +11,20 @@ import { cn } from "@/lib/cn";
 // every row is legible regardless of which language is currently active),
 // matching the closed pill's compact "EN"-style code + flag.
 const LANGUAGES: { code: string; label: string; name: string; flag: string }[] = [
-  { code: "en", label: "EN", name: "English", flag: "🇨🇦" },
-  { code: "fr", label: "FR", name: "French", flag: "🇫🇷" },
-  { code: "es", label: "ES", name: "Spanish", flag: "🇪🇸" },
-  { code: "hi", label: "HI", name: "Hindi", flag: "🇮🇳" },
-  { code: "pa", label: "PA", name: "Punjabi", flag: "🇮🇳" },
-  { code: "gu", label: "GU", name: "Gujarati", flag: "🇮🇳" },
-  { code: "ur", label: "UR", name: "Urdu", flag: "🇵🇰" },
-  { code: "zh-CN", label: "中文", name: "Chinese", flag: "🇨🇳" },
-  { code: "tl", label: "TL", name: "Tagalog", flag: "🇵🇭" },
-  { code: "ar", label: "AR", name: "Arabic", flag: "🇦🇪" },
-  { code: "fa", label: "FA", name: "Persian", flag: "🇮🇷" },
-  { code: "pt", label: "PT", name: "Portuguese", flag: "🇵🇹" },
-  { code: "vi", label: "VI", name: "Vietnamese", flag: "🇻🇳" },
-  { code: "ko", label: "KO", name: "Korean", flag: "🇰🇷" },
+  { code: "en", label: "EN", name: "English", flag: "/images/flags/ca.svg" },
+  { code: "fr", label: "FR", name: "French", flag: "/images/flags/fr.svg" },
+  { code: "es", label: "ES", name: "Spanish", flag: "/images/flags/es.svg" },
+  { code: "hi", label: "HI", name: "Hindi", flag: "/images/flags/in.svg" },
+  { code: "pa", label: "PA", name: "Punjabi", flag: "/images/flags/in.svg" },
+  { code: "gu", label: "GU", name: "Gujarati", flag: "/images/flags/in.svg" },
+  { code: "ur", label: "UR", name: "Urdu", flag: "/images/flags/pk.svg" },
+  { code: "zh-CN", label: "中文", name: "Chinese", flag: "/images/flags/cn.svg" },
+  { code: "tl", label: "TL", name: "Tagalog", flag: "/images/flags/ph.svg" },
+  { code: "ar", label: "AR", name: "Arabic", flag: "/images/flags/ae.svg" },
+  { code: "fa", label: "FA", name: "Persian", flag: "/images/flags/ir.svg" },
+  { code: "pt", label: "PT", name: "Portuguese", flag: "/images/flags/pt.svg" },
+  { code: "vi", label: "VI", name: "Vietnamese", flag: "/images/flags/vn.svg" },
+  { code: "ko", label: "KO", name: "Korean", flag: "/images/flags/kr.svg" },
 ];
 
 declare global {
@@ -195,9 +196,7 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
           light ? "border-white/25 hover:bg-white/5" : "border-black/10 hover:bg-black/[0.03]"
         )}
       >
-        <span aria-hidden="true" className="text-sm leading-none notranslate">
-          {currentLang.flag}
-        </span>
+        <Image src={currentLang.flag} alt="" width={24} height={16} className="h-4 w-6 shrink-0 object-cover" />
         <span className={cn("notranslate text-xs font-semibold", light ? "text-white" : "text-[var(--color-ink)]")}>
           {currentLang.label}
         </span>
@@ -212,7 +211,7 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
           role="listbox"
           aria-labelledby={buttonId}
           className={cn(
-            "notranslate absolute top-full z-50 mt-2 w-36 max-h-72 overflow-y-scroll overscroll-contain rounded-xl border border-black/[0.06] bg-white py-2 shadow-brand-sm scrollbar-brand",
+            "notranslate absolute top-full z-50 mt-2 w-56 max-h-[min(32rem,70dvh)] overflow-y-auto overscroll-contain rounded-xl border border-black/[0.06] bg-white p-2 shadow-brand-sm scrollbar-brand",
             align === "right" ? "right-0" : "left-0"
           )}
         >
@@ -226,21 +225,22 @@ export function LanguageSelector({ light = false, align = "right" }: { light?: b
               title={l.name}
               onClick={() => handleChange(l.code)}
               className={cn(
-                "flex w-full items-center gap-2.5 px-4 py-2.5 text-left transition-colors hover:bg-black/[0.04]",
+                "flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left transition-colors hover:bg-black/[0.04]",
                 l.code === current ? "bg-black/[0.03]" : ""
               )}
             >
-              <span aria-hidden="true" className="text-xl leading-none">
-                {l.flag}
-              </span>
+              <Image src={l.flag} alt="" width={30} height={20} className="h-5 w-[30px] shrink-0 object-cover" />
               <span
                 className={cn(
-                  "text-xs font-semibold tracking-wide",
+                  "flex-1 text-sm font-medium",
                   l.code === current ? "text-[var(--color-primary)]" : "text-slate-500"
                 )}
               >
-                {l.label}
+                {l.name}
               </span>
+              {l.code === current && (
+                <Check className="h-4 w-4 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
+              )}
             </button>
           ))}
         </div>

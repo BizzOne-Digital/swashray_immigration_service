@@ -6,7 +6,6 @@ import { cn } from "@/lib/cn";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { useTypewriter } from "@/components/site/useTypewriter";
-import { RcicIrbLogo } from "@/components/site/RcicIrbLogo";
 
 export interface HeroSlide {
   _id?: string;
@@ -178,10 +177,6 @@ export function HeroSlider({
       {/* Content */}
       <Container className="relative z-[3] flex h-full items-end sm:items-center pb-20 sm:pb-0">
         <div className="max-w-2xl min-w-0">
-          {/* Licensed-consultant designation — stays put while the slides change. */}
-          <span className="mb-6 hidden sm:inline-flex rounded-md bg-white px-3 py-2 shadow-brand-sm">
-            <RcicIrbLogo className="h-10 sm:h-12" sizes="170px" eager />
-          </span>
           <div key={active} className="animate-fade-in-up">
             {slide.label && (
               <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[var(--color-accent)] mb-5">

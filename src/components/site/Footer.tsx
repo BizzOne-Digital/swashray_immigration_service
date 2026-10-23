@@ -37,10 +37,11 @@ export function Footer({
   const socialEntries = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).filter(
     (key) => settings.social?.[key]
   );
-  // "Company" = the admin-managed menu minus Home and the services dropdown
-  // (which has its own column), plus the booking page — each URL once.
+  // "Company" = the admin-managed menu minus Home, the services dropdown
+  // (which has its own column) and the calculators (listed there as
+  // Resources & Tools), plus the booking page — each URL once.
   const companyLinks = [
-    ...navigation.filter((item) => !["/", "/services", "/booking"].includes(item.url)),
+    ...navigation.filter((item) => !["/", "/services", "/calculators", "/booking"].includes(item.url)),
     { label: "Book a Consultation", url: "/booking" },
   ].filter((item, i, all) => all.findIndex((other) => other.url === item.url) === i);
 
@@ -48,7 +49,7 @@ export function Footer({
     <footer className="mt-auto relative bg-[#0a1628] text-white">
       {/* hairline gold signature line across the very top of the footer */}
       <div className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent" aria-hidden="true" />
-      <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_0.8fr_1.1fr]">
+      <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:gap-x-8 lg:grid-cols-[1.2fr_1fr_0.8fr_1.3fr]">
         <div className="space-y-5">
           <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} light />
           <p className="text-sm text-white/70 max-w-sm leading-relaxed">{settings.footerDescription}</p>
@@ -98,7 +99,7 @@ export function Footer({
               </a>
             </li>
             <li>
-              <a href={`mailto:${settings.email}`} className="flex items-center gap-2.5 hover:text-white break-all">
+              <a href={`mailto:${settings.email}`} className="flex items-center gap-2.5 hover:text-white whitespace-nowrap">
                 <Mail className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
                 {settings.email}
               </a>
