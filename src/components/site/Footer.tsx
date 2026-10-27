@@ -18,7 +18,7 @@ const SOCIAL_ICONS = {
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white/50 mb-4">
+    <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)] mb-4">
       <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-highlight)]" aria-hidden="true" />
       {children}
     </h3>
@@ -46,14 +46,14 @@ export function Footer({
   ].filter((item, i, all) => all.findIndex((other) => other.url === item.url) === i);
 
   return (
-    <footer className="mt-auto relative bg-[#0a1628] text-white">
+    <footer className="mt-auto relative bg-white text-[var(--color-ink)]">
       {/* hairline gold signature line across the very top of the footer */}
       <div className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent" aria-hidden="true" />
       <Container className="py-14 grid gap-10 sm:grid-cols-2 lg:gap-x-8 lg:grid-cols-[1.2fr_1fr_0.8fr_1.3fr]">
         <div className="space-y-5">
-          <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} light />
-          <p className="text-sm text-white/70 max-w-sm leading-relaxed">{settings.footerDescription}</p>
-          <span className="inline-flex rounded-md bg-white px-3 py-2">
+          <Logo businessName={settings.businessName} logoMediaId={settings.logoMediaId as string | null} />
+          <p className="text-sm text-[var(--color-muted)] max-w-sm leading-relaxed">{settings.footerDescription}</p>
+          <span className="inline-flex">
             <RcicIrbLogo className="h-12" sizes="180px" />
           </span>
         </div>
@@ -63,13 +63,13 @@ export function Footer({
           <ul className="space-y-2.5 text-sm">
             {categories.map((c) => (
               <li key={c.slug}>
-                <Link href={`/services/${c.slug}`} className="text-white/80 hover:text-white transition-colors">
+                <Link href={`/services/${c.slug}`} className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {c.title}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/calculators" className="text-white/80 hover:text-white transition-colors">
+              <Link href="/calculators" className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                 Resources &amp; Tools
               </Link>
             </li>
@@ -81,7 +81,7 @@ export function Footer({
           <ul className="space-y-2.5 text-sm">
             {companyLinks.map((item) => (
               <li key={item.url}>
-                <Link href={item.url} className="text-white/80 hover:text-white transition-colors">
+                <Link href={item.url} className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {item.label}
                 </Link>
               </li>
@@ -91,15 +91,15 @@ export function Footer({
 
         <div>
           <FooterHeading>Contact Us</FooterHeading>
-          <ul className="space-y-3 text-sm text-white/80">
+          <ul className="space-y-3 text-sm text-[var(--color-muted)]">
             <li>
-              <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="flex items-center gap-2.5 hover:text-white">
+              <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="flex items-center gap-2.5 hover:text-[var(--color-primary)]">
                 <Phone className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
                 {settings.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${settings.email}`} className="flex items-center gap-2.5 hover:text-white whitespace-nowrap">
+              <a href={`mailto:${settings.email}`} className="flex items-center gap-2.5 hover:text-[var(--color-primary)] whitespace-nowrap">
                 <Mail className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
                 {settings.email}
               </a>
@@ -122,7 +122,7 @@ export function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={key}
-                    className="h-9 w-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                    className="h-9 w-9 flex items-center justify-center rounded-full bg-black/[0.04] text-[var(--color-primary)] hover:bg-black/[0.08] transition-colors"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -133,17 +133,17 @@ export function Footer({
         </div>
       </Container>
 
-      <div className="border-t border-white/15">
-        <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
+      <div className="border-t border-black/[0.08]">
+        <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--color-muted)]">
           <p>{settings.copyrightText}</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="hover:text-white">
+            <Link href="/privacy" className="hover:text-[var(--color-primary)]">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white">
+            <Link href="/terms" className="hover:text-[var(--color-primary)]">
               Terms of Use
             </Link>
-            <Link href="/disclaimer" className="hover:text-white">
+            <Link href="/disclaimer" className="hover:text-[var(--color-primary)]">
               Disclaimer
             </Link>
           </div>

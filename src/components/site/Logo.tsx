@@ -27,25 +27,25 @@ export function Logo({
   if (compact) {
     return (
       <Link href={href} aria-label={`${businessName}, home`} className="flex shrink-0 items-center gap-2 sm:gap-3">
-        <span aria-hidden="true" className="relative h-8 w-9 shrink-0 overflow-hidden sm:h-[62px] sm:w-[70px]">
+        <span aria-hidden="true" className="relative h-[72px] w-20 shrink-0 overflow-hidden sm:h-[78px] sm:w-[88px]">
           <Image
             src={src}
             alt=""
             width={1195}
             height={896}
-            sizes="(min-width: 640px) 188px, 96px"
+            sizes="(min-width: 640px) 240px, 220px"
             loading={eager ? "eager" : undefined}
-            className="absolute -left-8 -top-[7px] h-auto w-24 max-w-none sm:-left-[62px] sm:-top-[15px] sm:w-[188px]"
+            className="absolute -left-[73px] -top-[18px] h-auto w-[220px] max-w-none sm:-left-20 sm:-top-5 sm:w-[240px]"
           />
         </span>
-        <span className="block max-w-[161px] sm:max-w-none">
-          <span className="block font-heading text-[26px] font-semibold leading-none tracking-tight text-[#0a3449] sm:text-[32px]">
+        <span className="block max-w-[161px] max-[359px]:max-w-[132px] sm:max-w-none">
+          <span className="block font-heading text-[26px] font-semibold leading-none tracking-tight text-[#0a3449] max-[359px]:text-2xl sm:text-[32px]">
             Swashray
           </span>
-          <span className="mt-1 block whitespace-nowrap text-xs font-semibold uppercase leading-tight text-[#0a3449] sm:text-sm sm:tracking-[0.06em]">
+          <span className="mt-1 block whitespace-nowrap text-xs font-semibold uppercase leading-tight text-[#0a3449] max-[359px]:text-[10px] sm:text-sm sm:tracking-[0.06em]">
             Immigration Services
           </span>
-          <span className="mt-1 block text-xs font-medium leading-tight text-[var(--color-muted)]">
+          <span className="mt-1 block text-xs font-medium leading-tight text-[var(--color-muted)] max-[359px]:text-[10px]">
             Canadian Immigration Consultancy
           </span>
         </span>
