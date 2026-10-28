@@ -30,7 +30,7 @@ export function LogoWordmark({
 }: {
   className?: string;
   subline?: boolean;
-  /** The small "Canadian Immigration Consultancy" descriptor under the name. */
+  /** The brand tagline under the name. */
   tagline?: boolean;
   light?: boolean;
 }) {
@@ -58,7 +58,7 @@ export function LogoWordmark({
             light ? "text-white/45" : "text-[var(--color-muted)]/80"
           }`}
         >
-          Canadian Immigration Consultancy
+          Bridging borders, building futures
         </span>
       )}
     </span>

@@ -46,7 +46,7 @@ export function Logo({
             Immigration Services
           </span>
           <span className="mt-1 block text-xs font-medium leading-tight text-[var(--color-muted)] max-[359px]:text-[10px]">
-            Canadian Immigration Consultancy
+            Bridging borders, building futures
           </span>
         </span>
       </Link>
@@ -54,15 +54,21 @@ export function Logo({
   }
   return (
     <Link href={href} className={stacked ? "flex flex-col items-center shrink-0" : "flex items-center shrink-0"}>
-      <Image
-        src={src}
-        alt={businessName}
-        width={1195}
-        height={896}
-        sizes={light ? "208px" : "(min-width: 640px) 176px, 144px"}
-        loading={eager ? "eager" : undefined}
-        className={light ? "h-auto w-52 rounded-md bg-white object-contain" : "h-auto w-36 sm:w-44 object-contain"}
-      />
+      <span className={`relative block ${light ? "w-52" : "w-36 sm:w-44"}`}>
+        {/* Keep the artwork and lockup size; hide the descriptor baked into the image. */}
+        <Image
+          src={src}
+          alt={businessName}
+          width={1195}
+          height={896}
+          sizes={light ? "208px" : "(min-width: 640px) 176px, 144px"}
+          loading={eager ? "eager" : undefined}
+          className={`h-auto w-full object-contain [clip-path:inset(0_0_17%_0)] ${light ? "rounded-md bg-white" : ""}`}
+        />
+        <span className="absolute inset-x-0 top-[84%] text-center text-[7px] font-medium leading-tight text-[var(--color-muted)] sm:text-[8px]">
+          Bridging borders, building futures
+        </span>
+      </span>
     </Link>
   );
 }

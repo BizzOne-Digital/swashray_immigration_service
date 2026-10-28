@@ -112,6 +112,25 @@ it's safe to deploy to serverless platforms — nothing gets lost on
 redeploy. Set the same environment variables from `.env.local` in your
 hosting provider's dashboard.
 
+### Admin access after launch
+
+The admin sign-in remains available at `https://<your-domain>/admin/login`;
+opening `/admin` redirects signed-out visitors there. Deploy the full Next.js
+server application so the dashboard, authentication, and CMS API routes run.
+
+Before handover:
+
+1. Configure `MONGODB_URI` and a stable, random `AUTH_SECRET` (at least 16
+   characters) in the production hosting environment. Allow the host to
+   connect to MongoDB and serve the site over HTTPS for secure session cookies.
+2. If the production database has no admin account, run `npm run seed` against
+   that database with `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, and optionally
+   `SEED_ADMIN_NAME` set. This also creates starter content; rerunning the seed
+   resets that admin's password, so do not run it on every deployment.
+3. Open `/admin/login` on the live domain, sign in with the provisioned account,
+   confirm the dashboard loads, then sign out and confirm `/admin` returns to
+   sign-in. Share credentials privately with the client.
+
 ## 5. Project structure (for developers)
 
 ```
